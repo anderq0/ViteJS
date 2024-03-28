@@ -104,21 +104,22 @@ function findAudience(arr:audienceArrayType[], facultyNameString:string){
     for(let el of arr){
         if(el.facultyName.toLowerCase() == facultyNameString.toLowerCase() ){
             html += `<p>${el.audienceName}</p>`
-            audienceResultH5.innerHTML += html
             isExist = true
         }
     }
     if(!isExist){
         console.log('ok')
         html+= `<p style="color: red">No such audience 😞</p>`
-        audienceResultH5.innerHTML += html
     }
+    audienceResultH5.innerHTML += html
 } 
 FindAudienceButton.addEventListener('click', function() {
     audienceResultH5.innerHTML = ''
     findAudience(audienceArray, findAudienceInput.value)
     findAudienceInput.value = ''
 })
+
+
 // 3 Вывод на экран только тех аудиторий, которые подходят для
 // переданной группы. Объект-группа состоит из названия,
 // количества студентов и названия факультета.
@@ -146,13 +147,12 @@ function findAudienceForGroup(arr:audienceArrayType[], arr2:groupType[], groupNa
     for (let key in arr2){
         if(groupName == arr2[key].groupName){
             for(let el of arr){
-                for(let el2 of arr2){
-                    if(groupName == el2.groupName&&el2.studentQuentity <= el.placeQuentity && el2.facultyName == el.facultyName){
-                        html += `<p>${el.audienceName}</p>`
-                        AudienceForGroupResult.innerHTML += html
-                        isExist = true
-                    }
+                if(groupName == arr2[key].groupName&&arr2[key].studentQuentity <= el.placeQuentity && arr2[key].facultyName == el.facultyName){
+                    html += `<p>${el.audienceName}</p>`
+                    AudienceForGroupResult.innerHTML += html
+                    isExist = true
                 }
+                
             }
         }
     }
@@ -168,8 +168,5 @@ findAudienceForGroupButton.addEventListener('click', function() {
     findAudienceForGroup(audienceArray, groups, findAudienceForGroupInput.value)
     findAudienceInput.value = ''
 })
-// audienceArray.sort(function(a, b) {
-//     return a.placeQuentity - b.placeQuentity;
-//   });
 
-// console.log(audienceArray)
+
