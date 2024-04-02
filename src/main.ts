@@ -169,4 +169,124 @@ findAudienceForGroupButton.addEventListener('click', function() {
     findAudienceInput.value = ''
 })
 
+let someArray = [32,53,1,77,3]
+someArray.sort((a,b) => a-b)
+console.log(someArray)
 
+
+// ===========================================================
+
+// 1.1.  Написать функцию возвращающюю массив целых чисел от 0 до 10
+const arrayOfNums:number[] = []
+function addArrayOfNums(arr:number[], start=0, end= start+10){
+    for(let i=0; i <= 10; i++){
+         i == 0? arr.push(start) : i == 10 ? arr.push(end) : arr.push(i+start)
+    }
+    console.log(arr)
+}
+addArrayOfNums(arrayOfNums, 14)
+// 1.2 - 1.3*. Написать функцию возвращающюю массив случайных целых чисел. Функция принимает 1 параметр, количество элементов в будущем массиве
+// Добавить в функцию параметры опциональные параметры начального и конечного значения массива
+const ArrayOfRandomNums:number[] =[]
+function addArrayOfRandomNums(arr:number[], arrayLength:number){
+    for(let i= 0; i < arrayLength; i++){
+        arr.push(Math.floor(Math.random() * 100 ))
+    }
+    console.log(arr)
+}
+addArrayOfRandomNums(ArrayOfRandomNums,9)
+
+// 2.1 - 2.4
+const someDiv = document.getElementById('someIdForDiv') as HTMLDivElement
+function sayHelloToUser(name='user' ){
+    someDiv.innerHTML = `hello, ${name}`
+}
+sayHelloToUser('gaya')
+
+// Есть массив объектов
+type employeesType = {
+    name:string,
+    department: string,
+    salary:number
+}
+
+const employees:employeesType[] = [
+    { name: 'Федотова Арина Глебовна', department: 'ads', salary: 2100 },
+    { name: 'Голикова Мария Филипповна', department: 'prog', salary: 3500 },
+    { name: 'Панин Александр Германович', department: 'ads', salary: 2100 },
+    { name: 'Романов Эмиль Макарович', department: 'prog', salary: 3100 },
+    { name: 'Смирнов Никита Александрович', department: 'prog', salary: 3800 },
+    { name: 'Александрова Майя Вячеславовна', department: 'prog', salary: 4500 },
+    { name: 'Крылов Богдан Максимович', department: 'disign', salary: 2100 },
+    { name: 'Мухина Айша Константиновна', department: 'disign', salary: 2100 },
+  ]
+
+// 3.1. Создать функцию, принимающую массив работников, и возвращающую массив уникальных отделов (department)
+// let departmentArray:string[]
+// function chechUniqueOfDepartment(arr:employeesType[]){
+//     for(let el of arr){
+//         departmentArray.includes(el.department) ? departmentArray : departmentArray.push(el.department)
+//     }
+//     console.log(departmentArray)
+// }
+// chechUniqueOfDepartment(employees)
+// 3.2. Написать функцию, принимающую массив работников и ключ объекта, по которому сделать сортировку массива
+// Учесть, что строковые параметры сортируются при помощи метода localeCompare, а числовые,- вычитанием
+function sortEmployers(arr:employeesType[], key:'name' | 'department' | 'salary'){
+    if(key == 'name' || key == 'department'){
+        arr.sort((a,b) => a[key].localeCompare(b[key]))
+    }else if( key == 'salary'){
+        arr.sort((a,b) =>a.salary-b.salary)
+    }
+    console.log([...arr])
+}
+sortEmployers(employees, 'salary')
+
+// 3.3. Написать функцию, аналогичную описанной в задании 2.2., но сортирующую в обратном порядке
+function sortEmployersReverse(arr:employeesType[], key:'name' | 'department' | 'salary'){
+    sortEmployers(arr, key)
+    // if(key == 'name'){
+    //     arr.sort((a,b) => a.name.localeCompare(b.name)).reverse
+    // }else if( key == 'department'){
+    //     arr.sort((a,b) => a.department.localeCompare(b.department)).reverse
+    // }else if( key == 'salary'){
+    //     arr.sort((a,b) =>b.salary-a.salary)
+    // }
+    console.log([...arr.reverse()])
+}
+sortEmployersReverse(employees, 'salary')
+
+
+// 3.4. Написать функцию, принимающую массив работников и имя, и возвращающую объект сотрудника или undefined
+function findEmployerObject(arr:employeesType[], name:string){
+    for(let el of arr){
+        el.name == name ? console.log(el) : el.name
+    }
+}
+findEmployerObject(employees, 'Федотова Арина Глебовна')
+findEmployerObject(employees, 'sgudfyuew')
+// 3.5. Написать функцию, принимающую массив работников и название отдела, и возвращающую новый массив, содержащий только сотрудников переданного отдела
+function getAllEmployersByDepartment(arr:employeesType[], departmentTo:string){
+    let AllEmployersByDepartment:employeesType[] = []
+    for(let el of arr){
+        el.department == departmentTo? AllEmployersByDepartment.push(el) : AllEmployersByDepartment
+    }
+    console.log(AllEmployersByDepartment)
+    return AllEmployersByDepartment
+}
+getAllEmployersByDepartment(employees, 'prog')
+// 3.6. Написать функцию, принимающую массив работников и возвращающую сумму зарплат. Вызвать функцию по каждому отделу и по общему массиву
+let salaryArray = 0
+function getSalaryOfEmployers(arr:employeesType[], departmentTo = 'any'){
+    for(let el of arr){
+        el.department == departmentTo ? salaryArray += el.salary : departmentTo == 'any' ? salaryArray = arr.reduce((sum, salary) => sum+ salary.salary, 0) : salaryArray
+    }
+    console.log(salaryArray)
+}
+getSalaryOfEmployers(employees, 'ads')
+getSalaryOfEmployers(employees, 'prog')
+
+
+//3.7
+const buttonForZadanie = document.getElementById('forButton') as HTMLButtonElement
+//3.8
