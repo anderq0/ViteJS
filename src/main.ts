@@ -290,3 +290,25 @@ getSalaryOfEmployers(employees, 'prog')
 //3.7
 const buttonForZadanie = document.getElementById('forButton') as HTMLButtonElement
 //3.8
+
+const whatThreePointMean = ['hello', 'this', 'is', 'gaya']
+console.log(...whatThreePointMean)
+console.log(whatThreePointMean)
+const numsForTest:number[] = [1,2,3,4,5,6,7,8,9]
+console.log(Math.max(...numsForTest))
+
+const fruits = ['kiwi', 'orange', 'kiwi', 'apple', 'orange']
+console.log(fruits)
+// function fruitCounter(list:string[]){
+//     const count = {}
+
+//     list.forEach(f => {
+//         !count[f] ? count[f] = 1 : count[f]++
+//         console.log(count[f])
+//     })
+
+//     return count
+// }
+// console.log(fruitCounter(fruits))
+
+
