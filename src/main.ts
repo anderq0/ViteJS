@@ -222,6 +222,16 @@ const employees:employeesType[] = [
   ]
 
 // 3.1. Создать функцию, принимающую массив работников, и возвращающую массив уникальных отделов (department)
+function departmentUnqiue(arr:employeesType[]){
+    const departmentUniqueArray:string[] = []
+    arr.forEach(el=>{
+        if(!departmentUniqueArray.includes(el.department)){
+            departmentUniqueArray.push(el.department)
+        }
+    })
+    return departmentUniqueArray
+}
+console.log('Unique department: ',departmentUnqiue(employees))
 // let departmentArray:string[]
 // function chechUniqueOfDepartment(arr:employeesType[]){
 //     for(let el of arr){
@@ -245,13 +255,6 @@ sortEmployers(employees, 'salary')
 // 3.3. Написать функцию, аналогичную описанной в задании 2.2., но сортирующую в обратном порядке
 function sortEmployersReverse(arr:employeesType[], key:'name' | 'department' | 'salary'){
     sortEmployers(arr, key)
-    // if(key == 'name'){
-    //     arr.sort((a,b) => a.name.localeCompare(b.name)).reverse
-    // }else if( key == 'department'){
-    //     arr.sort((a,b) => a.department.localeCompare(b.department)).reverse
-    // }else if( key == 'salary'){
-    //     arr.sort((a,b) =>b.salary-a.salary)
-    // }
     console.log([...arr.reverse()])
 }
 sortEmployersReverse(employees, 'salary')
@@ -287,10 +290,26 @@ getSalaryOfEmployers(employees, 'ads')
 getSalaryOfEmployers(employees, 'prog')
 
 
-//3.7
-const buttonForZadanie = document.getElementById('forButton') as HTMLButtonElement
-//3.8
+// 3.7. В HTML создать div для кнопок, задать ему id и получить объект div'a в js, аналогично заданию 2.2.
+const buttonForZadanie = document.getElementById('forButton') as HTMLDivElement
+// 3.8. Так же как в 3.7 создать ul (as HTMLUListElement) для вывода списка и div для вывода суммы зарплат
+const ulForZadanie = document.getElementById('ulForThreePointEight') as HTMLUListElement
+// 3.9. Используя массив, полученный в 3.1. Вывести кнопки с названиями отделов + кнопку "Все отделы"
+//      использовать data-атрибут (data-dep), в который поместить название отдела. Для кнопки "Все отделы" data-dep="all"
+// 3.10. Используя div, полученный в задании 3.7
+// div37.addEventListener('click', function (e) {
+//   const target = e.target as HTMLElement
+//   if (target.tagName == 'BUTTON' && target.dataset.dep) {
+//      в зависимости от значения dep выводить в список (ul 3.8) тех сотрудников, которые работают в данном отделе, либо всех, если target.dataset.dep=='all'. Используем логическое ветвление и уже написанные функции
+//      в div (3.8) выводить сумму зарплат
+//   }
+// })
 
+
+
+
+
+//======================================================
 const whatThreePointMean = ['hello', 'this', 'is', 'gaya']
 console.log(...whatThreePointMean)
 console.log(whatThreePointMean)
@@ -309,6 +328,6 @@ console.log(fruits)
 
 //     return count
 // }
-// console.log(fruitCounter(fruits))
-
-
+// console.log(fruitCounter(fruits)
+console.log(15..toString())
+\
