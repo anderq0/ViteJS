@@ -296,6 +296,11 @@ getSalaryOfEmployers(employees, 'prog')
 // 3.8. Так же как в 3.7 создать ul (as HTMLUListElement) для вывода списка и div для вывода суммы зарплат
 const tableForEmployeesZadanie = document.getElementById('tableForEmployees') as HTMLTableElement
 const DivForSumSalaryZadanie = document.getElementById('DivForSumSalary') as HTMLDivElement
+
+
+const someSalarySum = employees.reduce((acumulator, currentValue) => acumulator + currentValue.salary,0)
+console.log(someSalarySum)
+
 function getArrayOfEmployees(arr:employeesType[]){
     let salarySum = 0 
     let html = '<thead> <tr> <th>Имя</th> <th>Департамент</th> <th>Зарплата</th> </tr></thead><tbody>'
@@ -366,3 +371,61 @@ console.log(fruits)
 // }
 // console.log(fruitCounter(fruits)
 console.log(15..toString())
+
+function wordLengthCompare(str1:string, str2:string){
+    let result = 0
+    str1.length > str2.length ? result = 1 : str1.length < str2.length ? result = -1 : result = 0
+    return result
+}
+console.log(wordLengthCompare('wdjf', 'sfsfrs'))
+
+function firstWordToUpperCase(str:string){
+    str = str[0].toUpperCase() + str.slice(1)
+    return str
+}
+console.log(firstWordToUpperCase('blablabla'))
+
+function countVowelLetter(str:string){
+    let count = 0
+    const vowelLetter = 'eyuoai'
+    for(let i = 0; i < str.length; i++){
+        vowelLetter.includes(str[i]) ? count++ : count
+    }
+    return count
+}
+console.log(countVowelLetter('count this shit'))
+
+function spamIdentifier(str:string){
+    let spamArray = ['100% бесплатно', 'увеличение продаж', 'только сегодня', 'не удаляйте', 'xxx']
+    for(let i = 0; i < spamArray.length; i++){
+        if(str.includes(spamArray[i])){
+            return true
+        }else{
+            return false
+        }
+    }
+    
+}
+console.log(spamIdentifier('wfjoiwrfjow 100% бесплатно'))
+
+function splitStringByMaxSize(str:string, maxSize: number){
+    if(maxSize < str.length){
+        str = str.slice(0,maxSize) + '...'
+        return str
+    }else{
+        return str
+    }
+}
+console.log(splitStringByMaxSize('Hello, world', 8))
+
+function palindromCheck(str:string){
+    let stringArray = str.toLowerCase.split('').reverse()
+    let str2 = stringArray.join('')
+    if(str.localeCompare(str2)){
+        return true
+    }else{
+        return false
+    }
+}
+
+console.log(palindromCheck('ФДДФ'))
