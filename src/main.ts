@@ -73,7 +73,7 @@ type audienceArrayType = {
     facultyName: string,
 }
 const audienceArray: audienceArrayType[] = [
-    {audienceName: 'first audience', placeQuentity:10, facultyName:'Math'},
+    {audienceName: 'first audience', placeQuentity:14, facultyName:'Math'},
     {audienceName: 'second audience', placeQuentity:15, facultyName:'Language'},
     {audienceName: 'third audience', placeQuentity:13, facultyName:'Biology'},
     {audienceName: 'fourth audience', placeQuentity:18, facultyName:'Chemistry'},
@@ -149,7 +149,7 @@ function findAudienceForGroup(arr:audienceArrayType[], arr2:groupType[], groupNa
             for(let el of arr){
                 if(groupName == arr2[key].groupName&&arr2[key].studentQuentity <= el.placeQuentity && arr2[key].facultyName == el.facultyName){
                     html += `<p>${el.audienceName}</p>`
-                    AudienceForGroupResult.innerHTML += html
+                    AudienceForGroupResult.innerHTML = html
                     isExist = true
                 }
                 
@@ -199,7 +199,13 @@ addArrayOfRandomNums(ArrayOfRandomNums,9)
 // 2.1 - 2.4
 const someDiv = document.getElementById('someIdForDiv') as HTMLDivElement
 function sayHelloToUser(name='user' ){
-    someDiv.innerHTML = `hello, ${name}`
+    // navigator.geolocation.getCurrentPosition(async (position) => {
+    //     const { latitude: lat, longitude: lon } = position.coords;  // Ваши координаты определены!
+    //     const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=ru`);
+    //     const { city } = await res.json(); // И вот название вашего города!
+    //     someDiv.innerHTML = `Привет, ${name}! Ваш город ${city}`
+    //   });
+      someDiv.innerHTML = `Привет, ${name}!`
 }
 sayHelloToUser('gaya')
 
@@ -232,14 +238,9 @@ function departmentUnqiue(arr:employeesType[]){
     return departmentUniqueArray
 }
 console.log('Unique department: ',departmentUnqiue(employees))
-// let departmentArray:string[]
-// function chechUniqueOfDepartment(arr:employeesType[]){
-//     for(let el of arr){
-//         departmentArray.includes(el.department) ? departmentArray : departmentArray.push(el.department)
-//     }
-//     console.log(departmentArray)
-// }
-// chechUniqueOfDepartment(employees)
+
+
+
 // 3.2. Написать функцию, принимающую массив работников и ключ объекта, по которому сделать сортировку массива
 // Учесть, что строковые параметры сортируются при помощи метода localeCompare, а числовые,- вычитанием
 function sortEmployers(arr:employeesType[], key:'name' | 'department' | 'salary'){
@@ -291,11 +292,50 @@ getSalaryOfEmployers(employees, 'prog')
 
 
 // 3.7. В HTML создать div для кнопок, задать ему id и получить объект div'a в js, аналогично заданию 2.2.
-const buttonForZadanie = document.getElementById('forButton') as HTMLDivElement
+
 // 3.8. Так же как в 3.7 создать ul (as HTMLUListElement) для вывода списка и div для вывода суммы зарплат
-const ulForZadanie = document.getElementById('ulForThreePointEight') as HTMLUListElement
+const tableForEmployeesZadanie = document.getElementById('tableForEmployees') as HTMLTableElement
+const DivForSumSalaryZadanie = document.getElementById('DivForSumSalary') as HTMLDivElement
+function getArrayOfEmployees(arr:employeesType[]){
+    let salarySum = 0 
+    let html = '<thead> <tr> <th>Имя</th> <th>Департамент</th> <th>Зарплата</th> </tr></thead><tbody>'
+    for(let el of arr){
+        html += `<tr><td>${el.name}</td>    <td>${el.department}</td>   <td>${el.salary} </td></tr>`
+        salarySum += el.salary
+    }
+    tableForEmployeesZadanie.innerHTML = html + `</thead>`
+    DivForSumSalaryZadanie.innerHTML = `<b>Final Sum Of Salaries: </b>` + String(salarySum)
+
+}
+getArrayOfEmployees(employees)
+
 // 3.9. Используя массив, полученный в 3.1. Вывести кнопки с названиями отделов + кнопку "Все отделы"
 //      использовать data-атрибут (data-dep), в который поместить название отдела. Для кнопки "Все отделы" data-dep="all"
+const buttonDivs = document.getElementById('butDivs') as HTMLDivElement
+
+function renderButtons(arr: string[]) {
+  let html = ''
+  for (let el of arr) {
+    html += `<button style="background-color: #316680; width: 80px; color: white; border-color: #316680; border-width: 5px;
+    margin-left: 20px; margin-bottom: 5px;" data-dep="${el}">${el.toUpperCase()}</button>`
+  }
+  html += `<button style="background-color: #316680; width: 80px; color: white; border-color: #316680; border-width: 5px;
+  margin-left: 20px; margin-bottom: 5px;" data-dep="all">ALL</button>`
+  buttonDivs.innerHTML = html
+}
+
+renderButtons(departmentUnqiue(employees))
+buttonDivs.addEventListener('click', function (e) {
+    const target = e.target as HTMLElement
+    if (target.tagName == 'BUTTON' && target.dataset.dep) {
+      if (target.dataset.dep == 'all') {
+        getArrayOfEmployees(employees)
+      } else {
+        getArrayOfEmployees(getAllEmployersByDepartment(employees, target.dataset.dep))
+      }
+    }
+  })
+
 // 3.10. Используя div, полученный в задании 3.7
 // div37.addEventListener('click', function (e) {
 //   const target = e.target as HTMLElement
@@ -304,10 +344,6 @@ const ulForZadanie = document.getElementById('ulForThreePointEight') as HTMLULis
 //      в div (3.8) выводить сумму зарплат
 //   }
 // })
-
-
-
-
 
 //======================================================
 const whatThreePointMean = ['hello', 'this', 'is', 'gaya']
@@ -330,4 +366,3 @@ console.log(fruits)
 // }
 // console.log(fruitCounter(fruits)
 console.log(15..toString())
-\
