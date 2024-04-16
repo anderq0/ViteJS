@@ -342,15 +342,6 @@ buttonDivs.addEventListener('click', function (e) {
     }
   })
 
-// 3.10. Используя div, полученный в задании 3.7
-// div37.addEventListener('click', function (e) {
-//   const target = e.target as HTMLElement
-//   if (target.tagName == 'BUTTON' && target.dataset.dep) {
-//      в зависимости от значения dep выводить в список (ul 3.8) тех сотрудников, которые работают в данном отделе, либо всех, если target.dataset.dep=='all'. Используем логическое ветвление и уже написанные функции
-//      в div (3.8) выводить сумму зарплат
-//   }
-// })
-
 //======================================================
 console.log(15..toString())
 
@@ -436,15 +427,15 @@ console.log(getAverageWordLength('Написать функцию, котора�
 
 // Написать функцию, которая принимает строку и символ и выводит индексы, по которым находится этот символ в
 // строке. Также вывести, сколько всего раз встречается этот символ в строке.
-// function getSymbolId(str:string, sym:string){
-//     let pos = -1
-//     let result = []
-//     while ((pos = str.indexOf(sym, pos + 1)) != -1) {
-//         result.push(pos)
-//     }
-//     return result
-// }
-// console.log(getSymbolId('итак4 первое попадание 4', '4'))
+function getSymbolId(str:string, sym:string){
+    let pos = -1
+    let result = []
+    while ((pos = str.indexOf(sym, pos + 1)) != -1) {
+        result.push(pos)
+    }
+    return result + ' - ' + result.length
+}
+console.log(getSymbolId('итак4 первое поп4адание 4', '4'))
 
 // ! Дз за 11 апреля
 
@@ -456,14 +447,13 @@ const fingStringStatisticButton = document.getElementById('fingStringStatisticBu
 const listStatistic = document.getElementById('listStatistic') as HTMLUListElement
 
 function stringStatictis(str:string){
-    let html = ''
     let letterCounter = 0
     let numCounter = 0
     let otherSymbolCounter = 0
     for(let el= 0; el < str.length ; el++){
        str[el].match(/[A-Za-zА-Яа-яЁё]+/) ?letterCounter++ : letterCounter 
        str[el].match(/[0-9]/) ? numCounter++ : numCounter
-       str[el].match(/[^a-zA-Zа-яА-Я0-9 ]/) ? otherSymbolCounter++ : otherSymbolCounter
+       str[el].match(/[^a-zA-Zа-яА-ЯЁё0-9 ]/) ? otherSymbolCounter++ : otherSymbolCounter
     }
     listStatistic.innerHTML = `<p>This is stat for: <br> ${str}</p><li>Nums quentity: ${numCounter}</.><li>Letters quentity: ${letterCounter}</li><li>Other symbols quentity: ${otherSymbolCounter}</li>`
 }
@@ -480,17 +470,24 @@ function getStringNum(num:number){
     let unitNum = ['один', 'два', 'три','четыре', 'пять', 'шесть', 'семь','восемь', 'девять']
     let strangeDecades = ['десять', 'одиннадцать', 'двенадцать','тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать','семьнадцать', 'восемьнадцать', 'девятнацать']
     let decades = ['двадцать', 'тридцать', 'сорок','пятьдесят', 'шестьдесят', 'семьдесят','восемьдесят', 'девяносто']
-    if(num < 20){
-        return strangeDecades[num - 10]
-    }else if (num >= 20 && num <= 99){
-        if( num % 10 == 0){
-            return decades[(num/10)- 2]
+    const isMinus = num < 0 ? 'минус ':''
+    if(Math.abs(num) < 10){
+        return isMinus + unitNum[Math.abs(num)-1]
+    }
+    else if(Math.abs(num) < 20 && Math.abs(num) > 9){
+        return isMinus+ strangeDecades[Math.abs(num) - 10]
+    }else if (Math.abs(num) >= 20 && Math.abs(num) <= 99){
+        if( Math.abs(num) % 10 == 0){
+            return isMinus+ decades[(Math.abs(num)/10)- 2]
         }else{
-            return decades[Math.floor(num/10)- 2] +' '+ unitNum[num % 10 - 1]
+            return isMinus+ decades[Math.floor(Math.abs(num)/10)- 2] +' '+ unitNum[Math.abs(num) % 10 - 1]
         }
     }
 }
-console.log(getStringNum(99))
+console.log(getStringNum(-1))
+console.log(getStringNum(-32))
+console.log(getStringNum(32))
+console.log(getStringNum(-16))
 
 // Написать функцию, которая заменяет в полученной строке
 // большие буквы на маленькие, маленькие – на большие, а
@@ -512,14 +509,17 @@ function smallToLargetoSmall(str:string){
 }
 console.log(smallToLargetoSmall('Some StrAnGe sENTence 423'))
 
-// !Написать функцию, которая преобразует названия css-стилей с дефисом в название в СamelСase 
+// Написать функцию, которая преобразует названия css-стилей с дефисом в название в СamelСase 
 
-// function camelCaseConvert(str:string){
-//     // let newString = str.replace(/-(\w)/, (s, l) => l.toUpperCase())
-//     let newString = str.replace(/-(\w)/, $')
-//     return newString
-// }
-// console.log(camelCaseConvert('blaaa-gla'))
+function camelCaseConvert(str:string){
+    for(let i = 0; i < str.length; i++){
+        if(str[i] == '-'){
+            str = str.replace('-'+str[i+1], str[i+1].toUpperCase())
+        }
+    }
+    return str
+}
+console.log(camelCaseConvert('cherepashka-ninja'))
 
 // Написать функцию, которая принимает словосочетание
 // и превращает его в аббревиатуру.
@@ -562,8 +562,13 @@ console.log(stringCalcualtor('3678+45'))
 // Например: url “https://itstep.org/ua/about”, информация
 // “протокол: https, домен: itstep.org, путь: /ua/about”.
 function getInfoAboutUrl(str:string){
-
+    let newStr = str.split('://')
+    let protocol = newStr[0]
+    let domain = newStr[1].split('/')[0]
+    let way = '/' + newStr[1].slice()
+    return `протокол: ${protocol} домен: ${domain} путь: ${way}`
 }
+console.log(getInfoAboutUrl('https://itstep.org/ua/about'))
 
 // Написать функцию, которая принимает строку и раздели-
 // тель и возвращает массив подстрок, разбитых с помощью
@@ -585,7 +590,7 @@ function splitStringWithoutSeparator(str:string, separator:string){
 }
 console.log(splitStringWithoutSeparator('10/08/2020', '/'))
 
-// !    Написать функцию вывода текста по заданному шаблону.
+// Написать функцию вывода текста по заданному шаблону.
 // Функция принимает первым параметром шаблон, в тексте
 // которого может использоваться %, после символа % ука-
 // зывается индекс входного параметра. При выводе вместо
@@ -594,12 +599,19 @@ console.log(splitStringWithoutSeparator('10/08/2020', '/'))
 // Например: print(“Today is %1 %2.%3.%4”, “Monday”, 10,
 // 8, 2020) должна вывести “Today is Monday 10.8.2020”.
 function stringByTemplate(template:string, ...str:string[]){
-    let newString = ''
-    for(let el = 0; el < template.length; el++){
-        if(template[el] != '%'){
-            newString += template[el]
-        }
+    
+    // for(let i = 0; i < template.length; i++){
+    //     if(template[i] == '%'){
+    //         let maybeNum = template[i+1]
+    //         if (isFinite(parseInt(maybeNum))) {
+    //             template = template.replace('%'+maybeNum, str[+maybeNum-1])
+    //         }
+    //     }
+    // }
+    for(let i = 0; i < str.length; i++){
+        template = template.replace('%'+(i+1), str[i])
     }
-    return newString
+    return template
 }
 console.log(stringByTemplate('Today is %1 %2.%3.%4', 'Monday', '10', '8', '2020'))
+console.log(stringByTemplate('%1 is my %2 %3 %5', ...['JS', 'best', 'lang', 'dasda', 'sfdds']))
