@@ -1,10 +1,50 @@
 body{
-    background-color: #A0A398;
+    background-color: #a5b0d0;
 }
-table{
-    border-top-color: rgb(0, 0, 0);
-    border-right-color: rgb(0, 0, 0);
-    border-bottom-color: rgb(0, 0, 0);
-    border-left-color: rgb(0, 0, 0);
-    background-color: rgb(167, 160, 156);
+
+
+
+th {
+    background: #24201f;
+    color: #f941a3;
+    border-right: 2px solid; 
+    border-left: 2px solid;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+td {
+    padding: 10px;
+    font-size: 15px;
+    text-align: center;
+    background-color: beige;
+    border-top: 2px solid #2e5fa7;
+    border-left: 2px solid #2e5fa7;
+    border-bottom: 2px solid #2e5fa7;
+    border-right: 2px solid #2e5fa7;
+    font-weight: bold;
+}
+
+button#fingStringStatisticButton{
+    background-color: #f941a3;
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+input#fingStringStatistic{
+    padding: 15px 15px;
+    margin-top: 5px;
+    background-color: #a5b0d0;
+    font-size: 15px;
+}
+
+div#DivForSumSalary{
+    margin-bottom: 15px;
+}
+p{
+    padding-right: 50%;
+}
+ul{
+    font-size: 20px;
+    list-style-type: none;
 }

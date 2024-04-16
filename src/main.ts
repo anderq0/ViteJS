@@ -5,6 +5,7 @@ type checkType = {
     count: number,
     cost: number,
 }
+// document.designMode = "on";
 
 const checkList: checkType[] = [
     {name:'cheese', count:1, cost:43},
@@ -351,50 +352,34 @@ buttonDivs.addEventListener('click', function (e) {
 // })
 
 //======================================================
-const whatThreePointMean = ['hello', 'this', 'is', 'gaya']
-console.log(...whatThreePointMean)
-console.log(whatThreePointMean)
-const numsForTest:number[] = [1,2,3,4,5,6,7,8,9]
-console.log(Math.max(...numsForTest))
-
-const fruits = ['kiwi', 'orange', 'kiwi', 'apple', 'orange']
-console.log(fruits)
-// function fruitCounter(list:string[]){
-//     const count = {}
-
-//     list.forEach(f => {
-//         !count[f] ? count[f] = 1 : count[f]++
-//         console.log(count[f])
-//     })
-
-//     return count
-// }
-// console.log(fruitCounter(fruits)
 console.log(15..toString())
 
+
+// Написать функцию, которая принимает 2 строки и сравнивает их длину. 
 function wordLengthCompare(str1:string, str2:string){
     let result = 0
-    str1.length > str2.length ? result = 1 : str1.length < str2.length ? result = -1 : result = 0
-    return result
+    return str1.length > str2.length ? result = 1 : str1.length < str2.length ? result = -1 : result = 0
 }
 console.log(wordLengthCompare('wdjf', 'sfsfrs'))
 
+// Написать функцию, которая переводит в верхний регистр первый символ переданной строки.
 function firstWordToUpperCase(str:string){
     str = str[0].toUpperCase() + str.slice(1)
     return str
 }
 console.log(firstWordToUpperCase('blablabla'))
 
+// Написать функцию, которая считает количество гласных букв в переданной строке.
 function countVowelLetter(str:string){
     let count = 0
-    const vowelLetter = 'eyuoai'
+    const vowelLetter = /['eyuoai']/gi
     for(let i = 0; i < str.length; i++){
-        vowelLetter.includes(str[i]) ? count++ : count
+        str[i].match(vowelLetter) ? count++ : count
     }
     return count
 }
-console.log(countVowelLetter('count this shit'))
-
+console.log(countVowelLetter('count this SHIT'))
+// Написать функцию для проверки спама в переданной строке.
 function spamIdentifier(str:string){
     let spamArray = ['100% бесплатно', 'увеличение продаж', 'только сегодня', 'не удаляйте', 'xxx']
     for(let i = 0; i < spamArray.length; i++){
@@ -408,6 +393,7 @@ function spamIdentifier(str:string){
 }
 console.log(spamIdentifier('wfjoiwrfjow 100% бесплатно'))
 
+// Написать функцию сокращения строки.
 function splitStringByMaxSize(str:string, maxSize: number){
     if(maxSize < str.length){
         str = str.slice(0,maxSize) + '...'
@@ -417,15 +403,203 @@ function splitStringByMaxSize(str:string, maxSize: number){
     }
 }
 console.log(splitStringByMaxSize('Hello, world', 8))
-
+// Написать функцию, которая проверяет, является ли переданная строка палиндромом.
 function palindromCheck(str:string){
-    let stringArray = str.toLowerCase.split('').reverse()
-    let str2 = stringArray.join('')
-    if(str.localeCompare(str2)){
-        return true
-    }else{
-        return false
+    let str2 = str.toLowerCase().split('').reverse().join('')
+    return str2 == str.toLowerCase()
+}
+console.log(palindromCheck('ФЛлф'))
+
+// Написать функцию, которая считает количество слов в предложении.
+function countWordsInString(str:string){
+     return str.split(/[^-.'A-Za-zА-Яа-яЁё1-9]+/)
+}
+console.log(countWordsInString('Написать функцию, которая считает количество слов в предложении.'))
+
+// Написать функцию, которая возвращает самое длинное слово из предложения.
+function getTheMostLargeWordInString(str:string){
+    let strArray = str.split(/[^-'A-Za-zА-Яа-яЁё1-9]+/)
+    return strArray.sort((a,b) => b.length-a.length)[0]
+}
+console.log(getTheMostLargeWordInString('Написать функцию, которая возвращает самое длинное слово из предложения.'))
+
+// Написать функцию, которая считает среднюю длину слова в предложении.
+function getAverageWordLength(str:string){
+    let strArray = str.split(/[^-'.A-Za-zА-Яа-яЁё0-9]+/).length
+    let lengthCount = 0
+    for(let el= 0; el < str.length ; el++){
+       str[el].match(/[A-Za-zА-Яа-яЁё1-9]+/) ?lengthCount++ : lengthCount 
     }
+    return Math.floor(lengthCount / strArray)
+}
+console.log(getAverageWordLength('Написать функцию, которая считает среднюю длину слова в предложении.'))
+
+// Написать функцию, которая принимает строку и символ и выводит индексы, по которым находится этот символ в
+// строке. Также вывести, сколько всего раз встречается этот символ в строке.
+// function getSymbolId(str:string, sym:string){
+//     let pos = -1
+//     let result = []
+//     while ((pos = str.indexOf(sym, pos + 1)) != -1) {
+//         result.push(pos)
+//     }
+//     return result
+// }
+// console.log(getSymbolId('итак4 первое попадание 4', '4'))
+
+// ! Дз за 11 апреля
+
+// Написать функцию, которая принимает строку и выводит
+// статистику о ней: количество букв, количество цифр и
+// количество других знаков.
+const fingStringStatistic = document.getElementById('fingStringStatistic') as HTMLInputElement
+const fingStringStatisticButton = document.getElementById('fingStringStatisticButton') as HTMLButtonElement
+const listStatistic = document.getElementById('listStatistic') as HTMLUListElement
+
+function stringStatictis(str:string){
+    let html = ''
+    let letterCounter = 0
+    let numCounter = 0
+    let otherSymbolCounter = 0
+    for(let el= 0; el < str.length ; el++){
+       str[el].match(/[A-Za-zА-Яа-яЁё]+/) ?letterCounter++ : letterCounter 
+       str[el].match(/[0-9]/) ? numCounter++ : numCounter
+       str[el].match(/[^a-zA-Zа-яА-Я0-9 ]/) ? otherSymbolCounter++ : otherSymbolCounter
+    }
+    listStatistic.innerHTML = `<p>This is stat for: <br> ${str}</p><li>Nums quentity: ${numCounter}</.><li>Letters quentity: ${letterCounter}</li><li>Other symbols quentity: ${otherSymbolCounter}</li>`
 }
 
-console.log(palindromCheck('ФДДФ'))
+fingStringStatisticButton.addEventListener('click', function() {
+    stringStatictis(fingStringStatistic.value)
+    fingStringStatistic.value = ''
+})
+
+// Написать функцию, которая принимает двузначное число
+// и возвращает его в текстовом виде.Например: 35 – тридцать пять, 89 – восемьдесят девять,
+// 12 – двенадцать.
+function getStringNum(num:number){
+    let unitNum = ['один', 'два', 'три','четыре', 'пять', 'шесть', 'семь','восемь', 'девять']
+    let strangeDecades = ['десять', 'одиннадцать', 'двенадцать','тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать','семьнадцать', 'восемьнадцать', 'девятнацать']
+    let decades = ['двадцать', 'тридцать', 'сорок','пятьдесят', 'шестьдесят', 'семьдесят','восемьдесят', 'девяносто']
+    if(num < 20){
+        return strangeDecades[num - 10]
+    }else if (num >= 20 && num <= 99){
+        if( num % 10 == 0){
+            return decades[(num/10)- 2]
+        }else{
+            return decades[Math.floor(num/10)- 2] +' '+ unitNum[num % 10 - 1]
+        }
+    }
+}
+console.log(getStringNum(99))
+
+// Написать функцию, которая заменяет в полученной строке
+// большие буквы на маленькие, маленькие – на большие, а
+// цифры – на знак нижнего подчеркивания.
+function smallToLargetoSmall(str:string){
+    let newString = ''
+    for(let el= 0; el < str.length ; el++){
+        if(str[el].match(/[A-ZА-ЯЁ]+/)){
+            newString += str[el].toLowerCase()
+        }else if (str[el].match(/[a-zа-яё]/) ){
+            newString += str[el].toUpperCase()
+        }else if(str[el].match(/[0-9]/)){
+            newString += '_'
+        }else if(str[el].match(' ')){
+            newString += ' '
+        }
+    }
+    return newString
+}
+console.log(smallToLargetoSmall('Some StrAnGe sENTence 423'))
+
+// !Написать функцию, которая преобразует названия css-стилей с дефисом в название в СamelСase 
+
+// function camelCaseConvert(str:string){
+//     // let newString = str.replace(/-(\w)/, (s, l) => l.toUpperCase())
+//     let newString = str.replace(/-(\w)/, $')
+//     return newString
+// }
+// console.log(camelCaseConvert('blaaa-gla'))
+
+// Написать функцию, которая принимает словосочетание
+// и превращает его в аббревиатуру.
+function getAbbreviation(str:string){
+    return str.split(' ').map(i => i[0].toUpperCase()).join('')
+}
+console.log(getAbbreviation('bla b bala'))
+
+// Написать функцию, которая принимает любое количество строк, объединяет их в одну длинную строку и
+// возвращает ее.
+function getOneStrint(...str:string[]){
+    return str.join(' ')
+}
+console.log(getOneStrint('bla', 'bla', 'fehiofe', 'smsmsm', ' sjsj, sksk'))
+
+// Написать функцию – калькулятор. Функция принимает
+// строку с примером, определяет, какое действие необходимо
+// выполнить (+ - * /), переводит операнды в числа, решает
+// пример и возвращает результат.
+function stringCalcualtor(str:string){
+    let stringCalculate = str.split(/(\+|\-|\*|\/)/)
+    for(let el = 0; el < stringCalculate.length;el++ ){
+        if(stringCalculate[el] == '+'){
+            return  +stringCalculate[el-1] + +stringCalculate[el+1]
+        }else if(stringCalculate[el] == '-'){
+            return   +stringCalculate[el-1] - +stringCalculate[el+1]
+        }
+        else if(stringCalculate[el] == '/'){
+            return   +stringCalculate[el-1] / +stringCalculate[el+1]
+        }
+        else if(stringCalculate[el] == '*'){
+            return  +stringCalculate[el-1] * +stringCalculate[el+1]
+        }
+    }
+}
+console.log(stringCalcualtor('3678+45'))
+
+// !Написать функцию, которая получает url и выводит под-
+// робную информацию о нем.
+// Например: url “https://itstep.org/ua/about”, информация
+// “протокол: https, домен: itstep.org, путь: /ua/about”.
+function getInfoAboutUrl(str:string){
+
+}
+
+// Написать функцию, которая принимает строку и раздели-
+// тель и возвращает массив подстрок, разбитых с помощью
+// указанного разделителя.
+function splitStringWithoutSeparator(str:string, separator:string){
+    let splitedString = []
+    let result = ''
+    for(let el = 0; el < str.length; el++){
+        if(str[el] == separator){
+            splitedString.push(result)
+            result = ''
+        }
+        if(str[el] != separator){
+            result += str[el]
+        }
+    }
+    splitedString.push(result)
+    return splitedString
+}
+console.log(splitStringWithoutSeparator('10/08/2020', '/'))
+
+// !    Написать функцию вывода текста по заданному шаблону.
+// Функция принимает первым параметром шаблон, в тексте
+// которого может использоваться %, после символа % ука-
+// зывается индекс входного параметра. При выводе вместо
+// %индекс необходимо вывести значение соответствующего
+// входного параметра.
+// Например: print(“Today is %1 %2.%3.%4”, “Monday”, 10,
+// 8, 2020) должна вывести “Today is Monday 10.8.2020”.
+function stringByTemplate(template:string, ...str:string[]){
+    let newString = ''
+    for(let el = 0; el < template.length; el++){
+        if(template[el] != '%'){
+            newString += template[el]
+        }
+    }
+    return newString
+}
+console.log(stringByTemplate('Today is %1 %2.%3.%4', 'Monday', '10', '8', '2020'))
