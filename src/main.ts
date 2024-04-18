@@ -342,7 +342,7 @@ buttonDivs.addEventListener('click', function (e) {
     }
   })
 
-//======================================================
+// !======================================================================================================================
 console.log(15..toString())
 
 
@@ -530,6 +530,9 @@ console.log(getAbbreviation('bla b bala'))
 
 // Написать функцию, которая принимает любое количество строк, объединяет их в одну длинную строку и
 // возвращает ее.
+let getOneStrintArrow = (...str:string[]) => str.join(' ')
+console.log(getOneStrintArrow('bla', 'bla', 'fehiofe', 'smsmsm', ' sjsj, sksk'))
+
 function getOneStrint(...str:string[]){
     return str.join(' ')
 }
@@ -616,3 +619,5 @@ function stringByTemplate(template:string, ...str:string[]){
 }
 console.log(stringByTemplate('Today is %1 %2.%3.%4', 'Monday', '10', '8', '2020'))
 console.log(stringByTemplate('%1 is my %2 %3 %5', ...['JS', 'best', 'lang', 'dasda', 'sfdds']))
+
+// !======================================================================================================================
