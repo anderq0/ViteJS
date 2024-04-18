@@ -557,16 +557,17 @@ function stringCalcualtor(str:string){
 }
 console.log(stringCalcualtor('3678+45'))
 
-// !Написать функцию, которая получает url и выводит под-
+// Написать функцию, которая получает url и выводит под-
 // робную информацию о нем.
 // Например: url “https://itstep.org/ua/about”, информация
 // “протокол: https, домен: itstep.org, путь: /ua/about”.
 function getInfoAboutUrl(str:string){
     let newStr = str.split('://')
+    console.log(newStr)
     let protocol = newStr[0]
     let domain = newStr[1].split('/')[0]
-    let way = '/' + newStr[1].slice()
-    return `протокол: ${protocol} домен: ${domain} путь: ${way}`
+    let way = newStr[1].split('/').slice(1).join('/')
+    return `протокол: ${protocol} домен: ${domain} путь-: /${way}`
 }
 console.log(getInfoAboutUrl('https://itstep.org/ua/about'))
 
