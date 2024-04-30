@@ -710,3 +710,35 @@ class ExtendedDate extends Date{
 }
 
 
+
+class Circle{
+    radius:number
+    constructor(radius:number){
+        this.radius = radius
+    }
+    getRadius(){
+        return this.radius
+    }
+    setRadius(newRadius:number){
+        this.radius = newRadius
+    }
+    getDiametr(){
+        return this.radius * 2
+    }
+    getSquare(){
+        return 3.14 + Math.pow(this.radius, 2)
+    }
+    getLength(){
+        return 3.14 + 2 * this.radius 
+    }
+}
+const firstCircle = new Circle(10)
+console.log(firstCircle.getDiametr())
+console.log(firstCircle.getLength())
+console.log(firstCircle.getRadius())
+console.log(firstCircle.getSquare())
+firstCircle.setRadius(12)
+console.log(firstCircle.getDiametr())
+console.log(firstCircle.getLength())
+console.log(firstCircle.getRadius())
+console.log(firstCircle.getSquare())
