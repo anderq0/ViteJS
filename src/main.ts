@@ -680,24 +680,10 @@ console.log(secondMarker.ink)
 
 // Реализуйте класс ExtendedDate, унаследовав его от стандарт-
 // ного класса Date и добавив следующие возможности:
-// ■ метод для вывода даты (числа и месяца) текстом;
-// ■ метод для проверки – это прошедшая дата или будущая
-// (если прошедшая, то метод возвращает false; если буду-
-// щая или текущая, то true);
-// !■ метод для проверки – високосный год или нет;
-// ■ метод, возвращающий следующую дату.
-// Создайте объект класса ExtendedDate и выведите на экран
-// результаты работы новых методов.
-
-let now = new Date()
-console.log(now)
-console.log(now.toLocaleString('ru', { month: 'long', day: "numeric" }))
-
 class DateClass {
     day: number
     month: number
     year: number
-    static now: any
     constructor(day: number, month: number, year: number) {
         this.day = day
         this.month = month
@@ -705,46 +691,23 @@ class DateClass {
     }
 }
 class ExtendedDate extends DateClass {
-//! ■ метод для вывода даты (числа и месяца) текстом;
-    dateToString(){
-        return new Date(this.year,this.month-1,this.day).toLocaleString('ru', { month: 'long', day: "numeric" })
+    dateToString() {
+        return new Date(this.year, this.month - 1, this.day).toLocaleString('ru', { month: 'long', day: "numeric" })
     }
-
-// !■ метод для проверки – это прошедшая дата или будущая
-// (если прошедшая, то метод возвращает false; если будущая или текущая, то true);
-    isDateFuture(){
-        if(new Date(this.year,this.month,this.day) >= new Date()){
-            return false
-        } else if(new Date(this.year,this.month,this.day) < new Date()){
-            return true
-        }
+    isDateFuture() {
+        return new Date(this.year, this.month, this.day) >= new Date() ? false : true
     }
-
-// ■ метод, возвращающий следующую дату.
-// !■ метод для проверки – високосный год или нет;
     isLeapYear() {
-        if (this.year / 4) {
-            return true
-        } else {
-            return false
-        }
+        return this.year / 4 ? true : false
     }
 }
-    const extData = new ExtendedDate(4,5,2024)
-    console.log(extData.dateToString())
-    console.log(extData.isDateFuture())
-    console.log(extData.isLeapYear())
+const extData = new ExtendedDate(4, 5, 2024)
+console.log(extData.dateToString())
+console.log(extData.isDateFuture())
+console.log(extData.isLeapYear())
 
 
-// Реализовать класс, описывающий окружность. В классе долж-
-// ны быть следующие компоненты:
-// ■ поле, хранящее радиус окружности;
-// ■ get-свойство, возвращающее радиус окружности;
-// ■ set-свойство, устанавливающее радиус окружности;
-// ■ get-свойство, возвращающее диаметр окружности;
-// ■ метод, вычисляющий площадь окружности;
-// ■ метод, вычисляющий длину окружности.
-// Продемонстрировать работу свойств и методов.
+// Реализовать класс, описывающий окружность. 
 class Circle {
     radius: number
     constructor(radius: number) {
@@ -776,7 +739,6 @@ console.log(firstCircle.getDiametr())
 console.log(firstCircle.getLength())
 console.log(firstCircle.getRadius())
 console.log(firstCircle.getSquare())
-
 
 
 
@@ -847,6 +809,7 @@ console.log(firstCircle.getSquare())
 
     const a = new HtmlElement('a', ' Who?...')
     a.setStyle('color', 'white')
+    a.setStyle('font-size', '20px')
     a.setAtribute('href', 'https://en.wikipedia.org/wiki/Pavel_Durov')
     a.setAtribute('target', '_blank')
 
@@ -864,7 +827,7 @@ console.log(firstCircle.getSquare())
     class CssClass {
         className: string
         stylesArray = [] as any[]
-        elements = [] as string[]
+        elements = [] as CssClass[]
         constructor(className: string) {
             this.className = className
         }
@@ -878,59 +841,81 @@ console.log(firstCircle.getSquare())
                 }
             }
         }
-        append(el: string) {
+        append(el: CssClass) {
             this.elements.push(el)
         }
-        getCss():string{
+        getCss(): string {
             const styles = this.stylesArray.map(el => el.name + ':' + el.value).join(';\n')
             let html = ''
-            if(this.elements.length > 0){
-                for(let i = 0; i < this.elements.length; i++){
-                    html += this.elements[i]
+            if (this.elements.length > 0) {
+                for (let i = 0; i < this.elements.length; i++) {
+                    html += this.elements[i].getCss()
                 }
-            }else{
+            } else {
                 html = this.className + '{\n' + styles + ';\n}\n'
             }
             return html
-            
+
 
         }
     }
     const mainStyle = new CssClass('mainClass')
     const wrap = new CssClass('wrap')
     wrap.setStyle('display', 'flex')
-    mainStyle.append(wrap.getCss())
+    mainStyle.append(wrap)
 
     const block = new CssClass('block')
     block.setStyle('width', '300px')
     block.setStyle('margin', '10px')
-    mainStyle.append(block.getCss())
+    mainStyle.append(block)
 
     const imgCss = new CssClass('img')
     imgCss.setStyle('margin', '100px')
     imgCss.setStyle('width', '100px')
-    mainStyle.append(imgCss.getCss())
+    mainStyle.append(imgCss)
 
     const text = new CssClass('text')
     text.setStyle('text-align', 'justify')
-    mainStyle.append(text.getCss())
+    mainStyle.append(text)
 
     class HtmlBlock {
-        styleCollections: string
-        htmlRoot:string
-        constructor(styleCollections:string, htmlRoot:string){
+        styleCollections: CssClass[]
+        htmlRoot: HtmlElement
+        constructor(styleCollections: CssClass[], htmlRoot: HtmlElement) {
             this.styleCollections = styleCollections
             this.htmlRoot = htmlRoot
         }
-        getCode(){
-            heDiv.innerHTML = this.htmlRoot
-            document.head.insertAdjacentHTML("beforeend", `<style>${this.styleCollections}</style>`)
-            
+        getCode() {
+            // document.head.insertAdjacentHTML("beforeend", `<style>${this.styleCollections}</style>`)
+            let css = this.styleCollections.map(el => el.getCss())
+            let html = `<style>${css}</style>`
+            html += this.htmlRoot.getHtml()
+            return html
         }
     }
 
-    const result = new HtmlBlock(mainStyle.getCss(), wrapper.getHtml())
-    result.getCode()
-    console.log(result.styleCollections)
- 
+    const result = new HtmlBlock([mainStyle], wrapper)
+    heDiv.innerHTML = result.getCode()
+    //console.log(result.styleCollections)
+
 }
+{
+    function krestik(x:number){
+        let sting = ''
+        for( let i = 0; i <= x-1; i++){
+            for(let j = 0; j <= x-1; j++){
+                if(i==j ||i+j+1 == x ){
+                    sting += '*'
+                } 
+                else{
+                    sting += ' '
+                }
+            }
+            sting += '\n'
+        }
+        return sting
+    }
+    console.log(krestik(20))
+}
+
+// ! TIMEOUT AND INTERVAL ---------------------------------------------------------------------------------------------------------------------
