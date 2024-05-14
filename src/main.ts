@@ -348,15 +348,13 @@ console.log(15..toString())
 
 // Написать функцию, которая принимает 2 строки и сравнивает их длину. 
 function wordLengthCompare(str1: string, str2: string) {
-    let result = 0
-    return str1.length > str2.length ? result = 1 : str1.length < str2.length ? result = -1 : result = 0
+    return str1.length > str2.length ? 1 : str1.length < str2.length ? -1 : 0
 }
 console.log(wordLengthCompare('wdjf', 'sfsfrs'))
 
 // Написать функцию, которая переводит в верхний регистр первый символ переданной строки.
 function firstWordToUpperCase(str: string) {
-    str = str[0].toUpperCase() + str.slice(1)
-    return str
+    return str[0].toUpperCase() + str.slice(1)
 }
 console.log(firstWordToUpperCase('blablabla'))
 
@@ -370,17 +368,13 @@ function countVowelLetter(str: string) {
     return count
 }
 console.log(countVowelLetter('count this SHIT'))
+
 // Написать функцию для проверки спама в переданной строке.
 function spamIdentifier(str: string) {
     let spamArray = ['100% бесплатно', 'увеличение продаж', 'только сегодня', 'не удаляйте', 'xxx']
     for (let i = 0; i < spamArray.length; i++) {
-        if (str.includes(spamArray[i])) {
-            return true
-        } else {
-            return false
-        }
+        return str.includes(spamArray[i]) ? true : false
     }
-
 }
 console.log(spamIdentifier('wfjoiwrfjow 100% бесплатно'))
 
@@ -394,6 +388,7 @@ function splitStringByMaxSize(str: string, maxSize: number) {
     }
 }
 console.log(splitStringByMaxSize('Hello, world', 8))
+
 // Написать функцию, которая проверяет, является ли переданная строка палиндромом.
 function palindromCheck(str: string) {
     let str2 = str.toLowerCase().split('').reverse().join('')
@@ -501,13 +496,13 @@ function smallToLargetoSmall(str: string) {
             newString += str[el].toUpperCase()
         } else if (str[el].match(/[0-9]/)) {
             newString += '_'
-        } else if (str[el].match(' ')) {
-            newString += ' '
+        } else {
+            newString += str[el]
         }
     }
     return newString
 }
-console.log(smallToLargetoSmall('Some StrAnGe sENTence 423'))
+console.log(smallToLargetoSmall('Some StrAnGe sENTence 42!!3'))
 
 // Написать функцию, которая преобразует названия css-стилей с дефисом в название в СamelСase 
 
@@ -524,19 +519,14 @@ console.log(camelCaseConvert('cherepashka-ninja'))
 // Написать функцию, которая принимает словосочетание
 // и превращает его в аббревиатуру.
 function getAbbreviation(str: string) {
-    return str.split(' ').map(i => i[0].toUpperCase()).join('')
+    return str.split(/[ -]+/).map(i => i[0].toUpperCase()).join('')
 }
-console.log(getAbbreviation('bla b bala'))
+console.log(getAbbreviation('d-aaaaa---m n'))
 
 // Написать функцию, которая принимает любое количество строк, объединяет их в одну длинную строку и
 // возвращает ее.
 let getOneStrintArrow = (...str: string[]) => str.join(' ')
 console.log(getOneStrintArrow('bla', 'bla', 'fehiofe', 'smsmsm', ' sjsj, sksk'))
-
-function getOneStrint(...str: string[]) {
-    return str.join(' ')
-}
-console.log(getOneStrint('bla', 'bla', 'fehiofe', 'smsmsm', ' sjsj, sksk'))
 
 // Написать функцию – калькулятор. Функция принимает
 // строку с примером, определяет, какое действие необходимо
@@ -603,15 +593,6 @@ console.log(splitStringWithoutSeparator('10/08/2020', '/'))
 // Например: print(“Today is %1 %2.%3.%4”, “Monday”, 10,
 // 8, 2020) должна вывести “Today is Monday 10.8.2020”.
 function stringByTemplate(template: string, ...str: string[]) {
-
-    // for(let i = 0; i < template.length; i++){
-    //     if(template[i] == '%'){
-    //         let maybeNum = template[i+1]
-    //         if (isFinite(parseInt(maybeNum))) {
-    //             template = template.replace('%'+maybeNum, str[+maybeNum-1])
-    //         }
-    //     }
-    // }
     for (let i = 0; i < str.length; i++) {
         template = template.replace('%' + (i + 1), str[i])
     }
@@ -619,20 +600,6 @@ function stringByTemplate(template: string, ...str: string[]) {
 }
 console.log(stringByTemplate('Today is %1 %2.%3.%4', 'Monday', '10', '8', '2020'))
 console.log(stringByTemplate('%1 is my %2 %3 %5', ...['JS', 'best', 'lang', 'dasda', 'sfdds']))
-
-// !======================================================================================================================
-// let user = {
-//     name: "John",
-//     age: 30,
-//     sayHi() {
-//       console.log( user.name )
-//     } 
-// }
-
-// let admin = user
-// user = null
-// admin.sayHi()\
-
 
 // ! ДЗ классы =====================================================
 // ?Реализовать класс, описывающий простой маркер. В классе
@@ -676,7 +643,6 @@ class RefuelingMarker extends Marker {
 let secondMarker = new RefuelingMarker('red', 10)
 secondMarker.print('Leon is a Legendary Brawler who has moderate health and a high damage output at close range.')
 secondMarker.refuel()
-console.log(secondMarker.ink)
 
 // Реализуйте класс ExtendedDate, унаследовав его от стандарт-
 // ного класса Date и добавив следующие возможности:
@@ -692,13 +658,13 @@ class DateClass {
 }
 class ExtendedDate extends DateClass {
     dateToString() {
-        return new Date(this.year, this.month - 1, this.day).toLocaleString('ru', { month: 'long', day: "numeric" })
+        return 'DATE -  ' + new Date(this.year, this.month - 1, this.day).toLocaleString('en', { month: 'long', day: "numeric" })
     }
     isDateFuture() {
-        return new Date(this.year, this.month, this.day) >= new Date() ? false : true
+        return 'IS DATE IN FUTURE? ' + (new Date(this.year, this.month, this.day) >= new Date() ? false : true)
     }
     isLeapYear() {
-        return this.year / 4 ? true : false
+        return 'IS LEAP YEAR? ' + (this.year / 4 ? true : false)
     }
 }
 const extData = new ExtendedDate(4, 5, 2024)
@@ -714,19 +680,19 @@ class Circle {
         this.radius = radius
     }
     getRadius() {
-        return this.radius
+        return 'RADIUS ' + this.radius
     }
     setRadius(newRadius: number) {
         this.radius = newRadius
     }
     getDiametr() {
-        return this.radius * 2
+        return 'DIAMETR ' + this.radius * 2
     }
     getSquare() {
-        return 3.14 + Math.pow(this.radius, 2)
+        return 'SQUARE ' + 3.14 + Math.pow(this.radius, 2)
     }
     getLength() {
-        return 3.14 + 2 * this.radius
+        return 'LENGTH ' + 3.14 + 2 * this.radius
     }
 }
 const firstCircle = new Circle(10)
@@ -741,9 +707,8 @@ console.log(firstCircle.getRadius())
 console.log(firstCircle.getSquare())
 
 
-
+//!  ДЗ 2.4 ---------------------------------------------------------------------------
 {
-    //*                         ДЗ 2.4
 
     class HtmlElement {
         tag: string
@@ -806,6 +771,7 @@ console.log(firstCircle.getSquare())
 
     const p = new HtmlElement('p', 'гений, миллиардер, плейбой, филантроп')
     p.setStyle('text-align', 'justify')
+    p.setStyle('font-size', '20px')
 
     const a = new HtmlElement('a', ' Who?...')
     a.setStyle('color', 'white')
@@ -855,8 +821,6 @@ console.log(firstCircle.getSquare())
                 html = this.className + '{\n' + styles + ';\n}\n'
             }
             return html
-
-
         }
     }
     const mainStyle = new CssClass('mainClass')
@@ -896,18 +860,18 @@ console.log(firstCircle.getSquare())
 
     const result = new HtmlBlock([mainStyle], wrapper)
     heDiv.innerHTML = result.getCode()
-    //console.log(result.styleCollections)
 
 }
+// ! KRESTIK --------------
 {
-    function krestik(x:number){
+    function krestik(x: number) {
         let sting = ''
-        for( let i = 0; i <= x-1; i++){
-            for(let j = 0; j <= x-1; j++){
-                if(i==j ||i+j+1 == x ){
+        for (let i = 0; i <= x - 1; i++) {
+            for (let j = 0; j <= x - 1; j++) {
+                if (i == j || i + j + 1 == x) {
                     sting += '*'
-                } 
-                else{
+                }
+                else {
                     sting += ' '
                 }
             }
@@ -915,7 +879,64 @@ console.log(firstCircle.getSquare())
         }
         return sting
     }
-    console.log(krestik(20))
+    console.log(krestik(9))
 }
 
 // ! TIMEOUT AND INTERVAL ---------------------------------------------------------------------------------------------------------------------
+{
+    function printNumbersInterval(from: number, to: number) {
+        let current = from
+
+        let intervalId = setInterval(() => {
+            console.log(current)
+            if (current == to) {
+                clearInterval(intervalId)
+            } else {
+                current++
+            }
+        }, 1000)
+    }
+    printNumbersInterval(1, 3)
+
+    function printNumbersTimeout(from: number, to: number) {
+        let current = from
+        console.log(current)
+        if (current != to) {
+            setTimeout(printNumbersTimeout, 1000, ++current, to)
+        }
+    }
+    setTimeout(() => printNumbersTimeout(4, 6), 4000)
+
+    // https://disk.yandex.ru/d/LADtnZajP19xeQ
+}
+
+// ! Практика ------------------------------------------------------
+{
+    //     Реализовать класс PrintMachine, которой состоит из:
+    //          ■ размера шрифта;
+    //          ■ цвета шрифта;
+    //          ■ семейства шрифта;
+    //          ■ метода print(), который принимает текст и печатает его соответствующим шрифтом с помощью
+    //     Создать объект такого класса и продемонстрировать работу
+
+    const printMachineDiv = document.getElementById('printMachine') as HTMLDivElement
+    class PrintMachine{
+        fontSize: string
+        fontColor: string
+        fontFamily: string
+        constructor(fontSize: string, fontColor: string, fontFamily: string){
+            this.fontSize = fontSize
+            this.fontColor = fontColor
+            this.fontFamily = fontFamily
+        }
+        print(text:string){
+            printMachineDiv.innerHTML = `<p style="color:${this.fontColor};font-size:${this.fontSize}px; font-family:${this.fontFamily};">${text}</p>`
+        }
+    }
+    let firstPrint = new PrintMachine('20','white','Lucida Sans')
+    firstPrint.print('This is text from print machine')
+    // СДЕЛАТЬ СО СПАНАМИ
+
+    // https://learn.javascript.ru/closure?ysclid=lw6otra9ho90909433
+    
+}
