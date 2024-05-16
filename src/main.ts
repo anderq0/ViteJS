@@ -607,7 +607,6 @@ console.log(stringByTemplate('%1 is my %2 %3 %5', ...['JS', 'best', 'lang', 'das
 // ?унаследовав его от простого маркера и добавив метод для заправки маркера.
 const divClasses = document.getElementById('dzClasses') as HTMLDivElement
 class Marker {
-
     color: string
     ink: number
     constructor(color: string, ink: number) {
@@ -667,10 +666,12 @@ class ExtendedDate extends DateClass {
         return 'IS LEAP YEAR? ' + (this.year / 4 ? true : false)
     }
 }
+
 const extData = new ExtendedDate(4, 5, 2024)
 console.log(extData.dateToString())
 console.log(extData.isDateFuture())
 console.log(extData.isLeapYear())
+console.log(extData)
 
 
 // Реализовать класс, описывающий окружность. 
@@ -933,10 +934,49 @@ console.log(firstCircle.getSquare())
             printMachineDiv.innerHTML = `<p style="color:${this.fontColor};font-size:${this.fontSize}px; font-family:${this.fontFamily};">${text}</p>`
         }
     }
-    let firstPrint = new PrintMachine('20','white','Lucida Sans')
-    firstPrint.print('This is text from print machine')
-    // СДЕЛАТЬ СО СПАНАМИ
+    class ExtendedPrintMachine extends PrintMachine{
+        fontStyle:string
+        constructor(fontSize: string, fontColor: string, fontFamily: string, fontStyle:string){
+            super(fontSize,fontColor, fontFamily)
+            this.fontStyle = fontStyle
+        }
+        print(text: ){
+            printMachineDiv.innerHTML = `<p style="color:${this.fontColor};font-size:${this.fontSize}px; font-family:${this.fontFamily}; font-style:${this.fontStyle}">${text}</p>`
+        }
+    }
 
+    let firstPrint = new ExtendedPrintMachine('20','white','Lucida Sans','italic')
+    firstPrint.print('This is text from print machine')
     // https://learn.javascript.ru/closure?ysclid=lw6otra9ho90909433
     
 }
+
+
+// Реализовать класс, описывающий геометрическую фигуру со
+// свойствами и методами:
+// ■ get-свойство для получения названия фигуры;
+// ■ метод для вывода информации о фигуре (стороны и их
+// длина);
+// ■ метод для вычисления площади фигуры;
+// ■ метод для вычисления периметра фигуры.
+// Реализуйте классы-наследники: квадрат, прямоугольник и
+// треугольник. Переопределите методы вывода и вычислений в
+// классах-наследниках.
+// Создайте массив с различными фигурами и выведите инфор-
+// мацию о каждой фигуре, включая площадь и периметр.
+{
+    
+}
+
+// Реализуйте класс ExtentedArray, унаследовав его от стандарт-
+// ного класса Array и добавив следующие методы:
+// ■ метод getString(separator) – для получения строки со
+// всеми элементами массива, перечисленными через ука-
+// занный разделитель: запятая, тире, пробел и т. д.;
+// ■ метод getHtml(tagName) – для получения строки с html
+// кодом, где каждый элемент массива будет обернут в ука-
+// занный тег (учтите, если указывается тег li, то все эле-
+// менты дополнительно необходимо обернуть в ul).
+// Создайте объект класса ExtentedArray, заполните его данны-
+// ми и выведите на экран результаты работы методов getString()
+// и getHtml().
