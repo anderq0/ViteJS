@@ -920,35 +920,30 @@ console.log(firstCircle.getSquare())
     //          ■ метода print(), который принимает текст и печатает его соответствующим шрифтом с помощью
     //     Создать объект такого класса и продемонстрировать работу
 
-    const printMachineDiv = document.getElementById('printMachine') as HTMLDivElement
-    class PrintMachine{
-        fontSize: string
-        fontColor: string
-        fontFamily: string
-        constructor(fontSize: string, fontColor: string, fontFamily: string){
-            this.fontSize = fontSize
-            this.fontColor = fontColor
-            this.fontFamily = fontFamily
-        }
-        print(text:string){
-            printMachineDiv.innerHTML = `<p style="color:${this.fontColor};font-size:${this.fontSize}px; font-family:${this.fontFamily};">${text}</p>`
-        }
-    }
-    class ExtendedPrintMachine extends PrintMachine{
-        fontStyle:string
-        constructor(fontSize: string, fontColor: string, fontFamily: string, fontStyle:string){
-            super(fontSize,fontColor, fontFamily)
-            this.fontStyle = fontStyle
-        }
-        print(text: ){
-            printMachineDiv.innerHTML = `<p style="color:${this.fontColor};font-size:${this.fontSize}px; font-family:${this.fontFamily}; font-style:${this.fontStyle}">${text}</p>`
-        }
-    }
+    const input = document.getElementById('printMachine') as HTMLInputElement
+    const dispay = document.getElementById('display') as HTMLDivElement
 
-    let firstPrint = new ExtendedPrintMachine('20','white','Lucida Sans','italic')
-    firstPrint.print('This is text from print machine')
+    input.addEventListener('input', function () {
+        const text = input.value
+        dispay.innerHTML = ''
+        let inkAmount = 1
+        for (let i = 0; i < text.length; i++) {
+            const span = document.createElement('span')
+            span.textContent = text[i];
+
+            const color = `${inkAmount - 0.05}`
+            console.log(color)
+            span.style.opacity = color
+            console.log(text[i], color)
+
+            dispay.appendChild(span)
+
+            inkAmount = inkAmount - 0.05
+        }
+
+    })
     // https://learn.javascript.ru/closure?ysclid=lw6otra9ho90909433
-    
+
 }
 
 
@@ -965,7 +960,7 @@ console.log(firstCircle.getSquare())
 // Создайте массив с различными фигурами и выведите инфор-
 // мацию о каждой фигуре, включая площадь и периметр.
 {
-    
+
 }
 
 // Реализуйте класс ExtentedArray, унаследовав его от стандарт-
@@ -980,3 +975,22 @@ console.log(firstCircle.getSquare())
 // Создайте объект класса ExtentedArray, заполните его данны-
 // ми и выведите на экран результаты работы методов getString()
 // и getHtml().
+
+class ExtendedArray extends Array {
+    // findIndex(predicate: (value: any, index: number, obj: any[]) => unknown, thisArg?: any): number { 
+    // }
+    // @ts-ignore
+    findIndex(predicate: (value: any, index: number, obj: any[]) => unknown, thisArg?: any): number {
+        for (let i = 0; i < this.length; i++) {
+            if (predicate(this[i], i, this)) {
+                return i
+            }
+        }
+        return -1
+    }
+}
+
+// @ts-ignore
+const myArr = new ExtendedArray({ name: 'sdfsd1' }, { name: 'sdfsd2' }, { name: 'sdfsd3' }, { name: 'sdfsd4' }, { name: 'sdfsd' }, { name: 'sdfsd' }, { name: 'sdfsd' }, { name: 'sdfsd' },)
+console.log(myArr.findIndex((el: any) => el.name == '2'))
+// figureArr.findIndex(el=>el==)
