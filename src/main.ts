@@ -930,15 +930,16 @@ console.log(firstCircle.getSquare())
         for (let i = 0; i < text.length; i++) {
             const span = document.createElement('span')
             span.textContent = text[i];
+            if (inkAmount != 0) {
+                const color = `${inkAmount - 0.04}`
+                span.style.opacity = color
 
-            const color = `${inkAmount - 0.05}`
-            console.log(color)
-            span.style.opacity = color
-            console.log(text[i], color)
-
-            dispay.appendChild(span)
-
-            inkAmount = inkAmount - 0.05
+                dispay.appendChild(span)
+                inkAmount = inkAmount - 0.04 >= 0 ? (inkAmount - 0.04) : 0
+            }else{
+                dispay.innerHTML = 'Inks are spent :( '
+            }
+            
         }
 
     })
