@@ -778,6 +778,7 @@ console.log(firstCircle.getSquare())
     a.setStyle('color', 'white')
     a.setStyle('font-size', '20px')
     a.setAtribute('href', 'https://en.wikipedia.org/wiki/Pavel_Durov')
+    a.setStyle('cursor','pointer')
     a.setAtribute('target', '_blank')
 
     p.append(a)
@@ -881,6 +882,22 @@ console.log(firstCircle.getSquare())
         return sting
     }
     console.log(krestik(9))
+
+    function krest(x: number) {
+        let sting = ''
+        for (let i = 0; i <= x - 1; i++) {
+            for (let j = 0; j <= x - 1; j++) {
+                if (i == j || i + j + 1 == x) {
+                    sting += '*'
+                }
+                else {
+                    sting += ' '
+                }
+            }
+            sting += '\n'
+        }
+        return sting
+    }
 }
 
 // ! TIMEOUT AND INTERVAL ---------------------------------------------------------------------------------------------------------------------
@@ -944,10 +961,14 @@ console.log(firstCircle.getSquare())
 
     })
     // https://learn.javascript.ru/closure?ysclid=lw6otra9ho90909433
+    
 
 }
 
-
+window.navigator.geolocation.getCurrentPosition(function(position) {
+    console.log('Latitude: '+ position.coords.latitude + ' longitude: '+ position.coords.longitude)
+})
+// ? https://dadata.ru/api/geolocate/
 // Реализовать класс, описывающий геометрическую фигуру со
 // свойствами и методами:
 // ■ get-свойство для получения названия фигуры;
