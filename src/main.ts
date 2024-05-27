@@ -778,7 +778,7 @@ console.log(firstCircle.getSquare())
     a.setStyle('color', 'white')
     a.setStyle('font-size', '20px')
     a.setAtribute('href', 'https://en.wikipedia.org/wiki/Pavel_Durov')
-    a.setStyle('cursor','pointer')
+    a.setStyle('cursor', 'pointer')
     a.setAtribute('target', '_blank')
 
     p.append(a)
@@ -914,7 +914,7 @@ console.log(firstCircle.getSquare())
             }
         }, 1000)
     }
-    printNumbersInterval(1, 3)
+    // printNumbersInterval(1, 3)
 
     function printNumbersTimeout(from: number, to: number) {
         let current = from
@@ -923,7 +923,7 @@ console.log(firstCircle.getSquare())
             setTimeout(printNumbersTimeout, 1000, ++current, to)
         }
     }
-    setTimeout(() => printNumbersTimeout(4, 6), 4000)
+    // setTimeout(() => printNumbersTimeout(4, 6), 4000)
 
     // https://disk.yandex.ru/d/LADtnZajP19xeQ
 }
@@ -953,21 +953,21 @@ console.log(firstCircle.getSquare())
 
                 dispay.appendChild(span)
                 inkAmount = inkAmount - 0.04 >= 0 ? (inkAmount - 0.04) : 0
-            }else{
+            } else {
                 dispay.innerHTML = 'Inks are spent :( '
             }
-            
+
         }
 
     })
     // https://learn.javascript.ru/closure?ysclid=lw6otra9ho90909433
-    
+
 
 }
 
-window.navigator.geolocation.getCurrentPosition(function(position) {
-    console.log('Latitude: '+ position.coords.latitude + ' longitude: '+ position.coords.longitude)
-})
+// window.navigator.geolocation.getCurrentPosition(function(position) {
+//     console.log('Latitude: '+ position.coords.latitude + ' longitude: '+ position.coords.longitude)
+// })
 // ? https://dadata.ru/api/geolocate/
 // Реализовать класс, описывающий геометрическую фигуру со
 // свойствами и методами:
@@ -1016,3 +1016,73 @@ class ExtendedArray extends Array {
 const myArr = new ExtendedArray({ name: 'sdfsd1' }, { name: 'sdfsd2' }, { name: 'sdfsd3' }, { name: 'sdfsd4' }, { name: 'sdfsd' }, { name: 'sdfsd' }, { name: 'sdfsd' }, { name: 'sdfsd' },)
 console.log(myArr.findIndex((el: any) => el.name == '2'))
 // figureArr.findIndex(el=>el==)
+
+
+
+//? получение фотки из местоположения
+// let latitude
+// let longitude
+// function getlocation() {
+//     if (navigator.geolocation) {
+//         navigator.geolocation.getCurrentPosition(savePosition)
+//     } else {
+//         console.log("Geolocation is not supported by this browser.")
+//     }
+
+
+// }
+// // @ts-ignore
+// function savePosition(position) {
+//     latitude = position.coords.latitude
+//     longitude = position.coords.longitude
+//     console.log("Latitude: " + latitude + ", Longitude: " + longitude)
+// }
+// getlocation()
+
+
+
+const accesKey = "mHQcEWgeYpwQPfvGvbofjGAVs3eqF_WcG7Cpb7jkeHw"
+const geoPhoto = document.getElementById('geoPhoto') as HTMLDivElement
+let keyword = ''
+
+function getlocation() {
+    fetch("https://ipapi.co/json/")
+        .then((response) => response.json())
+        .then((data) => {
+            keyword = data.city
+            console.log(data.city)
+            const geopositionText = document.createElement('h4')
+            geopositionText.textContent =  `Are you from ${data.city}` 
+            geopositionText.id = 'geopositionText'
+            geoPhoto.appendChild(geopositionText)
+            searchImages(keyword)
+        })
+    
+    
+
+}
+
+getlocation()
+
+async function searchImages(keyword:string) {
+    const url = `https://api.unsplash.com/search/photos?per_page=1&query=${keyword}&client_id=${accesKey}`
+
+    const response = await fetch(url)
+    const data = await response.json()
+
+    const results = data.results
+
+    results.map((result: any) => {
+        const image = document.createElement('img')
+        image.src = result.urls.regular
+        image.id = 'geopositionPic'
+        const imageLink = document.createElement('a')
+        imageLink.href = result.links.html
+        imageLink.target = '_blank'
+
+        imageLink.appendChild(image)
+        geoPhoto.appendChild(imageLink)
+    })
+
+    // console.log(data)
+}
