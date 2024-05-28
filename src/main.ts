@@ -5,7 +5,7 @@ type checkType = {
     count: number,
     cost: number,
 }
-// document.designMode = "on";
+// document.designMode = "on"
 
 const checkList: checkType[] = [
     { name: 'cheese', count: 1, cost: 43 },
@@ -925,7 +925,7 @@ console.log(firstCircle.getSquare())
     }
     // setTimeout(() => printNumbersTimeout(4, 6), 4000)
 
-    // https://disk.yandex.ru/d/LADtnZajP19xeQ
+    //?? https://disk.yandex.ru/d/LADtnZajP19xeQ
 }
 
 // ! Практика ------------------------------------------------------
@@ -969,21 +969,6 @@ console.log(firstCircle.getSquare())
 //     console.log('Latitude: '+ position.coords.latitude + ' longitude: '+ position.coords.longitude)
 // })
 // ? https://dadata.ru/api/geolocate/
-// Реализовать класс, описывающий геометрическую фигуру со
-// свойствами и методами:
-// ■ get-свойство для получения названия фигуры;
-// ■ метод для вывода информации о фигуре (стороны и их
-// длина);
-// ■ метод для вычисления площади фигуры;
-// ■ метод для вычисления периметра фигуры.
-// Реализуйте классы-наследники: квадрат, прямоугольник и
-// треугольник. Переопределите методы вывода и вычислений в
-// классах-наследниках.
-// Создайте массив с различными фигурами и выведите инфор-
-// мацию о каждой фигуре, включая площадь и периметр.
-{
-
-}
 
 // Реализуйте класс ExtentedArray, унаследовав его от стандарт-
 // ного класса Array и добавив следующие методы:
@@ -1018,8 +1003,52 @@ console.log(myArr.findIndex((el: any) => el.name == '2'))
 // figureArr.findIndex(el=>el==)
 
 
+{
+    // !  DZ Employee
+    const tableRandom = document.getElementById('tableRandom') as HTMLTableElement
+    type empType ={
+        name: string
+        department: string
+        salary: number
+    }
+    class Employee{
+        name: string
+        department: string
+        salary: number
+        constructor(name: string, department: string, salary: number) {
+            this.name = name
+            this.salary = salary
+            this.department = department
+        }
+    }
 
-//? получение фотки из местоположения
+    const employees:empType[] = [
+        new Employee('Федотова Арина Глебовна', 'ads', 2100),
+        new Employee('Мухина Айша Константиновна', 'disign', 2100),
+        new Employee('Александрова Майя Вячеславовна', 'prog', 4500),
+        new Employee('Крылов Богдан Максимович', 'disign', 2100),
+        new Employee('Романов Эмиль Макарович', 'prog', 3100),
+        new Employee('Федотова Арина Глебовна', 'ads', 2100),
+        new Employee('Федотова Арина Глебовна', 'ads', 2100)
+    ]
+    class EmpTable{
+        arr:empType[] 
+        constructor(arr:empType[]){
+            this.arr = arr
+        }
+        getHtml(){
+            let html = '<thead> <tr> <th>Имя</th> <th>Департамент</th> <th>Зарплата</th> </tr></thead><tbody>'
+            for (let el of this.arr) {
+                html += `<tr><td>${el.name}</td>    <td>${el.department}</td>   <td>${el.salary} </td></tr>`
+            }
+            tableRandom.innerHTML = html + `</thead>`
+        } 
+    }
+    let firstTable = new EmpTable(employees)
+    firstTable.getHtml()
+}
+//? получение фотки geo из current местоположения
+
 // let latitude
 // let longitude
 // function getlocation() {
@@ -1027,8 +1056,7 @@ console.log(myArr.findIndex((el: any) => el.name == '2'))
 //         navigator.geolocation.getCurrentPosition(savePosition)
 //     } else {
 //         console.log("Geolocation is not supported by this browser.")
-//     }
-
+//   }
 
 // }
 // // @ts-ignore
@@ -1052,19 +1080,17 @@ function getlocation() {
             keyword = data.city
             console.log(data.city)
             const geopositionText = document.createElement('h4')
-            geopositionText.textContent =  `Are you from ${data.city}` 
+            geopositionText.textContent = `Are you from ${data.city} ?`
             geopositionText.id = 'geopositionText'
             geoPhoto.appendChild(geopositionText)
             searchImages(keyword)
         })
-    
-    
 
 }
 
 getlocation()
 
-async function searchImages(keyword:string) {
+async function searchImages(keyword: string) {
     const url = `https://api.unsplash.com/search/photos?per_page=1&query=${keyword}&client_id=${accesKey}`
 
     const response = await fetch(url)
@@ -1086,3 +1112,5 @@ async function searchImages(keyword:string) {
 
     // console.log(data)
 }
+
+
