@@ -995,24 +995,85 @@ console.log(firstCircle.getSquare())
     //  ?    Её href содержит ://
     // ?     Но не начинается с http://internal.com.
     let link = document.querySelectorAll('a')
-    const hrefAllowed =  new RegExp("://")
+    const hrefAllowed = new RegExp("://")
     const hrefReject = new RegExp("\^http://internal.com")
-    link.forEach(el=>{
+    link.forEach(el => {
         let text = el.textContent as string
-        if (text.match(hrefAllowed ) && !text.match(hrefReject)) {
+        if (text.match(hrefAllowed) && !text.match(hrefReject)) {
             el.style.color = 'orange'
-        }  
+        }
     })
 
-//     ?У нас есть дерево, структурированное как вложенные списки ul/li.
-//     ?Напишите код, который выведет каждый элемент списка <li>:
-//     ?Какой в нём текст (без поддерева) ?
-//     ?Какое число потомков – всех вложенных <li> (включая глубоко вложенные) ?
+    //     ?У нас есть дерево, структурированное как вложенные списки ul/li.
+    //     ?Напишите код, который выведет каждый элемент списка <li>:
+    //     ?Какой в нём текст (без поддерева) ?
+    //     ?Какое число потомков – всех вложенных <li> (включая глубоко вложенные) ?
 
-    let liElements = document.querySelectorAll('li')
+    let liElements = document.querySelectorAll('#taskSPrirodoy   li')
     for (let li of liElements) {
-        console.log(li.firstChild?.textContent+' '+ li.querySelectorAll('li').length)
+        console.log(li.firstChild?.textContent?.trim() + ' ' + li.querySelectorAll('li').length)
     }
+}
+
+{
+    //! PRAKTIKA
+
+    //     Напишите интерфейс для создания списка.
+
+    // Для каждого пункта:
+
+    // ?Запрашивайте содержимое пункта у пользователя с помощью prompt.
+    // ?Создавайте элемент <li> и добавляйте его к <ul>.
+    // ?Продолжайте до тех пор, пока пользователь не отменит ввод (нажатием клавиши Esc или введя пустую строку).
+    // ?Все элементы должны создаваться динамически.
+
+    // ?Если пользователь вводит HTML-теги, они должны обрабатываться как текст.
+    let question
+    let ulForTask = document.querySelector('#ulForTask') as HTMLUListElement
+    let inputList = document.querySelector('#inputList') as HTMLInputElement
+    let buttonList = document.querySelector('#buttonList') as HTMLButtonElement
+    buttonList.addEventListener('click', function () {
+        let newli = document.createElement('li')
+        newli.textContent = `${inputList.value}`
+        ulForTask.append(newli)
+        inputList.value = ''
+        inputList.focus()
+    })
+
+    const container = document.querySelector('#container ul') as HTMLUListElement
+    let data = {
+        "Рыбы": {
+            "форель": {},
+            "лосось": {}
+        },
+
+        "Деревья": {
+            "Огромные": {
+                "секвойя": {},
+                "дуб": {}
+            },
+            "Цветковые": {
+                "яблоня": {},
+                "магнолия": {}
+            }
+        }
+    } as Record<string,any>
+    //@ts-ignore
+    function createTree(container:HTMLUListElement, arr:Record<string,any>) {
+        for(let key in data){
+            if(Object.keys(data[key]).length){
+                const li = document.createElement('li')
+                li.innerHTML =`${key}<ul></ul>`
+                container.append(li)
+                const ul = li.querySelector('ul') as HTMLUListElement
+                createTree(ul,data[key])
+            }else{
+                container.insertAdjacentHTML('beforeend', `<li>${key}</li>`)
+            }
+        }
+    }
+    createTree(container,data)
+
 }
 
 // //? получение фотки geo из current местоположения
@@ -1064,7 +1125,7 @@ console.log(firstCircle.getSquare())
 //         //await ждет, пока запрос к API завершится, и результат присваивается переменной response
 //         const response = await fetch(url) //etch(url)  HTTP-запрос к указанному url
 
-//         //response.json(): Этот метод парсит тело ответа как JSON 
+//         //response.json(): Этот метод парсит тело ответа как JSON
 //         const data = await response.json() //await: Ждет, пока промис от response.json() завершится, и результат присваивается переменной data
 
 
@@ -1081,7 +1142,5 @@ console.log(firstCircle.getSquare())
 //             imageLink.appendChild(image)
 //             geoPhoto.appendChild(imageLink)
 //         })
-
-//         // console.log(data)
 //     }
 // }
