@@ -200,12 +200,6 @@ addArrayOfRandomNums(ArrayOfRandomNums, 9)
 // 2.1 - 2.4
 const someDiv = document.getElementById('someIdForDiv') as HTMLDivElement
 function sayHelloToUser(name = 'user') {
-    // navigator.geolocation.getCurrentPosition(async (position) => {
-    //     const { latitude: lat, longitude: lon } = position.coords;  // Ваши координаты определены!
-    //     const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=ru`);
-    //     const { city } = await res.json(); // И вот название вашего города!
-    //     someDiv.innerHTML = `Привет, ${name}! Ваш город ${city}`
-    //   });
     someDiv.innerHTML = `Привет, ${name}!`
 }
 sayHelloToUser('gaya')
@@ -881,23 +875,7 @@ console.log(firstCircle.getSquare())
         }
         return sting
     }
-    console.log(krestik(9))
-
-    function krest(x: number) {
-        let sting = ''
-        for (let i = 0; i <= x - 1; i++) {
-            for (let j = 0; j <= x - 1; j++) {
-                if (i == j || i + j + 1 == x) {
-                    sting += '*'
-                }
-                else {
-                    sting += ' '
-                }
-            }
-            sting += '\n'
-        }
-        return sting
-    }
+    console.log(krestik(6))
 }
 
 // ! TIMEOUT AND INTERVAL ---------------------------------------------------------------------------------------------------------------------
@@ -917,12 +895,13 @@ console.log(firstCircle.getSquare())
     // printNumbersInterval(1, 3)
 
     function printNumbersTimeout(from: number, to: number) {
-        let current = from
+        let current = from--
         console.log(current)
         if (current != to) {
             setTimeout(printNumbersTimeout, 1000, ++current, to)
         }
     }
+    // printNumbersTimeout(4,6)
     // setTimeout(() => printNumbersTimeout(4, 6), 4000)
 
     //?? https://disk.yandex.ru/d/LADtnZajP19xeQ
@@ -964,54 +943,15 @@ console.log(firstCircle.getSquare())
 
 
 }
-
-// window.navigator.geolocation.getCurrentPosition(function(position) {
-//     console.log('Latitude: '+ position.coords.latitude + ' longitude: '+ position.coords.longitude)
-// })
-// ? https://dadata.ru/api/geolocate/
-
-// Реализуйте класс ExtentedArray, унаследовав его от стандарт-
-// ного класса Array и добавив следующие методы:
-// ■ метод getString(separator) – для получения строки со
-// всеми элементами массива, перечисленными через ука-
-// занный разделитель: запятая, тире, пробел и т. д.;
-// ■ метод getHtml(tagName) – для получения строки с html
-// кодом, где каждый элемент массива будет обернут в ука-
-// занный тег (учтите, если указывается тег li, то все эле-
-// менты дополнительно необходимо обернуть в ul).
-// Создайте объект класса ExtentedArray, заполните его данны-
-// ми и выведите на экран результаты работы методов getString()
-// и getHtml().
-
-class ExtendedArray extends Array {
-    // findIndex(predicate: (value: any, index: number, obj: any[]) => unknown, thisArg?: any): number { 
-    // }
-    // @ts-ignore
-    findIndex(predicate: (value: any, index: number, obj: any[]) => unknown, thisArg?: any): number {
-        for (let i = 0; i < this.length; i++) {
-            if (predicate(this[i], i, this)) {
-                return i
-            }
-        }
-        return -1
-    }
-}
-
-// @ts-ignore
-const myArr = new ExtendedArray({ name: 'sdfsd1' }, { name: 'sdfsd2' }, { name: 'sdfsd3' }, { name: 'sdfsd4' }, { name: 'sdfsd' }, { name: 'sdfsd' }, { name: 'sdfsd' }, { name: 'sdfsd' },)
-console.log(myArr.findIndex((el: any) => el.name == '2'))
-// figureArr.findIndex(el=>el==)
-
-
 {
     // !  DZ Employee
     const tableRandom = document.getElementById('tableRandom') as HTMLTableElement
-    type empType ={
+    type empType = {
         name: string
         department: string
         salary: number
     }
-    class Employee{
+    class Employee {
         name: string
         department: string
         salary: number
@@ -1022,7 +962,7 @@ console.log(myArr.findIndex((el: any) => el.name == '2'))
         }
     }
 
-    const employees:empType[] = [
+    const employees: empType[] = [
         new Employee('Федотова Арина Глебовна', 'ads', 2100),
         new Employee('Мухина Айша Константиновна', 'disign', 2100),
         new Employee('Александрова Майя Вячеславовна', 'prog', 4500),
@@ -1031,86 +971,117 @@ console.log(myArr.findIndex((el: any) => el.name == '2'))
         new Employee('Федотова Арина Глебовна', 'ads', 2100),
         new Employee('Федотова Арина Глебовна', 'ads', 2100)
     ]
-    class EmpTable{
-        arr:empType[] 
-        constructor(arr:empType[]){
+    class EmpTable {
+        arr: empType[]
+        constructor(arr: empType[]) {
             this.arr = arr
         }
-        getHtml(){
+        getHtml() {
             let html = '<thead> <tr> <th>Имя</th> <th>Департамент</th> <th>Зарплата</th> </tr></thead><tbody>'
             for (let el of this.arr) {
                 html += `<tr><td>${el.name}</td>    <td>${el.department}</td>   <td>${el.salary} </td></tr>`
             }
             tableRandom.innerHTML = html + `</thead>`
-        } 
+        }
     }
     let firstTable = new EmpTable(employees)
     firstTable.getHtml()
 }
-//? получение фотки geo из current местоположения
 
-// let latitude
-// let longitude
-// function getlocation() {
-//     if (navigator.geolocation) {
-//         navigator.geolocation.getCurrentPosition(savePosition)
-//     } else {
-//         console.log("Geolocation is not supported by this browser.")
-//   }
-
-// }
-// // @ts-ignore
-// function savePosition(position) {
-//     latitude = position.coords.latitude
-//     longitude = position.coords.longitude
-//     console.log("Latitude: " + latitude + ", Longitude: " + longitude)
-// }
-// getlocation()
-
-
-
-const accesKey = "mHQcEWgeYpwQPfvGvbofjGAVs3eqF_WcG7Cpb7jkeHw"
-const geoPhoto = document.getElementById('geoPhoto') as HTMLDivElement
-let keyword = ''
-
-function getlocation() {
-    fetch("https://ipapi.co/json/")
-        .then((response) => response.json())
-        .then((data) => {
-            keyword = data.city
-            console.log(data.city)
-            const geopositionText = document.createElement('h4')
-            geopositionText.textContent = `Are you from ${data.city} ?`
-            geopositionText.id = 'geopositionText'
-            geoPhoto.appendChild(geopositionText)
-            searchImages(keyword)
-        })
-
-}
-
-getlocation()
-
-async function searchImages(keyword: string) {
-    const url = `https://api.unsplash.com/search/photos?per_page=1&query=${keyword}&client_id=${accesKey}`
-
-    const response = await fetch(url)
-    const data = await response.json()
-
-    const results = data.results
-
-    results.map((result: any) => {
-        const image = document.createElement('img')
-        image.src = result.urls.regular
-        image.id = 'geopositionPic'
-        const imageLink = document.createElement('a')
-        imageLink.href = result.links.html
-        imageLink.target = '_blank'
-
-        imageLink.appendChild(image)
-        geoPhoto.appendChild(imageLink)
+{
+    //! ДЗ С LEARN JS
+    //?     Сделайте все внешние ссылки оранжевыми, изменяя их свойство style.
+    // ?     Ссылка является внешней, если:
+    //  ?    Её href содержит ://
+    // ?     Но не начинается с http://internal.com.
+    let link = document.querySelectorAll('a')
+    const hrefAllowed =  new RegExp("://")
+    const hrefReject = new RegExp("\^http://internal.com")
+    link.forEach(el=>{
+        let text = el.textContent as string
+        if (text.match(hrefAllowed ) && !text.match(hrefReject)) {
+            el.style.color = 'orange'
+        }  
     })
 
-    // console.log(data)
+//     ?У нас есть дерево, структурированное как вложенные списки ul/li.
+//     ?Напишите код, который выведет каждый элемент списка <li>:
+//     ?Какой в нём текст (без поддерева) ?
+//     ?Какое число потомков – всех вложенных <li> (включая глубоко вложенные) ?
+
+    let liElements = document.querySelectorAll('li')
+    for (let li of liElements) {
+        console.log(li.firstChild?.textContent+' '+ li.querySelectorAll('li').length)
+    }
 }
 
+// //? получение фотки geo из current местоположения
+// {
+//     // let latitude
+//     // let longitude
+//     // function getlocation() {
+//     //     if (navigator.geolocation) {
+//     //         navigator.geolocation.getCurrentPosition(savePosition)
+//     //     } else {
+//     //         console.log("Geolocation is not supported by this browser.")
+//     //   }
 
+//     // }
+//     // // @ts-ignore
+//     // function savePosition(position) {
+//     //     latitude = position.coords.latitude
+//     //     longitude = position.coords.longitude
+//     //     console.log("Latitude: " + latitude + ", Longitude: " + longitude)
+//     // }
+//     // getlocation()
+
+//     const accesKey = "mHQcEWgeYpwQPfvGvbofjGAVs3eqF_WcG7Cpb7jkeHw"
+//     const geoPhoto = document.getElementById('geoPhoto') as HTMLDivElement
+//     let keyword = ''
+
+//     function getlocation() {
+//         fetch("https://ipapi.co/json/")
+//             .then((response) => response.json())
+//             .then((data) => {
+//                 keyword = data.city
+//                 console.log("City: "+ data.city +"\nIP: "+ data.ip)
+//                 const geopositionText = document.createElement('h4')
+//                 geopositionText.textContent = `Are you from ${data.city} ?`
+//                 geopositionText.id = 'geopositionText'
+//                 geoPhoto.appendChild(geopositionText)
+//                 searchImages(keyword)
+
+//             })
+
+//     }
+
+//     getlocation()
+
+//     async function searchImages(keyword: string) {
+//         const url = `https://api.unsplash.com/search/photos?per_page=1&query=${keyword}&client_id=${accesKey}`
+
+
+//         //await ждет, пока запрос к API завершится, и результат присваивается переменной response
+//         const response = await fetch(url) //etch(url)  HTTP-запрос к указанному url
+
+//         //response.json(): Этот метод парсит тело ответа как JSON 
+//         const data = await response.json() //await: Ждет, пока промис от response.json() завершится, и результат присваивается переменной data
+
+
+//         const results = data.results
+
+//         results.map((result: any) => {
+//             const image = document.createElement('img')
+//             image.src = result.urls.regular
+//             image.id = 'geopositionPic'
+//             const imageLink = document.createElement('a')
+//             imageLink.href = result.links.html
+//             imageLink.target = '_blank'
+
+//             imageLink.appendChild(image)
+//             geoPhoto.appendChild(imageLink)
+//         })
+
+//         // console.log(data)
+//     }
+// }
