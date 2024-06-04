@@ -1013,9 +1013,6 @@ console.log(firstCircle.getSquare())
     for (let li of liElements) {
         console.log(li.firstChild?.textContent?.trim() + ' ' + li.querySelectorAll('li').length)
     }
-}
-
-{
     //! PRAKTIKA
 
     //     Напишите интерфейс для создания списка.
@@ -1028,10 +1025,10 @@ console.log(firstCircle.getSquare())
     // ?Все элементы должны создаваться динамически.
 
     // ?Если пользователь вводит HTML-теги, они должны обрабатываться как текст.
-    let question
     let ulForTask = document.querySelector('#ulForTask') as HTMLUListElement
     let inputList = document.querySelector('#inputList') as HTMLInputElement
     let buttonList = document.querySelector('#buttonList') as HTMLButtonElement
+
     buttonList.addEventListener('click', function () {
         let newli = document.createElement('li')
         newli.textContent = `${inputList.value}`
@@ -1040,7 +1037,7 @@ console.log(firstCircle.getSquare())
         inputList.focus()
     })
 
-    const container = document.querySelector('#container ul') as HTMLUListElement
+    //?Напишите функцию createTree, которая создаёт вложенный список ul/li из объекта.
     let data = {
         "Рыбы": {
             "форель": {},
@@ -1057,22 +1054,79 @@ console.log(firstCircle.getSquare())
                 "магнолия": {}
             }
         }
-    } as Record<string,any>
-    //@ts-ignore
-    function createTree(container:HTMLUListElement, arr:Record<string,any>) {
-        for(let key in data){
-            if(Object.keys(data[key]).length){
+    } as Record<string, any>
+    const container = document.getElementById('container') as HTMLUListElement
+
+    function createTree(container: HTMLUListElement, data: Record<string, any>) {
+        for (let key in data) {
+            if (Object.keys(data[key]).length) {
                 const li = document.createElement('li')
-                li.innerHTML =`${key}<ul></ul>`
+                li.innerHTML = `${key}<ul></ul>`
                 container.append(li)
                 const ul = li.querySelector('ul') as HTMLUListElement
-                createTree(ul,data[key])
-            }else{
+                createTree(ul, data[key])
+            } else {
                 container.insertAdjacentHTML('beforeend', `<li>${key}</li>`)
             }
         }
     }
-    createTree(container,data)
+
+    createTree(container, data)
+
+
+    //?Есть дерево, организованное в виде вложенных списков ul/li.
+    // ?Напишите код, который добавит каждому элементу списка <li> 
+    // ?количество вложенных в него элементов. Узлы нижнего уровня, без детей – пропускайте.
+    for (let li of liElements) {
+        if (li.querySelectorAll('li').length > 0) {
+            li.firstChild!.nodeValue = `${li.firstChild!.textContent} [${li.querySelectorAll('li').length}]`
+        }
+    }
+
+    // ?Hапишите функцию createCalendar(elem, year, month).
+
+    // ?Вызов функции должен создать календарь для заданного месяца month в году year и вставить его в elem.
+
+    // ?Календарь должен быть таблицей, где неделя – это <tr>, а день – это <td>. 
+    // ?У таблицы должен быть заголовок с названиями дней недели, каждый день – <th>, 
+    // ?первым днём недели должен быть понедельник.
+    // function createCalendar(elem, year, month){
+
+    // }
+
+
+    // Создайте цветные часы 
+    const extremistClock = document.getElementById('extremistClock') as HTMLDivElement
+    let currentTime = document.createElement('h3')
+    function printextremistClock() {
+        let hour = new Date().getHours() > 9? new Date().getHours() : `0${new Date().getHours()}`
+        let minutes = new Date().getMinutes() > 9? new Date().getMinutes() : `0${new Date().getMinutes()}`
+        let seconds = new Date().getSeconds()> 9? new Date().getSeconds() : `0${new Date().getSeconds()}`
+        currentTime.innerHTML = `<span id="hours" style="color: red">${hour}</span>:<span id="minutes" style="color: green">${minutes}</span>:<span id="seconds" style="color: blue">${seconds}</span>`
+        extremistClock.appendChild(currentTime)
+        setTimeout(printextremistClock, 1000)
+    }
+    printextremistClock()
+
+    let sortTableByName = document.getElementById('sortTableByName') as HTMLTableElement
+    let sortTableByNameArray = sortTableByName.querySelectorAll('td') 
+
+    // Напишите код для вставки <li>2</li><li>3</li> между этими двумя <li>
+    let ulTask9 = document.getElementById('ulTask9') as HTMLUListElement
+    ulTask9.firstElementChild?.insertAdjacentHTML('beforeend', `<li>2</li><li>3</li>`)
+
+
+
+    function sortArrayByName() {
+        for(let el of sortTableByNameArray){
+            if(el.cellIndex == 0){
+                console.log(el.textContent)
+                
+            }
+        }
+    
+    }
+    sortArrayByName()
 
 }
 
