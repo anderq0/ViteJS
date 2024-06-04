@@ -1,22 +1,24 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <link rel="stylesheet" href="src/style.scss">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + TS</title>
-  <style id="styleForTask"></style>
-  <script src="https://api-maps.yandex.ru/v3/?apikey=39a3e3f9-3252-423c-8882-3c5d7aecfbd2&lang=ru_RU" type="text/javascript">
-  </script>
+  
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="src/style.scss">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+    <style id="styleForTask"></style>
+    <script src="https://api-maps.yandex.ru/v3/?apikey=39a3e3f9-3252-423c-8882-3c5d7aecfbd2&lang=ru_RU" type="text/javascript">
+    </script>
   <script type="module" src="/src/main.ts"></script>
 </head>
 
 <body>
   
-
+  
   Самый крутой индекс аштимиэль
+  <div id="notification" style="text-align: end;"></div>
+  
   <div>
     <h2>DZ 2 Z 2</h2>
     <ol id='DZ2z2'></ol>
@@ -136,6 +138,7 @@
 
   <div id="extremistClock">
   </div>
+  <button id="btnClock">Click</button>
 
   <ul id="ulTask9">
     <li id="one">1</li>
@@ -158,11 +161,21 @@
       <tr>
         <td>Ann</td><td>Lee</td><td>5</td>
       </tr>
-      <tr>
-        <td>...</td><td>...</td><td>...</td>
-      </tr>
     </tbody>
     </table>
+
+    <table id="dateTable" style="margin-top: 30px;">
+      <thead>
+        <tr>
+          <th>SUN</th><th>MND</th><th>TUE</th><th>WEN</th><th>THU</th><th>FRI</th><th>SAT</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      </tbody>
+      </table>
+
+
   
 
   <!-- <script type="module" src="/src/main.ts"></script> -->

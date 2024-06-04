@@ -1090,13 +1090,31 @@ console.log(firstCircle.getSquare())
     // ?Календарь должен быть таблицей, где неделя – это <tr>, а день – это <td>. 
     // ?У таблицы должен быть заголовок с названиями дней недели, каждый день – <th>, 
     // ?первым днём недели должен быть понедельник.
-    // function createCalendar(elem, year, month){
-
-    // }
+    //`<tr><td>${el.name}</td>    <td>${el.department}</td>   <td>${el.salary} </td></tr>`
+    let dateTable = document.getElementById('dateTable') as HTMLTableElement
+    function createCalendar(elem:string, year:number, month:number){
+        let html =''
+        let datemeaning = new Date(year,--month)
+        console.log(datemeaning.toDateString())
+        for(let el = 1;el<= new Date(year,++month,0).getDate();el++){
+            let week  = '<tr>'
+            for(let weekday = 0; weekday <= 6;weekday++){
+                if(new Date(year,month-1,el).getDay() != weekday){
+                    week +=`<td>    </td>`
+                }else{
+                    week += `<td></td>`
+                }
+            }
+        }
+        
+    }
+    createCalendar('rd', 2024, 2)
 
 
     // Создайте цветные часы 
     const extremistClock = document.getElementById('extremistClock') as HTMLDivElement
+    const btnClock = document.getElementById('btnClock') as HTMLButtonElement
+
     let currentTime = document.createElement('h3')
     function printextremistClock() {
         let hour = new Date().getHours() > 9? new Date().getHours() : `0${new Date().getHours()}`
@@ -1106,7 +1124,9 @@ console.log(firstCircle.getSquare())
         extremistClock.appendChild(currentTime)
         setTimeout(printextremistClock, 1000)
     }
-    printextremistClock()
+    btnClock.addEventListener('click', function(){
+        printextremistClock()
+    })
 
     let sortTableByName = document.getElementById('sortTableByName') as HTMLTableElement
     let sortTableByNameArray = sortTableByName.querySelectorAll('td') 
@@ -1118,17 +1138,39 @@ console.log(firstCircle.getSquare())
 
 
     function sortArrayByName() {
+        let namearray = []
         for(let el of sortTableByNameArray){
             if(el.cellIndex == 0){
                 console.log(el.textContent)
-                
+                namearray.push(el.textContent)
             }
         }
-    
+        namearray.sort((a, b) => a!.localeCompare(b!))
+        
+        
     }
     sortArrayByName()
 
-}
+    //? Напишите функцию showNotification(options),
+    //?  которая создаёт уведомление: <div class="notification"> с заданным содержимым. 
+    //?  Уведомление должно автоматически исчезнуть через 1,5 секунды.
+    // Доделать
+    let notificationDiv = document.getElementById('notification') as HTMLDivElement
+    function showNotification(y='0', x='0',html='asdadada' ){
+        let notification = document.createElement('div')
+        notification.style.display ='block'
+        notification.style.position = 'fixed'
+        notification.style.top = `${y}px`
+        notification.style.right = `${x}px`
+        notification.innerHTML = html
+        notificationDiv.appendChild(notification)
+        setTimeout(() => notification.remove(), 1500)
+
+    }   
+    setInterval(()=>{showNotification('10','0','<img src="https://yt3.googleusercontent.com/bRxpLuKan-5TAGEdooDE35CTPXr-59xEhwlt_w1BHY2rzc1hQBdpfVLo0a95p9bYbBObUkmsfw=s900-c-k-c0x00ffffff-no-rj" alt="Stranger">'),3000}) 
+    // showNotification('10','0','<img src="https://yt3.googleusercontent.com/bRxpLuKan-5TAGEdooDE35CTPXr-59xEhwlt_w1BHY2rzc1hQBdpfVLo0a95p9bYbBObUkmsfw=s900-c-k-c0x00ffffff-no-rj" alt="Stranger">')
+
+}   
 
 // //? получение фотки geo из current местоположения
 // {
