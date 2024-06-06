@@ -1084,14 +1084,8 @@ console.log(firstCircle.getSquare())
     }
 
     // ?Hапишите функцию createCalendar(elem, year, month).
-
-    // ?Вызов функции должен создать календарь для заданного месяца month в году year и вставить его в elem.
-
-    // ?Календарь должен быть таблицей, где неделя – это <tr>, а день – это <td>. 
-    // ?У таблицы должен быть заголовок с названиями дней недели, каждый день – <th>, 
-    // ?первым днём недели должен быть понедельник.
     let dateTable = document.getElementById('dateTable') as HTMLTableElement
-    function createCalendar(elem: string, year: number, monthUser: number) {
+    function createCalendar(elem: HTMLTableElement, year: number, monthUser: number) {
         let week = '<tr>'
         let date = new Date(year, monthUser - 1, 1)
         let firstDay = date.getDay()
@@ -1112,10 +1106,10 @@ console.log(firstCircle.getSquare())
                 week += '<td></td>';
             }
         }
-        dateTable.innerHTML += week
+        elem.innerHTML += week
 
     }
-    createCalendar('rd', 2024, 6)
+    createCalendar(dateTable, 2024, 6)
 
 
     // Создайте цветные часы 
@@ -1135,27 +1129,14 @@ console.log(firstCircle.getSquare())
         printextremistClock()
     })
 
-    let sortTableByName = document.getElementById('sortTableByName') as HTMLTableElement
-    let sortTableByNameArray = sortTableByName.querySelectorAll('td')
-
+    
     // ?Напишите код для вставки <li>2</li><li>3</li> между этими двумя <li>
     let ulTask9 = document.getElementById('ulTask9') as HTMLUListElement
     ulTask9.firstElementChild?.insertAdjacentHTML('beforeend', `<li>2</li><li>3</li>`)
+    
+    let sortTableByName = document.getElementById('sortTableByName') as HTMLTableElement
+    let sortTableByNameArray = sortTableByName.querySelectorAll('td')
 
-
-
-    function sortArrayByName() {
-        let namearray = []
-        for (let el of sortTableByNameArray) {
-            if (el.cellIndex == 0) {
-                console.log(el.textContent)
-                namearray.push(el.textContent)
-            }
-        }
-        namearray.sort((a, b) => a!.localeCompare(b!))
-
-    }
-    sortArrayByName()
 
     //? Напишите функцию showNotification(options),
     //?  которая создаёт уведомление: <div class="notification"> с заданным содержимым. 
