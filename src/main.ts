@@ -1013,17 +1013,13 @@ console.log(firstCircle.getSquare())
     for (let li of liElements) {
         console.log(li.firstChild?.textContent?.trim() + ' ' + li.querySelectorAll('li').length)
     }
+
     //! PRAKTIKA
-
-    //     Напишите интерфейс для создания списка.
-
-    // Для каждого пункта:
 
     // ?Запрашивайте содержимое пункта у пользователя с помощью prompt.
     // ?Создавайте элемент <li> и добавляйте его к <ul>.
     // ?Продолжайте до тех пор, пока пользователь не отменит ввод (нажатием клавиши Esc или введя пустую строку).
     // ?Все элементы должны создаваться динамически.
-
     // ?Если пользователь вводит HTML-теги, они должны обрабатываться как текст.
     let ulForTask = document.querySelector('#ulForTask') as HTMLUListElement
     let inputList = document.querySelector('#inputList') as HTMLInputElement
@@ -1093,8 +1089,8 @@ console.log(firstCircle.getSquare())
         for (let i = 0; i < firstDay; i++) {
             week += `<td>ツ</td>`
         }
-        console.log(date.getMonth() )
-        while (date.getMonth() == monthUser - 1) { 
+        console.log(date.getMonth())
+        while (date.getMonth() == monthUser - 1) {
             week += `<td>${date.getDate()}</td>`;
             if (date.getDay() == 6) {
                 week += '</tr><tr>';
@@ -1129,13 +1125,12 @@ console.log(firstCircle.getSquare())
         printextremistClock()
     })
 
-    
+
     // ?Напишите код для вставки <li>2</li><li>3</li> между этими двумя <li>
     let ulTask9 = document.getElementById('ulTask9') as HTMLUListElement
     ulTask9.firstElementChild?.insertAdjacentHTML('beforeend', `<li>2</li><li>3</li>`)
-    
-    let sortTableByName = document.getElementById('sortTableByName') as HTMLTableElement
-    let sortTableByNameArray = sortTableByName.querySelectorAll('td')
+
+
 
 
     //? Напишите функцию showNotification(options),
@@ -1150,7 +1145,43 @@ console.log(firstCircle.getSquare())
         document.body.insertAdjacentElement('afterbegin', notification)
         setTimeout(() => notification.remove(), 1500)
     }
-    setInterval(()=>{showNotification('10','0','<img src="https://yt3.googleusercontent.com/bRxpLuKan-5TAGEdooDE35CTPXr-59xEhwlt_w1BHY2rzc1hQBdpfVLo0a95p9bYbBObUkmsfw=s900-c-k-c0x00ffffff-no-rj" alt="Stranger">')},3000) 
+    setInterval(() => { showNotification('10', '0', '<img src="https://yt3.googleusercontent.com/bRxpLuKan-5TAGEdooDE35CTPXr-59xEhwlt_w1BHY2rzc1hQBdpfVLo0a95p9bYbBObUkmsfw=s900-c-k-c0x00ffffff-no-rj" alt="Stranger">') }, 3000)
+
+
+    let scrollToOptionsBtn = document.querySelector('#scrollToOptions') as HTMLButtonElement
+    // scrollToOptionsBtn.addEventListener('click', function () {
+    //     window.scrollTo({
+    //         top: 500,
+    //         left: 0,
+    //         behavior: 'smooth'
+    //     })
+    // })
+
+
+    // ! Размеры и прокрутка элементов
+
+    //      Свойство elem.scrollTop содержит размер прокрученной области при отсчёте сверху. 
+    //      А как подсчитать размер прокрутки снизу (назовём его scrollBottom)?
+    //      Напишите соответствующее выражение для произвольного элемента elem.
+    //      P.S. Проверьте: если прокрутки нет вообще или элемент полностью прокручен – оно должно давать 0.
+    let scrollBottom = document.body.scrollHeight - document.documentElement.scrollTop
+    console.log(scrollBottom)
+
+    //      Напишите код, который возвращает ширину стандартной полосы прокрутки.
+    //      Для Windows она обычно колеблется от 12px до 20px.  
+    //      Если браузер не выделяет место под полосу прокрутки(так тоже бывает, она
+    //      может быть прозрачной над текстом), тогда значение может быть 0px.
+    let scrollWidth = document.body.offsetWidth - document.body.clientWidth
+    console.log(scrollWidth)
+
+    const ball = document.getElementById('ball') as HTMLImageElement
+    const field = document.getElementById('field') as HTMLDivElement
+    let x = field.clientWidth / 2
+    let y = field.clientHeight / 2
+    let ballX = ball.clientWidth / 2
+    let ballY = ball.clientHeight / 2
+    ball.style.left = (x - ballX) + 'px'
+    ball.style.top = (y - ballY) + 'px'
 
 }
 
@@ -1222,3 +1253,4 @@ console.log(firstCircle.getSquare())
 //         })
 //     }
 // }
+// @id:marqu3s.aurora-x
