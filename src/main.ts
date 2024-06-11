@@ -1111,7 +1111,7 @@ console.log(firstCircle.getSquare())
     // Создайте цветные часы 
     const extremistClock = document.getElementById('extremistClock') as HTMLDivElement
     const btnClock = document.getElementById('btnClock') as HTMLButtonElement
-
+    let btnVisible = false
     let currentTime = document.createElement('h3')
     function printextremistClock() {
         let hour = new Date().getHours() > 9 ? new Date().getHours() : `0${new Date().getHours()}`
@@ -1122,16 +1122,20 @@ console.log(firstCircle.getSquare())
         setTimeout(printextremistClock, 1000)
     }
     btnClock.addEventListener('click', function () {
-        printextremistClock()
+        if(!btnVisible){
+            btnVisible = true
+            printextremistClock()
+            extremistClock.style.visibility = ''
+        }else{
+            btnVisible = false
+            extremistClock.style.visibility = 'hidden'
+        }
     })
 
 
     // ?Напишите код для вставки <li>2</li><li>3</li> между этими двумя <li>
     let ulTask9 = document.getElementById('ulTask9') as HTMLUListElement
     ulTask9.firstElementChild?.insertAdjacentHTML('beforeend', `<li>2</li><li>3</li>`)
-
-
-
 
     //? Напишите функцию showNotification(options),
     //?  которая создаёт уведомление: <div class="notification"> с заданным содержимым. 
@@ -1146,19 +1150,46 @@ console.log(firstCircle.getSquare())
         setTimeout(() => notification.remove(), 1500)
     }
     setInterval(() => { showNotification('10', '0', '<img src="https://yt3.googleusercontent.com/bRxpLuKan-5TAGEdooDE35CTPXr-59xEhwlt_w1BHY2rzc1hQBdpfVLo0a95p9bYbBObUkmsfw=s900-c-k-c0x00ffffff-no-rj" alt="Stranger">') }, 3000)
+}
 
+{
+    const fieldAnother = document.querySelector('#fieldAnother') as HTMLDivElement
+    const fieldData  = document.querySelector('#fieldData') as HTMLDivElement
+    const fieldStyle = getComputedStyle(fieldAnother)
+    const borderRight = parseFloat(fieldStyle.borderRightWidth)
+    const borderLeft = parseFloat(fieldStyle.borderLeftWidth)
+    const borderBottom = parseFloat(fieldStyle.borderBottomWidth)
+    const borderTop = parseFloat(fieldStyle.borderTopWidth)
+    document.addEventListener('scroll',()=>{
+        const rect = fieldAnother.getBoundingClientRect()
+        fieldData.innerHTML =`<p>1. 
+        client:(${rect.left}, ${rect.top})   
+        page: (${rect.left + window.scrollX}), ${rect.top+window.scrollY}</p>`
+
+        fieldData.innerHTML +=`<p>2. 
+        client:(${rect.right}, ${rect.bottom})
+        page:(${rect.right+window.scrollX}), (${rect.bottom+window.scrollY})</p>`
+
+        fieldData.innerHTML +=`<p>3. 
+        client:(${rect.left + borderLeft}, ${rect.top + borderTop})
+        page:(${rect.right+window.scrollX}), (${rect.bottom+window.scrollY})</p>`
+
+        fieldData.innerHTML +=`<p>4. 
+        client:(${rect.right-borderRight}, ${rect.bottom-borderBottom})
+        page:(${rect.right+window.scrollX}), (${rect.bottom+window.scrollY})</p>`
+    })
+}
+{
+    // ! Размеры и прокрутка элементов
 
     let scrollToOptionsBtn = document.querySelector('#scrollToOptions') as HTMLButtonElement
-    // scrollToOptionsBtn.addEventListener('click', function () {
-    //     window.scrollTo({
-    //         top: 500,
-    //         left: 0,
-    //         behavior: 'smooth'
-    //     })
-    // })
-
-
-    // ! Размеры и прокрутка элементов
+    scrollToOptionsBtn.addEventListener('click', function () {
+        window.scrollTo({
+            top: 500,
+            left: 0,
+            behavior: 'smooth'
+        })
+    })
 
     //      Свойство elem.scrollTop содержит размер прокрученной области при отсчёте сверху. 
     //      А как подсчитать размер прокрутки снизу (назовём его scrollBottom)?
@@ -1176,12 +1207,8 @@ console.log(firstCircle.getSquare())
 
     const ball = document.getElementById('ball') as HTMLImageElement
     const field = document.getElementById('field') as HTMLDivElement
-    let x = field.clientWidth / 2
-    let y = field.clientHeight / 2
-    let ballX = ball.clientWidth / 2
-    let ballY = ball.clientHeight / 2
-    ball.style.left = (x - ballX) + 'px'
-    ball.style.top = (y - ballY) + 'px'
+    ball.style.left = `${field.clientWidth / 2 - ball.clientWidth / 2}px`
+    ball.style.top = `${field.clientHeight / 2 - ball.clientHeight / 2}px`
 
 }
 
@@ -1253,4 +1280,3 @@ console.log(firstCircle.getSquare())
 //         })
 //     }
 // }
-// @id:marqu3s.aurora-x
