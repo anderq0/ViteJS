@@ -1219,31 +1219,69 @@ console.log(firstCircle.getSquare())
     function positionAt(anchor:HTMLElement, position: 'top' | 'right' | 'bottom', elem: any) {
         const coords = anchor.getBoundingClientRect()
         if(position=='top'){
-            elem.style.top = coords.top + 'px'
-            elem.style.top = coords.top - elem.offsetHeight + "px"
+            elem.style.left = coords.left + 'px'
+            elem.style.top = coords.top  + "px"
         }else if(position=='right'){
-            elem.style.right = coords.right + 'px'
-            elem.style.top = coords.top + "px"
+            elem.style.left = coords.right + 'px'
         }else if(position=='bottom'){
-            elem.style.bottom = coords.bottom + 'px'
+            elem.style.left = coords.left + 'px'
             elem.style.top = coords.top + anchor.offsetHeight + "px"
         }
     }
 
     function showNote(anchor: HTMLElement, position: 'top' | 'right' | 'bottom', html: string) {
         let note = document.createElement('div');
-        note.className = "note";
-        note.innerHTML = html;
-        document.body.append(note);
-        positionAt(anchor, position, note);
+        note.className = "note"
+        note.innerHTML = html
+        document.body.append(note)
+        positionAt(anchor, position, note)
     }
     let blockquote = document.querySelector('blockquote') as HTMLQuoteElement
 
-    showNote( blockquote, "top", "note above");
-    showNote( blockquote, "right", "note at the right");
-    showNote( blockquote, "bottom", "note below");
+    // showNote( blockquote, "top", "note above")
+    showNote( blockquote, "right", "note at the right")
+    // showNote( blockquote, "bottom", "note below")
 }
+{
+    // ! Обработчики событий
 
+    // Добавьте JavaScript к кнопке button, чтобы при нажатии элемент <div id="text"> исчезал.
+    let text = document.querySelector('#text') as HTMLDivElement
+    let textToDlete = document.querySelector('#textToDlete') as HTMLButtonElement
+    let isTextDeleted = false
+    textToDlete.addEventListener('click',()=>{
+        if(!isTextDeleted){            
+            text.style.visibility = 'hidden'
+            isTextDeleted = true
+        }else{
+            textToDlete.style.visibility = 'hidden'
+        }
+    })
+
+    // Пусть мяч перемещается при клике на поле, туда, куда был клик
+//     !Требования:
+//      CSS-анимация желательна, но не обязательна;
+//      Мяч ни в коем случае не должен пересекать границы поля;
+    let ball = document.querySelector('#realBall') as HTMLImageElement
+    let field = document.querySelector('#realField') as HTMLDivElement
+    const fieldStyle = getComputedStyle(field)
+    const coords = ball.getBoundingClientRect()
+    const border = parseFloat(fieldStyle.borderTopWidth)
+    field.addEventListener('click',(e)=>{
+        console.log(e)
+        let positionY = e.pageY - ball.clientHeight/2
+        let positionX = e.pageX- ball.clientWidth/2
+        console.log(positionY,coords.top + window.pageYOffset + border )
+        if(positionY <=coords.top + window.pageYOffset + border  ){
+            ball.style.top = `${positionY+border}px`
+            ball.style.left = `${positionX}px`
+        }else{
+            ball.style.top = `${positionY}px`
+            ball.style.left = `${positionX}px`
+        }
+    })
+
+}
 
 // //? получение фотки geo из current местоположения
 // {
