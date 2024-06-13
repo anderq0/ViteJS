@@ -1,4 +1,4 @@
-body{
+body {
     background-color: #373b46;
 }
 
@@ -7,7 +7,7 @@ body{
 th {
     background: #24201f;
     color: #f941a3;
-    border-right: 2px solid; 
+    border-right: 2px solid;
     border-left: 2px solid;
     font-size: 0.9em;
     font-weight: bold;
@@ -25,19 +25,20 @@ td {
     font-weight: bold;
 }
 
-button{
+button {
     background-color: #f941a3;
     font-size: 20px;
     margin-top: 15px;
 }
 
-input{
+input {
     padding: 15px 15px;
     margin-top: 5px;
     background-color: #a5b0d0;
     font-size: 15px;
 }
-input#printMachine{
+
+input#printMachine {
     position: absolute;
     left: 0;
     right: 0;
@@ -45,43 +46,52 @@ input#printMachine{
     bottom: 0;
     opacity: 0;
 }
+
 #ink-div {
     position: relative;
 }
-div#display{
+
+div#display {
     padding: 30px 30px;
     word-break: break-all;
     background-color: rgb(255, 255, 255);
     font-size: 30px;
 }
 
-div#DivForSumSalary{
+div#DivForSumSalary {
     margin-bottom: 15px;
 }
-p{
+
+p {
     padding-right: 50%;
-    
+
 }
-ul{
+
+ul {
     font-size: 20px;
     list-style-type: none;
 }
-div#geoPhoto{
+
+div#geoPhoto {
     background-color: rgb(0, 0, 0);
 }
-img#geopositionPic{
-    width: 27%; /* Ширина */
-    margin: 0 0 0 3.5%; 
-    padding: 2%; 
+
+img#geopositionPic {
+    width: 27%;
+    /* Ширина */
+    margin: 0 0 0 3.5%;
+    padding: 2%;
 }
-#geopositionText{
+
+#geopositionText {
     color: #f5f5f5;
     font-size: 30px;
     margin: 0 0 0 3.5%;
-    padding: 2%; 
+    padding: 2%;
 
 }
-#ball{
+
+#ball {
     position: absolute;
     width: 40px;
     height: 40px;
@@ -93,15 +103,45 @@ img#geopositionPic{
     border: 10px groove black;
     background-color: #00FF00;
     position: relative;
-  }
-#fieldAnother{
+}
+
+#fieldAnother {
     overflow: hidden;
-  width: 200px;
-  height: 150px;
-  border-top: 10px solid black;
-  border-right: 10px solid gray;
-  border-bottom: 10px solid gray;
-  border-left: 10px solid black;
-  background-color: #00FF00;
-  font: 10px/1.2 monospace;
+    width: 200px;
+    height: 150px;
+    border-top: 10px solid black;
+    border-right: 10px solid gray;
+    border-bottom: 10px solid gray;
+    border-left: 10px solid black;
+    background-color: #00FF00;
+    font: 10px/1.2 monospace;
+}
+
+.note {
+    position: fixed;
+    z-index: 1000;
+    padding: 5px;
+    border: 1px solid black;
+    background: white;
+    text-align: center;
+    font: italic 14px serif;
+}
+
+blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 0 0 0 100px;
+    padding: .5em 10px;
+    quotes: "\201C" "\201D" "\2018" "\2019";
+    display: inline-block;
+    white-space: pre;
+}
+
+blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: .1em;
+    margin-right: .25em;
+    vertical-align: -.4em;
 }

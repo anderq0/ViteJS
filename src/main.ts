@@ -1122,11 +1122,11 @@ console.log(firstCircle.getSquare())
         setTimeout(printextremistClock, 1000)
     }
     btnClock.addEventListener('click', function () {
-        if(!btnVisible){
+        if (!btnVisible) {
             btnVisible = true
             printextremistClock()
             extremistClock.style.visibility = ''
-        }else{
+        } else {
             btnVisible = false
             extremistClock.style.visibility = 'hidden'
         }
@@ -1154,29 +1154,25 @@ console.log(firstCircle.getSquare())
 
 {
     const fieldAnother = document.querySelector('#fieldAnother') as HTMLDivElement
-    const fieldData  = document.querySelector('#fieldData') as HTMLDivElement
+    const fieldData = document.querySelector('#fieldData') as HTMLDivElement
     const fieldStyle = getComputedStyle(fieldAnother)
     const borderRight = parseFloat(fieldStyle.borderRightWidth)
     const borderLeft = parseFloat(fieldStyle.borderLeftWidth)
     const borderBottom = parseFloat(fieldStyle.borderBottomWidth)
     const borderTop = parseFloat(fieldStyle.borderTopWidth)
-    document.addEventListener('scroll',()=>{
+    document.addEventListener('scroll', () => {
         const rect = fieldAnother.getBoundingClientRect()
-        fieldData.innerHTML =`<p>1. 
-        client:(${rect.left}, ${rect.top})   
-        page: (${rect.left + window.scrollX}), ${rect.top+window.scrollY}</p>`
+        fieldData.innerHTML = `<p>1. 
+        client:(${Math.trunc(rect.left)}, ${Math.trunc(rect.top)})</p>`
 
-        fieldData.innerHTML +=`<p>2. 
-        client:(${rect.right}, ${rect.bottom})
-        page:(${rect.right+window.scrollX}), (${rect.bottom+window.scrollY})</p>`
+        fieldData.innerHTML += `<p>2. 
+        client:(${Math.trunc(rect.right)}, ${Math.trunc(rect.bottom)})</p>`
 
-        fieldData.innerHTML +=`<p>3. 
-        client:(${rect.left + borderLeft}, ${rect.top + borderTop})
-        page:(${rect.right+window.scrollX}), (${rect.bottom+window.scrollY})</p>`
+        fieldData.innerHTML += `<p>3. 
+        client:(${Math.trunc(rect.left + borderLeft)}, ${Math.trunc(rect.top + borderTop)})</p>`
 
-        fieldData.innerHTML +=`<p>4. 
-        client:(${rect.right-borderRight}, ${rect.bottom-borderBottom})
-        page:(${rect.right+window.scrollX}), (${rect.bottom+window.scrollY})</p>`
+        fieldData.innerHTML += `<p>4. 
+        client:(${Math.trunc(rect.right - borderRight)}, ${Math.trunc(rect.bottom - borderBottom)})</p>`
     })
 }
 {
@@ -1210,7 +1206,44 @@ console.log(firstCircle.getSquare())
     ball.style.left = `${field.clientWidth / 2 - ball.clientWidth / 2}px`
     ball.style.top = `${field.clientHeight / 2 - ball.clientHeight / 2}px`
 
+
+    //     Создайте функцию positionAt(anchor, position, elem), которая позиционирует элемент elem в з
+    //     ависимости от значения свойства position рядом с элементом anchor.
+    // Аргумент position – строка с одним из 3 значений:
+    // "top" – расположить elem прямо над anchor
+    // "right" – расположить elem непосредственно справа от anchor
+    // "bottom" – расположить elem прямо под anchor
+    // Она используется внутри функции showNote(anchor, position, html), которая уже есть в 
+    // исходном коде задачи. Она создаёт и показывает элемент-«заметку» с текстом html на заданной позиции 
+    // position рядом с элементом anchor.
+    function positionAt(anchor:HTMLElement, position: 'top' | 'right' | 'bottom', elem: any) {
+        const coords = anchor.getBoundingClientRect()
+        if(position=='top'){
+            elem.style.top = coords.top + 'px'
+            elem.style.top = coords.top - elem.offsetHeight + "px"
+        }else if(position=='right'){
+            elem.style.right = coords.right + 'px'
+            elem.style.top = coords.top + "px"
+        }else if(position=='bottom'){
+            elem.style.bottom = coords.bottom + 'px'
+            elem.style.top = coords.top + anchor.offsetHeight + "px"
+        }
+    }
+
+    function showNote(anchor: HTMLElement, position: 'top' | 'right' | 'bottom', html: string) {
+        let note = document.createElement('div');
+        note.className = "note";
+        note.innerHTML = html;
+        document.body.append(note);
+        positionAt(anchor, position, note);
+    }
+    let blockquote = document.querySelector('blockquote') as HTMLQuoteElement
+
+    showNote( blockquote, "top", "note above");
+    showNote( blockquote, "right", "note at the right");
+    showNote( blockquote, "bottom", "note below");
 }
+
 
 // //? получение фотки geo из current местоположения
 // {
