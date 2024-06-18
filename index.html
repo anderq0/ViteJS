@@ -1,20 +1,20 @@
 <!doctype html>
 <html lang="en">
-  
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="src/style.scss">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-    <style id="styleForTask"></style>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="src/style.scss">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + TS</title>
+  <style id="styleForTask"></style>
   <script type="module" src="/src/main.ts"></script>
 </head>
 
 <body>
-  
-  
-  Самый крутой индекс аштимиэль  
+
+
+  Самый крутой индекс аштимиэль
   <div>
     <h2>DZ 2 Z 2</h2>
     <ol id='DZ2z2'></ol>
@@ -70,7 +70,7 @@
     <div id="display"></div>
   </div>
 
-  <div id="geoPhoto" >
+  <div id="geoPhoto">
     <!-- <h4 id="geopositionText">Are you from Sochi?</h4>
     <img id="geopositionPic" src="https://images.unsplash.com/photo-1608926632580-067ba78be72b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2MTYyMDB8MHwxfHNlYXJjaHwxfHxTb2NoaXxlbnwwfHx8fDE3MTY4NDA4MTd8MA&ixlib=rb-4.0.3&q=80&w=1080" alt="dkdkdk"> -->
   </div>
@@ -144,65 +144,115 @@
   <table id="sortTableByName">
     <thead>
       <tr>
-        <th>Name</th><th>Surname</th><th>Age</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>John</td><td>Smith</td><td>10</td>
+        <td>John</td>
+        <td>Smith</td>
+        <td>10</td>
       </tr>
       <tr>
-        <td>Pete</td><td>Brown</td><td>15</td>
+        <td>Pete</td>
+        <td>Brown</td>
+        <td>15</td>
       </tr>
       <tr>
-        <td>Ann</td><td>Lee</td><td>5</td>
+        <td>Ann</td>
+        <td>Lee</td>
+        <td>5</td>
       </tr>
     </tbody>
-    </table>
+  </table>
 
-    <table id="dateTable" style="margin-top: 30px;">
-      <thead>
-        <tr>
-          <th>SUN</th><th>MND</th><th>TUE</th><th>WEN</th><th>THU</th><th>FRI</th><th>SAT</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-      </tbody>
-      </table>
-      <div id="fieldAnother">
-        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-      </div>
-      <div  id="fieldData"></div>
+  <table id="dateTable" style="margin-top: 30px;">
+    <thead>
+      <tr>
+        <th>SUN</th>
+        <th>MND</th>
+        <th>TUE</th>
+        <th>WEN</th>
+        <th>THU</th>
+        <th>FRI</th>
+        <th>SAT</th>
+      </tr>
+    </thead>
+    <tbody>
 
-      <button id="scrollToOptions"></button>
+    </tbody>
+  </table>
+  <div id="fieldAnother">
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+  <div id="fieldData"></div>
 
-      <div id="field">
-        <img src="public/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-      </div>
+  <button id="scrollToOptions"></button>
+
+  <div id="field">
+    <img src="public/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . .
+  </div>
 
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
-        esse sequi officia sapiente.</p>
-    
-      <blockquote>
-        Teacher: Why are you late?
-        Student: There was a man who lost a hundred dollar bill.
-        Teacher: That's nice. Were you helping him look for it?
-        Student: No. I was standing on it.
-      </blockquote>
-    
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
-        esse sequi officia sapiente.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt
+    voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident
+    molestias sit tempore omnis recusandae
+    esse sequi officia sapiente.</p>
 
-      <div id="text">text to delete</div>
-      <button id="textToDlete">Click to delete the text</button>
+  <blockquote>
+    Teacher: Why are you late?
+    Student: There was a man who lost a hundred dollar bill.
+    Teacher: That's nice. Were you helping him look for it?
+    Student: No. I was standing on it.
+  </blockquote>
 
-      <div id="realField">
-        <img src="public/ball.svg" id="realBall"></div>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt
+    voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident
+    molestias sit tempore omnis recusandae
+    esse sequi officia sapiente.</p>
+
+  <div id="text">text to delete</div>
+  <button id="textToDlete">Click to delete the text</button>
+
+  <div id="realField" style="background-image: url('/public/pole.jpeg');">
+    <img src="public/Creeper_(Minecraft).png" id="realBall">
+  </div>
+
+  <div id="menu">
+    ▶ Сладости (нажми меня)!
+  </div>
+  <ul id="sweetsUl" style="visibility: hidden;">
+    <li>Пирожное</li>
+    <li>Пончик</li>
+    <li>Мёд</li>
+  </ul>
+
+
+  <div>
+    <div class="pane">
+      <h3>Edgar</h3>
+      <p>Edgar believes nobody understands him. Certainly not his mom, who thinks he's going through a phase. Only he knows the darkness in his soul is eternal</p>
+    </div>
+    <div class="pane">
+      <h3>Buzz</h3>
+      <p>Buzz is a lifeguard at the Velocirapids water park and a real stickler for the rules. He clearly enjoys wielding the tiny bit of authority he has to the greatest degree possible.</p>
+    </div>
+    <div class="pane">
+      <h3>Chester</h3>
+      <p>Chester makes vicious fun of anyone in sight, trying to get under their skin. The more hate he gets, the better... especially if that hater is Mandy!</p>
+    </div>
+  </div>
   
+
 
   <!-- <script type="module" src="/src/main.ts"></script> -->
 </body>

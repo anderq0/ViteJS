@@ -1230,7 +1230,7 @@ console.log(firstCircle.getSquare())
     }
 
     function showNote(anchor: HTMLElement, position: 'top' | 'right' | 'bottom', html: string) {
-        let note = document.createElement('div');
+        let note = document.createElement('div')
         note.className = "note"
         note.innerHTML = html
         document.body.append(note)
@@ -1265,22 +1265,41 @@ console.log(firstCircle.getSquare())
     let ball = document.querySelector('#realBall') as HTMLImageElement
     let field = document.querySelector('#realField') as HTMLDivElement
     const fieldStyle = getComputedStyle(field)
-    const coords = ball.getBoundingClientRect()
     const border = parseFloat(fieldStyle.borderTopWidth)
     field.addEventListener('click',(e)=>{
-        console.log(e)
         let positionY = e.pageY - ball.clientHeight/2
         let positionX = e.pageX- ball.clientWidth/2
-        console.log(positionY,coords.top + window.pageYOffset + border )
-        if(positionY <=coords.top + window.pageYOffset + border  ){
-            ball.style.top = `${positionY+border}px`
-            ball.style.left = `${positionX}px`
+        if(e.pageX >= parseFloat(ball.style.left)){
+            ball.style.transform = `scaleX(-1)`
         }else{
-            ball.style.top = `${positionY}px`
-            ball.style.left = `${positionX}px`
+            ball.style.transform = `scaleX(1)`
+        }
+        ball.style.top = (e.pageY <= field.offsetTop + border ||e.pageY <= field.offsetTop + border+ball.clientHeight/2) ? `${field.offsetTop + border}px` : (e.pageY >= field.offsetHeight + field.offsetTop - border ||e.pageY >= field.offsetHeight+ field.offsetTop- ball.clientHeight) ? `${field.offsetHeight+ field.offsetTop -border - ball.clientHeight}px`:`${positionY}px`
+        ball.style.left = (e.pageX <= field.offsetLeft + border ||e.pageX <= field.offsetLeft + border+ ball.clientWidth/2) ? `${field.offsetLeft + border}px` : (e.pageX >= field.offsetWidth+ field.offsetLeft - border||e.pageX >= field.offsetWidth+ field.offsetLeft - ball.clientWidth) ? `${field.offsetWidth+ field.offsetLeft- border - ball.clientWidth}px` : `${positionX}px`
+    })
+
+    // Создать меню, которое по нажатию открывается либо закрывается:
+    let menu = document.querySelector('#menu') as HTMLDivElement
+    let sweetsUl = document.querySelector('#sweetsUl') as HTMLUListElement
+    menu.addEventListener('click', ()=>{
+        if(sweetsUl.style.visibility == ''){
+            menu.innerText = ' ▶ Сладости (нажми меня)!' 
+            sweetsUl.style.visibility = 'hidden'
+        }else{
+            sweetsUl.style.visibility = ''
+            menu.innerText = ' ▼ Сладости (нажми меня)!' 
         }
     })
 
+    // Список сообщений
+    let pane = document.querySelectorAll('.pane')
+    for(let el of pane){
+        el.insertAdjacentHTML('afterbegin', `<button class="remove-button">[x]</button>`)
+        el.firstChild?.addEventListener('click', ()=>{
+            el.remove()
+        })
+    }
+    
 }
 
 // //? получение фотки geo из current местоположения
