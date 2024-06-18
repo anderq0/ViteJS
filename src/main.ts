@@ -1176,7 +1176,7 @@ console.log(firstCircle.getSquare())
     })
 }
 {
-    // ! Размеры и прокрутка элементов
+    // ! ---------------------------------------------------------------Размеры и прокрутка элементов
 
     let scrollToOptionsBtn = document.querySelector('#scrollToOptions') as HTMLButtonElement
     scrollToOptionsBtn.addEventListener('click', function () {
@@ -1243,7 +1243,7 @@ console.log(firstCircle.getSquare())
     // showNote( blockquote, "bottom", "note below")
 }
 {
-    // ! Обработчики событий
+    // ! -----------------------------------Обработчики событий----------------------------------------
 
     // Добавьте JavaScript к кнопке button, чтобы при нажатии элемент <div id="text"> исчезал.
     let text = document.querySelector('#text') as HTMLDivElement
@@ -1266,8 +1266,19 @@ console.log(firstCircle.getSquare())
     let field = document.querySelector('#realField') as HTMLDivElement
     const fieldStyle = getComputedStyle(field)
     const border = parseFloat(fieldStyle.borderTopWidth)
+    const topPole = field.offsetTop + field.offsetHeight
+    const leftPole = field.offsetLeft + field.offsetWidth/2
+    ball.style.left = `${leftPole}px`
+    ball.style.top = `${topPole}px`
+    document.addEventListener('scroll', ()=>{
+        const topPole = field.offsetTop + field.offsetHeight/2
+        const leftPole = field.offsetLeft + field.offsetWidth/2
+        ball.style.left = `${leftPole}px`
+        ball.style.top = `${topPole}px`
+    })
+    
     field.addEventListener('click',(e)=>{
-        let positionY = e.pageY - ball.clientHeight/2
+        let positionY = e.pageY - ball.clientHeight/2 
         let positionX = e.pageX- ball.clientWidth/2
         if(e.pageX >= parseFloat(ball.style.left)){
             ball.style.transform = `scaleX(-1)`
@@ -1275,6 +1286,7 @@ console.log(firstCircle.getSquare())
             ball.style.transform = `scaleX(1)`
         }
         ball.style.top = (e.pageY <= field.offsetTop + border ||e.pageY <= field.offsetTop + border+ball.clientHeight/2) ? `${field.offsetTop + border}px` : (e.pageY >= field.offsetHeight + field.offsetTop - border ||e.pageY >= field.offsetHeight+ field.offsetTop- ball.clientHeight) ? `${field.offsetHeight+ field.offsetTop -border - ball.clientHeight}px`:`${positionY}px`
+
         ball.style.left = (e.pageX <= field.offsetLeft + border ||e.pageX <= field.offsetLeft + border+ ball.clientWidth/2) ? `${field.offsetLeft + border}px` : (e.pageX >= field.offsetWidth+ field.offsetLeft - border||e.pageX >= field.offsetWidth+ field.offsetLeft - ball.clientWidth) ? `${field.offsetWidth+ field.offsetLeft- border - ball.clientWidth}px` : `${positionX}px`
     })
 
@@ -1282,6 +1294,7 @@ console.log(firstCircle.getSquare())
     let menu = document.querySelector('#menu') as HTMLDivElement
     let sweetsUl = document.querySelector('#sweetsUl') as HTMLUListElement
     menu.addEventListener('click', ()=>{
+        
         if(sweetsUl.style.visibility == ''){
             menu.innerText = ' ▶ Сладости (нажми меня)!' 
             sweetsUl.style.visibility = 'hidden'
@@ -1290,18 +1303,33 @@ console.log(firstCircle.getSquare())
             menu.innerText = ' ▼ Сладости (нажми меня)!' 
         }
     })
-
-    // Список сообщений
+}
+{
+    //! -----------------------------  Список сообщений ---------------------------------------
     let pane = document.querySelectorAll('.pane')
     for(let el of pane){
         el.insertAdjacentHTML('afterbegin', `<button class="remove-button">[x]</button>`)
-        el.firstChild?.addEventListener('click', ()=>{
-            el.remove()
-        })
     }
-    
-}
+    document.addEventListener('click', (e)=>{
+        let message = e.target as HTMLElement
+        let messagedesk = message.closest('.pane') as HTMLElement
+        if(!message.closest('.remove-button')) return //клик не по кнопке !
+        messagedesk.remove()
+    })
 
+//      Создайте дерево, которое по клику на заголовок скрывает-показывает потомков:
+//      !Требования:
+//      Использовать только один обработчик событий (применить делегирование)
+//      Клик вне текста заголовка (на пустом месте) ничего делать не должен.
+    document.addEventListener('click',(e)=>{
+        let target = e.target as HTMLElement
+        let targetUl = target.querySelectorAll('li') 
+        if(!targetUl) return
+        for(let li = 0; li < targetUl.length; li++){
+            targetUl[li].hidden = !targetUl[li].hidden
+        }
+    })
+}
 // //? получение фотки geo из current местоположения
 // {
 //     // let latitude
