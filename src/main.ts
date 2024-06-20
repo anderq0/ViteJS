@@ -829,10 +829,10 @@ console.log(firstCircle.getSquare())
     block.setStyle('margin', '10px')
     mainStyle.append(block)
 
-    const imgCss = new CssClass('img')
-    imgCss.setStyle('margin', '100px')
-    imgCss.setStyle('width', '100px')
-    mainStyle.append(imgCss)
+    // const imgCss = new CssClass('img')
+    // imgCss.setStyle('margin', '100px')
+    // imgCss.setStyle('width', '100px')
+    // mainStyle.append(imgCss)
 
     const text = new CssClass('text')
     text.setStyle('text-align', 'justify')
@@ -1145,6 +1145,7 @@ console.log(firstCircle.getSquare())
         notification.style.top = `${y}px`
         notification.style.position = 'fixed'
         notification.style.right = `${x}px`
+        notification.classList.add(`notify`)
         notification.innerHTML = html
         document.body.insertAdjacentElement('afterbegin', notification)
         setTimeout(() => notification.remove(), 1500)
@@ -1216,14 +1217,14 @@ console.log(firstCircle.getSquare())
     // Она используется внутри функции showNote(anchor, position, html), которая уже есть в 
     // исходном коде задачи. Она создаёт и показывает элемент-«заметку» с текстом html на заданной позиции 
     // position рядом с элементом anchor.
-    function positionAt(anchor:HTMLElement, position: 'top' | 'right' | 'bottom', elem: any) {
+    function positionAt(anchor: HTMLElement, position: 'top' | 'right' | 'bottom', elem: any) {
         const coords = anchor.getBoundingClientRect()
-        if(position=='top'){
+        if (position == 'top') {
             elem.style.left = coords.left + 'px'
-            elem.style.top = coords.top  + "px"
-        }else if(position=='right'){
+            elem.style.top = coords.top + "px"
+        } else if (position == 'right') {
             elem.style.left = coords.right + 'px'
-        }else if(position=='bottom'){
+        } else if (position == 'bottom') {
             elem.style.left = coords.left + 'px'
             elem.style.top = coords.top + anchor.offsetHeight + "px"
         }
@@ -1239,7 +1240,7 @@ console.log(firstCircle.getSquare())
     let blockquote = document.querySelector('blockquote') as HTMLQuoteElement
 
     // showNote( blockquote, "top", "note above")
-    showNote( blockquote, "right", "note at the right")
+    showNote(blockquote, "right", "note at the right")
     // showNote( blockquote, "bottom", "note below")
 }
 {
@@ -1249,86 +1250,116 @@ console.log(firstCircle.getSquare())
     let text = document.querySelector('#text') as HTMLDivElement
     let textToDlete = document.querySelector('#textToDlete') as HTMLButtonElement
     let isTextDeleted = false
-    textToDlete.addEventListener('click',()=>{
-        if(!isTextDeleted){            
+    textToDlete.addEventListener('click', () => {
+        if (!isTextDeleted) {
             text.style.visibility = 'hidden'
             isTextDeleted = true
-        }else{
+        } else {
             textToDlete.style.visibility = 'hidden'
         }
     })
 
     // Пусть мяч перемещается при клике на поле, туда, куда был клик
-//     !Требования:
-//      CSS-анимация желательна, но не обязательна;
-//      Мяч ни в коем случае не должен пересекать границы поля;
+    //     !Требования:
+    //      CSS-анимация желательна, но не обязательна;
+    //      Мяч ни в коем случае не должен пересекать границы поля;
     let ball = document.querySelector('#realBall') as HTMLImageElement
     let field = document.querySelector('#realField') as HTMLDivElement
     const fieldStyle = getComputedStyle(field)
     const border = parseFloat(fieldStyle.borderTopWidth)
-    const topPole = field.offsetTop + field.offsetHeight
-    const leftPole = field.offsetLeft + field.offsetWidth/2
+    const topPole = field.offsetTop + field.offsetHeight - border
+    const leftPole = field.offsetLeft + field.offsetWidth / 2
     ball.style.left = `${leftPole}px`
     ball.style.top = `${topPole}px`
-    document.addEventListener('scroll', ()=>{
-        const topPole = field.offsetTop + field.offsetHeight/2
-        const leftPole = field.offsetLeft + field.offsetWidth/2
-        ball.style.left = `${leftPole}px`
-        ball.style.top = `${topPole}px`
-    })
-    
-    field.addEventListener('click',(e)=>{
-        let positionY = e.pageY - ball.clientHeight/2 
-        let positionX = e.pageX- ball.clientWidth/2
-        if(e.pageX >= parseFloat(ball.style.left)){
+    // document.addEventListener('scroll', ()=>{
+    //     const topPole = field.offsetTop + field.offsetHeight/2
+    //     const leftPole = field.offsetLeft + field.offsetWidth/2
+    //     ball.style.left = `${leftPole}px`
+    //     ball.style.top = `${topPole}px`
+    // })
+
+    field.addEventListener('click', (e) => {
+        let positionY = e.pageY - ball.clientHeight / 2
+        let positionX = e.pageX - ball.clientWidth / 2
+        if (e.pageX >= parseFloat(ball.style.left)) {
             ball.style.transform = `scaleX(-1)`
-        }else{
+        } else {
             ball.style.transform = `scaleX(1)`
         }
-        ball.style.top = (e.pageY <= field.offsetTop + border ||e.pageY <= field.offsetTop + border+ball.clientHeight/2) ? `${field.offsetTop + border}px` : (e.pageY >= field.offsetHeight + field.offsetTop - border ||e.pageY >= field.offsetHeight+ field.offsetTop- ball.clientHeight) ? `${field.offsetHeight+ field.offsetTop -border - ball.clientHeight}px`:`${positionY}px`
+        ball.style.top = (e.pageY <= field.offsetTop + border || e.pageY <= field.offsetTop + border + ball.clientHeight / 2) ? `${field.offsetTop + border}px` : (e.pageY >= field.offsetHeight + field.offsetTop - border || e.pageY >= field.offsetHeight + field.offsetTop - ball.clientHeight) ? `${field.offsetHeight + field.offsetTop - border - ball.clientHeight}px` : `${positionY}px`
 
-        ball.style.left = (e.pageX <= field.offsetLeft + border ||e.pageX <= field.offsetLeft + border+ ball.clientWidth/2) ? `${field.offsetLeft + border}px` : (e.pageX >= field.offsetWidth+ field.offsetLeft - border||e.pageX >= field.offsetWidth+ field.offsetLeft - ball.clientWidth) ? `${field.offsetWidth+ field.offsetLeft- border - ball.clientWidth}px` : `${positionX}px`
+        ball.style.left = (e.pageX <= field.offsetLeft + border || e.pageX <= field.offsetLeft + border + ball.clientWidth / 2) ? `${field.offsetLeft + border}px` : (e.pageX >= field.offsetWidth + field.offsetLeft - border || e.pageX >= field.offsetWidth + field.offsetLeft - ball.clientWidth) ? `${field.offsetWidth + field.offsetLeft - border - ball.clientWidth}px` : `${positionX}px`
     })
 
     // Создать меню, которое по нажатию открывается либо закрывается:
     let menu = document.querySelector('#menu') as HTMLDivElement
     let sweetsUl = document.querySelector('#sweetsUl') as HTMLUListElement
-    menu.addEventListener('click', ()=>{
-        
-        if(sweetsUl.style.visibility == ''){
-            menu.innerText = ' ▶ Сладости (нажми меня)!' 
+    menu.addEventListener('click', () => {
+
+        if (sweetsUl.style.visibility == '') {
+            menu.innerText = ' ▶ Сладости (нажми меня)!'
             sweetsUl.style.visibility = 'hidden'
-        }else{
+        } else {
             sweetsUl.style.visibility = ''
-            menu.innerText = ' ▼ Сладости (нажми меня)!' 
+            menu.innerText = ' ▼ Сладости (нажми меня)!'
         }
     })
 }
 {
     //! -----------------------------  Список сообщений ---------------------------------------
+    const container = document.querySelector('#messageDesk') as HTMLDivElement
     let pane = document.querySelectorAll('.pane')
-    for(let el of pane){
+    for (let el of pane) {
         el.insertAdjacentHTML('afterbegin', `<button class="remove-button">[x]</button>`)
     }
-    document.addEventListener('click', (e)=>{
+    container.addEventListener('click', (e) => {
         let message = e.target as HTMLElement
         let messagedesk = message.closest('.pane') as HTMLElement
-        if(!message.closest('.remove-button')) return //клик не по кнопке !
+        if (!message.closest('.remove-button')) return //клик не по кнопке !
         messagedesk.remove()
     })
 
-//      Создайте дерево, которое по клику на заголовок скрывает-показывает потомков:
-//      !Требования:
-//      Использовать только один обработчик событий (применить делегирование)
-//      Клик вне текста заголовка (на пустом месте) ничего делать не должен.
-    document.addEventListener('click',(e)=>{
+    //     ! Создайте дерево, которое по клику на заголовок скрывает-показывает потомков:
+    //      Требования:
+    //      Использовать только один обработчик событий (применить делегирование)
+    //      Клик вне текста заголовка (на пустом месте) ничего делать не должен.
+    document.addEventListener('click', (e) => {
         let target = e.target as HTMLElement
-        let targetUl = target.querySelectorAll('li') 
-        if(!targetUl) return
-        for(let li = 0; li < targetUl.length; li++){
+        let targetUl = target.querySelectorAll('li')
+        if (!targetUl) return
+        for (let li = 0; li < targetUl.length; li++) {
             targetUl[li].hidden = !targetUl[li].hidden
         }
+        if (target.tagName == 'H3') {
+            target.style.color = 'red'
+        }
     })
+}
+{
+    //     Сделайте так, чтобы при клике на ссылки внутри элемента id="contents" пользователю 
+    // выводился вопрос о том, действительно ли он хочет покинуть страницу, и если он не хочет, то прерывать переход по ссылке.
+    let contents = document.getElementById('contents') as HTMLLegendElement
+    contents.addEventListener('click', (e)=>{
+        let target = e.target as HTMLElement
+        let link = target.closest('a') as HTMLAnchorElement
+        if(!link) return
+        let agreement = confirm(`leave for ${link.getAttribute('href')}`)
+        if(!agreement){
+            e.preventDefault()
+        } 
+    })
+
+    // Создайте галерею изображений, в которой основное изображение изменяется при клике на уменьшенный вариант.
+    let mainPicture = document.querySelector('#largeImg') as HTMLImageElement
+    document.addEventListener('click', (e)=>{
+        let target = e.target as HTMLElement
+        e.preventDefault()
+        let picture = target.closest('img') as HTMLImageElement
+        if(!picture) return
+        mainPicture.src = picture.src
+    })
+
+    
 }
 // //? получение фотки geo из current местоположения
 // {
