@@ -1323,43 +1323,80 @@ console.log(firstCircle.getSquare())
     //      Требования:
     //      Использовать только один обработчик событий (применить делегирование)
     //      Клик вне текста заголовка (на пустом месте) ничего делать не должен.
-    document.addEventListener('click', (e) => {
-        let target = e.target as HTMLElement
-        let targetUl = target.querySelectorAll('li')
-        if (!targetUl) return
-        for (let li = 0; li < targetUl.length; li++) {
-            targetUl[li].hidden = !targetUl[li].hidden
-        }
-        if (target.tagName == 'H3') {
-            target.style.color = 'red'
-        }
-    })
+    // document.addEventListener('click', (e) => {
+    //     let target = e.target as HTMLElement
+    //     let targetUl = target.querySelectorAll('li')
+    //     if (!targetUl) return
+    //     for (let li = 0; li < targetUl.length; li++) {
+    //         targetUl[li].hidden = !targetUl[li].hidden
+    //     }
+    //     if (target.tagName == 'H3') {
+    //         target.style.color = 'red'
+    //     }
+    // })
 }
 {
     //     Сделайте так, чтобы при клике на ссылки внутри элемента id="contents" пользователю 
     // выводился вопрос о том, действительно ли он хочет покинуть страницу, и если он не хочет, то прерывать переход по ссылке.
     let contents = document.getElementById('contents') as HTMLLegendElement
-    contents.addEventListener('click', (e)=>{
+    contents.addEventListener('click', (e) => {
         let target = e.target as HTMLElement
         let link = target.closest('a') as HTMLAnchorElement
-        if(!link) return
+        if (!link) return
         let agreement = confirm(`leave for ${link.getAttribute('href')}`)
-        if(!agreement){
+        if (!agreement) {
             e.preventDefault()
-        } 
+        }
     })
 
     // Создайте галерею изображений, в которой основное изображение изменяется при клике на уменьшенный вариант.
     let mainPicture = document.querySelector('#largeImg') as HTMLImageElement
-    document.addEventListener('click', (e)=>{
+    document.addEventListener('click', (e) => {
         let target = e.target as HTMLElement
         e.preventDefault()
         let picture = target.closest('img') as HTMLImageElement
-        if(!picture) return
+        if (!picture) return
         mainPicture.src = picture.src
     })
 
-    
+
+}
+
+{
+    //     Создайте список, в котором элементы могут быть выделены, как в файловых менеджерах.
+    // При клике на элемент списка выделяется только этот элемент (добавляется класс .selected), отменяется выделение остальных элементов.
+    // Если клик сделан вместе с Ctrl (Cmd для Mac), то выделение переключается на элементе, но остальные элементы при этом не изменяются.
+    // P.S. В этом задании все элементы списка содержат только текст. Без вложенных тегов.
+    // P.P.S. Предотвратите стандартное для браузера выделение текста при кликах.
+
+    const ulSelected = document.getElementById('ulSelected') as HTMLUListElement
+    const liArr = Array.from(ulSelected.children)
+    for (let i = 0; i < liArr.length; i++) {
+        // @ts-ignore    
+        liArr[i].dataset.id = i
+    }
+    let lastLi = null as any
+    ulSelected.addEventListener('click', (e) => {
+        let target = e.target as HTMLElement
+        const ul = e.currentTarget as HTMLUListElement
+        let li = target.closest('li')
+        if (!li) return
+        if (e.ctrlKey) {
+            li!.classList.toggle('selected')
+        } else if (e.shiftKey) {
+            
+        } else {
+            for (let el of ul.children) {
+                if (el == li) continue
+                el.className = ''
+            }
+            li!.classList.toggle('selected')
+            if (li) console.log(liArr.indexOf(li))
+        }
+        lastLi = li
+    })
+
+
 }
 // //? получение фотки geo из current местоположения
 // {
