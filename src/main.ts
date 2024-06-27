@@ -1381,10 +1381,15 @@ console.log(firstCircle.getSquare())
         const ul = e.currentTarget as HTMLUListElement
         let li = target.closest('li')
         if (!li) return
-        if (e.ctrlKey) {
+        if (e.ctrlKey || e.metaKey) {
             li!.classList.toggle('selected')
         } else if (e.shiftKey) {
-            
+            let begin = liArr.indexOf(li) < liArr.indexOf(lastLi) ? liArr.indexOf(li) : liArr.indexOf(lastLi)
+            let finish = liArr.indexOf(li) > liArr.indexOf(lastLi) ? liArr.indexOf(li) : liArr.indexOf(lastLi)
+            for (let el = begin; el <= finish; el++) {
+                if (lastLi == liArr[el]) continue
+                liArr[el]!.classList.toggle('selected')
+            }
         } else {
             for (let el of ul.children) {
                 if (el == li) continue
