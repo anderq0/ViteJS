@@ -1387,7 +1387,9 @@ console.log(firstCircle.getSquare())
             let begin = liArr.indexOf(li) < liArr.indexOf(lastLi) ? liArr.indexOf(li) : liArr.indexOf(lastLi)
             let finish = liArr.indexOf(li) > liArr.indexOf(lastLi) ? liArr.indexOf(li) : liArr.indexOf(lastLi)
             for (let el = begin; el <= finish; el++) {
-                if (lastLi == liArr[el]) continue
+                if (lastLi == liArr[el]){
+                    lastLi.classList = !lastLi.classList ? 'selected' : ''
+                }
                 liArr[el]!.classList.toggle('selected')
             }
         } else {
@@ -1396,12 +1398,46 @@ console.log(firstCircle.getSquare())
                 el.className = ''
             }
             li!.classList.toggle('selected')
-            if (li) console.log(liArr.indexOf(li))
         }
         lastLi = li
     })
 
 
+}
+
+{
+    const combinations = []as any
+    function runOnKeys(fn:Function, ...args:string[]){
+        const keys ={} as Record<string,boolean>
+        for(let key of args){
+            keys[key] = false
+        }
+        combinations.push({keys,fn})
+    }
+
+    document.addEventListener('keydown', (e)=>{
+        for(let el of combinations){
+
+            if(e.code in el.keys){
+                el.keys[e.code] = true
+            }
+            const values = Object.values(el.keys)
+            if(values.every(o=>o)){
+                el.fn()
+                for(let key in el.keys){
+                    el.keys[key] = false
+                }
+            }
+        }
+    })
+    document.addEventListener('keyup', (e)=>{
+        for(let el of combinations){
+            if(e.code in el.keys){
+                el.keys[e.code] = false
+            }
+        }
+    })
+    runOnKeys(() => alert("Привет!"),"KeyQ","KeyW")
 }
 // //? получение фотки geo из current местоположения
 // {
