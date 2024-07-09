@@ -1439,6 +1439,41 @@ console.log(firstCircle.getSquare())
     })
     runOnKeys(() => alert("Привет!"),"KeyQ","KeyW")
 }
+
+
+{
+    let images = document.querySelectorAll('img') as HTMLImageElement
+
+    /**
+     * Проверка видимости элемента (в видимой части страницы)
+     * Достаточно, чтобы верхний или нижний край элемента был виден
+     */
+    function isVisible(elem:HTMLElement) {
+        let coords = elem.getBoundingClientRect()
+        let top = coords.top > 0 && coords.top < document.documentElement.clientHeight
+        let bottom = coords.bottom < document.documentElement.clientHeight && coords.bottom > 0
+        return top || bottom
+    }
+
+    function showVisible() {
+        for (let img of document.querySelectorAll('img')) {
+          let realSrc = img.dataset.src;
+          if (!realSrc) continue;
+  
+          if (isVisible(img)) {
+            
+  
+            img.src = realSrc;
+  
+            img.dataset.src = '';
+          }
+        }
+  
+      }
+  
+      window.addEventListener('scroll', showVisible);
+      showVisible();
+}
 // //? получение фотки geo из current местоположения
 // {
 //     // let latitude
