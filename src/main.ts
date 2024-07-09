@@ -1387,7 +1387,7 @@ console.log(firstCircle.getSquare())
             let begin = liArr.indexOf(li) < liArr.indexOf(lastLi) ? liArr.indexOf(li) : liArr.indexOf(lastLi)
             let finish = liArr.indexOf(li) > liArr.indexOf(lastLi) ? liArr.indexOf(li) : liArr.indexOf(lastLi)
             for (let el = begin; el <= finish; el++) {
-                if (lastLi == liArr[el]){
+                if (lastLi == liArr[el]) {
                     lastLi.classList = !lastLi.classList ? 'selected' : ''
                 }
                 liArr[el]!.classList.toggle('selected')
@@ -1406,73 +1406,115 @@ console.log(firstCircle.getSquare())
 }
 
 {
-    const combinations = []as any
-    function runOnKeys(fn:Function, ...args:string[]){
-        const keys ={} as Record<string,boolean>
-        for(let key of args){
+    const combinations = [] as any
+    function runOnKeys(fn: Function, ...args: string[]) {
+        const keys = {} as Record<string, boolean>
+        for (let key of args) {
             keys[key] = false
         }
-        combinations.push({keys,fn})
+        combinations.push({ keys, fn })
     }
 
-    document.addEventListener('keydown', (e)=>{
-        for(let el of combinations){
+    document.addEventListener('keydown', (e) => {
+        for (let el of combinations) {
 
-            if(e.code in el.keys){
+            if (e.code in el.keys) {
                 el.keys[e.code] = true
             }
             const values = Object.values(el.keys)
-            if(values.every(o=>o)){
+            if (values.every(o => o)) {
                 el.fn()
-                for(let key in el.keys){
+                for (let key in el.keys) {
                     el.keys[key] = false
                 }
             }
         }
     })
-    document.addEventListener('keyup', (e)=>{
-        for(let el of combinations){
-            if(e.code in el.keys){
+    document.addEventListener('keyup', (e) => {
+        for (let el of combinations) {
+            if (e.code in el.keys) {
                 el.keys[e.code] = false
             }
         }
     })
-    runOnKeys(() => alert("Привет!"),"KeyQ","KeyW")
+    runOnKeys(() => alert("Привет!"), "KeyQ", "KeyW")
 }
 
 
 {
-    let images = document.querySelectorAll('img') as HTMLImageElement
+    //! Требования:
 
-    /**
-     * Проверка видимости элемента (в видимой части страницы)
-     * Достаточно, чтобы верхний или нижний край элемента был виден
-     */
-    function isVisible(elem:HTMLElement) {
+    // При загрузке страницы те изображения, которые уже видимы, должны загружаться сразу же, не ожидая прокрутки.
+
+    // Некоторые изображения могут быть обычными, без data-src. Код не должен касаться их.
+    // Если изображение один раз загрузилось, оно не должно больше перезагружаться при прокрутке.
+    // P.S. Если можете, реализуйте более продвинутое решение, которое будет загружать изображения на одну страницу ниже/после текущей позиции.
+
+    let images = document.querySelectorAll('img')
+    // let mercury = document.querySelector('#mercury') as HTMLImageElement
+    function isVisible(elem: HTMLElement) {
         let coords = elem.getBoundingClientRect()
         let top = coords.top > 0 && coords.top < document.documentElement.clientHeight
         let bottom = coords.bottom < document.documentElement.clientHeight && coords.bottom > 0
         return top || bottom
     }
-
-    function showVisible() {
-        for (let img of document.querySelectorAll('img')) {
-          let realSrc = img.dataset.src;
-          if (!realSrc) continue;
-  
-          if (isVisible(img)) {
-            
-  
-            img.src = realSrc;
-  
-            img.dataset.src = '';
-          }
+    document.addEventListener('scroll', () => {
+        for (let el of images) {
+            let imgSrc = el.dataset.src
+            if (!imgSrc) continue
+            if (isVisible(el)) {
+                el.src = imgSrc
+                el.dataset.src = ''
+            }
         }
-  
-      }
-  
-      window.addEventListener('scroll', showVisible);
-      showVisible();
+    })
+}
+
+{
+    //     !Создайте <div>, который превращается в <textarea>, если на него кликнуть.
+    //      <textarea> позволяет редактировать HTML в элементе <div>.
+    //      Когда пользователь нажимает Enter или переводит фокус, <textarea> превращается обратно в <div>, и его содержимое становится HTML-кодом в <div>.
+
+    let divArea = document.querySelector('#divArea') as HTMLElement
+    divArea.addEventListener('click', () => {
+        divArea.innerHTML = `<textarea>${divArea.textContent}</textarea>`
+        const textArea = divArea.children[0] as HTMLTextAreaElement
+        textArea.focus()
+        textArea.onblur = () => {
+            textArea.onblur = null
+            divArea.innerHTML = textArea.value
+        }
+    })
+
+
+    //     !Сделайте ячейки таблицы редактируемыми по клику.
+    // По клику – ячейка должна стать «редактируемой» (textarea появляется внутри), мы можем изменять HTML. Изменение размера ячейки должно быть отключено.
+    // Кнопки OK и ОТМЕНА появляются ниже ячейки и, соответственно, завершают/отменяют редактирование.
+    // Только одну ячейку можно редактировать за один раз. Пока <td> в «режиме редактирования», клики по другим ячейкам игнорируются.
+    // Таблица может иметь множество ячеек. Используйте делегирование событий.
+
+
+    // Установите фокус на мышь. Затем используйте клавиши со стрелками, чтобы её двигать
+    let mouse = document.querySelector('#mouse') as HTMLPreElement
+    mouse.addEventListener('focus', () => {
+        mouse.tabIndex
+        mouse.style.position = 'fixed'
+        mouse.addEventListener('keydown', (e) => {
+            if(e.key =='ArrowDown' ){
+                mouse.style.top = (parseInt(mouse.style.top) - 5) + 'px'
+            }
+            if(e.key =='ArrowLeft' ){
+                mouse.style.left = (parseInt(mouse.style.left) + 5) + 'px'
+            }
+            if(e.key =='ArrowDown' ){
+                mouse.style.left = (parseInt(mouse.style.left) - 5) + 'px'
+            }
+            if(e.key =='ArrowDown' ){
+                mouse.style.top = (parseInt(mouse.style.top) + 5) + 'px'
+            }
+        })
+    })
+
 }
 // //? получение фотки geo из current местоположения
 // {
