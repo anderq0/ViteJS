@@ -222,3 +222,13 @@ blockquote:before {
 #thumbs img:hover {
     border-color: #FF9900;
 }
+#scrollUp{
+    cursor: pointer;
+    position: fixed;
+    top: 100px;
+    left: 10px;
+}
+#modal{
+    position: absolute;
+    background-color: #a5b0d0;
+}

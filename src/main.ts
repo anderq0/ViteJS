@@ -1500,21 +1500,50 @@ console.log(firstCircle.getSquare())
         mouse.tabIndex
         mouse.style.position = 'fixed'
         mouse.addEventListener('keydown', (e) => {
-            if(e.key =='ArrowDown' ){
+            if (e.key == 'ArrowDown') {
                 mouse.style.top = (parseInt(mouse.style.top) - 5) + 'px'
             }
-            if(e.key =='ArrowLeft' ){
+            if (e.key == 'ArrowLeft') {
                 mouse.style.left = (parseInt(mouse.style.left) + 5) + 'px'
             }
-            if(e.key =='ArrowDown' ){
+            if (e.key == 'ArrowDown') {
                 mouse.style.left = (parseInt(mouse.style.left) - 5) + 'px'
             }
-            if(e.key =='ArrowDown' ){
+            if (e.key == 'ArrowDown') {
                 mouse.style.top = (parseInt(mouse.style.top) + 5) + 'px'
             }
         })
     })
 
+}
+{
+    let scrollUp = document.querySelector('#scrollUp') as HTMLParagraphElement
+    document.addEventListener('scroll', () => {
+        scrollUp.hidden = window.scrollY < window.innerHeight
+    })
+    scrollUp.onclick = () => {
+        window.scrollTo(0, 0)
+    }
+}
+{
+    //     !Создайте функцию showPrompt(html, callback), которая выводит форму с сообщением (html), полем ввода и кнопками OK/ОТМЕНА.
+    const showPromptBtn = document.querySelector('#showPrompt') as HTMLButtonElement
+    // function showPrompt(html:string, callback:Function){
+    //     showPromptBtn.addEventListener('click',()=>{
+            
+    //     })
+
+    // }
+    // Пользователь должен ввести что-то в текстовое поле и нажать Enter или кнопку «OK», после чего должна вызываться функция callback(value) со значением поля.
+    // Если пользователь нажимает Esc или кнопку «ОТМЕНА», тогда вызывается callback(null).
+    // В обоих случаях нужно завершить процесс ввода и закрыть диалоговое окно с формой.
+
+    // Требования:
+
+    // Форма должна быть в центре окна.
+    // Форма является модальным окном, это значит, что никакое взаимодействие с остальной частью страницы невозможно, пока пользователь не закроет его.
+    // При показе формы, фокус должен находиться сразу внутри <input>.
+    // Клавиши Tab/Shift+Tab должны переключать фокус между полями формы, не позволяя ему переходить к другим элементам страницы.
 }
 // //? получение фотки geo из current местоположения
 // {
