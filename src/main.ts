@@ -1494,23 +1494,29 @@ console.log(firstCircle.getSquare())
     // Таблица может иметь множество ячеек. Используйте делегирование событий.
 
 
+
     // Установите фокус на мышь. Затем используйте клавиши со стрелками, чтобы её двигать
     let mouse = document.querySelector('#mouse') as HTMLPreElement
     mouse.addEventListener('focus', () => {
-        mouse.tabIndex
         mouse.style.position = 'fixed'
+        mouse.style.top = 100 + 'px'
+        mouse.style.left = 100 + 'px'
         mouse.addEventListener('keydown', (e) => {
-            if (e.key == 'ArrowDown') {
-                mouse.style.top = (parseInt(mouse.style.top) - 5) + 'px'
+            let coordsY = parseInt(mouse.style.top)
+            let coordsX = parseInt(mouse.style.left)
+            if (e.code == 'ArrowDown') {
+                e.preventDefault()
+                mouse.style.top = (coordsY + 15) + 'px'
             }
-            if (e.key == 'ArrowLeft') {
-                mouse.style.left = (parseInt(mouse.style.left) + 5) + 'px'
+            if (e.code == 'ArrowLeft') {
+                mouse.style.left = (coordsX - 15) + 'px'
             }
-            if (e.key == 'ArrowDown') {
-                mouse.style.left = (parseInt(mouse.style.left) - 5) + 'px'
+            if (e.code == 'ArrowRight') {
+                mouse.style.left = (coordsX + 15) + 'px'
             }
-            if (e.key == 'ArrowDown') {
-                mouse.style.top = (parseInt(mouse.style.top) + 5) + 'px'
+            if (e.code == 'ArrowUp') {
+                e.preventDefault()
+                mouse.style.top = (coordsY - 15) + 'px'
             }
         })
     })
@@ -1525,12 +1531,49 @@ console.log(firstCircle.getSquare())
         window.scrollTo(0, 0)
     }
 }
+
+{
+    // Сделайте ячейки таблицы редактируемыми по клику.
+
+    //! По клику – ячейка должна стать «редактируемой» (textarea появляется внутри), мы можем изменять HTML. Изменение размера ячейки должно быть отключено.
+    // Кнопки OK и ОТМЕНА появляются ниже ячейки и, соответственно, завершают/отменяют редактирование.
+    // Только одну ячейку можно редактировать за один раз. Пока <td> в «режиме редактирования», клики по другим ячейкам игнорируются.
+    // Таблица может иметь множество ячеек. Используйте делегирование событий.
+    let tdS = document.querySelectorAll('td')
+    for (let el of tdS) {
+        el.tabIndex = 0
+    }
+    document.addEventListener('click', (e) => {
+        let target = e.target as HTMLElement
+        let td = target.closest('td')
+        if (!td) return
+        let text = td.innerHTML
+        // console.log(text)
+        td.addEventListener('focus', () => {
+            td.innerHTML = `<textarea style="resize: none; width:150px; height:150px; padding: 10px;">${text}</textarea>`
+            const okBtn = document.createElement('button') as HTMLButtonElement
+            td.appendChild(okBtn)
+            const noBtn = document.createElement('button') as HTMLButtonElement
+            td.appendChild(noBtn)
+            // let textChild = td.firstChild as HTMLElement
+            // let text2 = textChild.textContent
+            // console.log(text2)
+            if(okBtn.onclick){
+                let textChild = td.firstChild as HTMLElement
+                td.innerHTML = textChild.textContent as string
+            }
+        })
+
+
+    })
+
+}
 {
     //     !Создайте функцию showPrompt(html, callback), которая выводит форму с сообщением (html), полем ввода и кнопками OK/ОТМЕНА.
-    const showPromptBtn = document.querySelector('#showPrompt') as HTMLButtonElement
+    // const showPromptBtn = document.querySelector('#showPrompt') as HTMLButtonElement
     // function showPrompt(html:string, callback:Function){
     //     showPromptBtn.addEventListener('click',()=>{
-            
+
     //     })
 
     // }
