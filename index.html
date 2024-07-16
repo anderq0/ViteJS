@@ -412,6 +412,62 @@
 
 </table>
 
+Депозитный калькулятор.
+
+  <form id="calculator">
+    <table>
+      <tr>
+        <td>Первоначальный депозит</td>
+        <td>
+          <input id="money" type="number" value="10000" required>
+        </td>
+      </tr>
+      <tr>
+        <td>Срок вклада?</td>
+        <td>
+          <select id="months">
+            <option value="3">3 (минимум)</option>
+            <option value="6">6 (полгода)</option>
+            <option value="12" selected>12 (год)</option>
+            <option value="18">18 (1.5 года)</option>
+            <option value="24">24 (2 года)</option>
+            <option value="30">30 (2.5 года)</option>
+            <option value="36">36 (3 года)</option>
+            <option value="60">60 (5 лет)</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Годовая процентная ставка?</td>
+        <td>
+          <input id="interest" type="number" value="5" required>
+        </td>
+      </tr>
+    </table>
+
+    <table id="diagram">
+      <tr>
+        <th>Было:</th>
+        <th>Станет:</th>
+      </tr>
+      <tr>
+        <th id="money-before-res"></th>
+        <th id="money-after-res"></th>
+      </tr>
+      <td>
+        <div id="money-before" style="background: red;width:40px;height:100px"></div>
+      </td>
+      <td>
+        <div id="money-after" style="background: green;width:40px;height:100px" id="height-after"></div>
+      </td>
+    </table>
+
+
+  </form>
+
+  <textarea style="width:200px; height: 60px;" id="area"></textarea>
+  <button id="deleteArea">Delete</button>
+
   <!-- <script type="module" src="/src/main.ts"></script> -->
 </body>
 

@@ -1539,35 +1539,37 @@ console.log(firstCircle.getSquare())
     // Кнопки OK и ОТМЕНА появляются ниже ячейки и, соответственно, завершают/отменяют редактирование.
     // Только одну ячейку можно редактировать за один раз. Пока <td> в «режиме редактирования», клики по другим ячейкам игнорируются.
     // Таблица может иметь множество ячеек. Используйте делегирование событий.
-    let tdS = document.querySelectorAll('td')
-    for (let el of tdS) {
-        el.tabIndex = 0
-    }
-    document.addEventListener('click', (e) => {
-        let target = e.target as HTMLElement
-        let td = target.closest('td')
-        if (!td) return
-        let text = td.innerHTML
-        // console.log(text)
-        td.addEventListener('focus', () => {
-            td.innerHTML = `<textarea style="resize: none; width:150px; height:150px; padding: 10px;">${text}</textarea>`
-            const okBtn = document.createElement('button') as HTMLButtonElement
-            td.appendChild(okBtn)
-            const noBtn = document.createElement('button') as HTMLButtonElement
-            td.appendChild(noBtn)
-            // let textChild = td.firstChild as HTMLElement
-            // let text2 = textChild.textContent
-            // console.log(text2)
-            if(okBtn.onclick){
-                let textChild = td.firstChild as HTMLElement
-                td.innerHTML = textChild.textContent as string
-            }
-        })
+    // let tdS = document.querySelectorAll('td')
+    // for (let el of tdS) {
+    //     el.tabIndex = 0
+    // }
+    // document.addEventListener('click', (e) => {
+    //     let target = e.target as HTMLElement
+    //     let td = target.closest('td')
+    //     if (!td) return
+    //     let text = td.innerHTML
+    //     // console.log(text)
+    //     td.addEventListener('focus', () => {
+    //         td.innerHTML = `<textarea style="resize: none; width:150px; height:150px; padding: 10px;">${text}</textarea>`
+    //         const okBtn = document.createElement('button') as HTMLButtonElement
+    //         td.appendChild(okBtn)
+    //         const noBtn = document.createElement('button') as HTMLButtonElement
+    //         td.appendChild(noBtn)
+    //         // let textChild = td.firstChild as HTMLElement
+    //         // let text2 = textChild.textContent
+    //         // console.log(text2)
+    //         if(okBtn.onclick){
+    //             let textChild = td.firstChild as HTMLElement
+    //             td.innerHTML = textChild.textContent as string
+    //         }
+    //     })
 
 
-    })
-
+    // })
+    // sessionStorage.setItem('test', '1')
+    // alert( sessionStorage.getItem('test') )
 }
+
 {
     //     !Создайте функцию showPrompt(html, callback), которая выводит форму с сообщением (html), полем ввода и кнопками OK/ОТМЕНА.
     // const showPromptBtn = document.querySelector('#showPrompt') as HTMLButtonElement
@@ -1587,6 +1589,41 @@ console.log(firstCircle.getSquare())
     // Форма является модальным окном, это значит, что никакое взаимодействие с остальной частью страницы невозможно, пока пользователь не закроет его.
     // При показе формы, фокус должен находиться сразу внутри <input>.
     // Клавиши Tab/Shift+Tab должны переключать фокус между полями формы, не позволяя ему переходить к другим элементам страницы.
+}
+
+{
+    //? События: change, input, cut, copy, paste          16.07.24
+    // Создайте интерфейс, позволяющий ввести сумму банковского вклада и процент, 
+    // а затем рассчитать, какая это будет сумма через заданный промежуток времени.
+    let initial = document.querySelector('#money') as HTMLInputElement//начальная сумма денег
+    let months = document.querySelector('#months') as HTMLSelectElement //сколько лет ждать 
+    let interest = document.querySelector('#interest') as HTMLInputElement //проценты, например, 0.05 означает 5% в год
+    let calculator = document.querySelector('#calculator')
+    let moneyAfter = document.getElementById('money-after') as HTMLDivElement
+    let moneyBeforeRes = document.querySelector('#money-before-res') as HTMLDivElement
+    let moneyAfterRes = document.querySelector('#money-after-res') as HTMLTableCellElement
+    calculator?.addEventListener('change', () => {
+        let result = Math.round(parseFloat(initial.value) * (1 + parseFloat(interest.value) / 100) ** (parseFloat(months.value) / 12));
+        moneyAfterRes.innerHTML = `${result}`
+        moneyBeforeRes.innerHTML = `${initial.value}`
+        moneyAfter.style.height = parseInt(moneyAfter.style.height) + (result - parseFloat(initial.value)) + 'px'
+    })
+}
+{
+    //     Автосохранение поля формы
+    // Создайте поле textarea, значение которого будет автоматически сохраняться при каждом его изменении.
+    let area = document.querySelector('#area') as HTMLTextAreaElement
+    let deleteArea = document.querySelector('#deleteArea') as HTMLButtonElement
+    area.addEventListener('change', ()=>{
+        localStorage.setItem('1',area.value) 
+    })
+    deleteArea.onclick =()=>{
+        localStorage.removeItem('1')
+        area.value = ''
+    }
+    area.value = localStorage.getItem('1') 
+
+    // Когда пользователь закроет страницу и потом откроет её заново он должен увидеть последнее введённое значение.
 }
 // //? получение фотки geo из current местоположения
 // {
