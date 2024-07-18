@@ -1150,7 +1150,7 @@ console.log(firstCircle.getSquare())
         document.body.insertAdjacentElement('afterbegin', notification)
         setTimeout(() => notification.remove(), 1500)
     }
-    setInterval(() => { showNotification('10', '0', '<img src="https://yt3.googleusercontent.com/bRxpLuKan-5TAGEdooDE35CTPXr-59xEhwlt_w1BHY2rzc1hQBdpfVLo0a95p9bYbBObUkmsfw=s900-c-k-c0x00ffffff-no-rj" alt="Stranger">') }, 3000)
+    // setInterval(() => { showNotification('10', '0', '<img src="https://yt3.googleusercontent.com/bRxpLuKan-5TAGEdooDE35CTPXr-59xEhwlt_w1BHY2rzc1hQBdpfVLo0a95p9bYbBObUkmsfw=s900-c-k-c0x00ffffff-no-rj" alt="Stranger">') }, 3000)
 }
 
 {
@@ -1536,38 +1536,40 @@ console.log(firstCircle.getSquare())
     // Сделайте ячейки таблицы редактируемыми по клику.
 
     //! По клику – ячейка должна стать «редактируемой» (textarea появляется внутри), мы можем изменять HTML. Изменение размера ячейки должно быть отключено.
-    // Кнопки OK и ОТМЕНА появляются ниже ячейки и, соответственно, завершают/отменяют редактирование.
+    // !Кнопки OK и ОТМЕНА появляются ниже ячейки и, соответственно, завершают/отменяют редактирование.
     // Только одну ячейку можно редактировать за один раз. Пока <td> в «режиме редактирования», клики по другим ячейкам игнорируются.
     // Таблица может иметь множество ячеек. Используйте делегирование событий.
-    // let tdS = document.querySelectorAll('td')
-    // for (let el of tdS) {
-    //     el.tabIndex = 0
-    // }
-    // document.addEventListener('click', (e) => {
-    //     let target = e.target as HTMLElement
-    //     let td = target.closest('td')
-    //     if (!td) return
-    //     let text = td.innerHTML
-    //     // console.log(text)
-    //     td.addEventListener('focus', () => {
-    //         td.innerHTML = `<textarea style="resize: none; width:150px; height:150px; padding: 10px;">${text}</textarea>`
-    //         const okBtn = document.createElement('button') as HTMLButtonElement
-    //         td.appendChild(okBtn)
-    //         const noBtn = document.createElement('button') as HTMLButtonElement
-    //         td.appendChild(noBtn)
-    //         // let textChild = td.firstChild as HTMLElement
-    //         // let text2 = textChild.textContent
-    //         // console.log(text2)
-    //         if(okBtn.onclick){
-    //             let textChild = td.firstChild as HTMLElement
-    //             td.innerHTML = textChild.textContent as string
-    //         }
-    //     })
+    document.addEventListener('click', (e) => {
+        let target = e.target as HTMLElement
+        let td = target.closest('td')
+        if (!td) return
+        if (document.querySelector('td textarea')) return
+
+        let text = td.innerHTML
+
+        let textarea = document.createElement('textarea')
+        textarea.style.resize = 'none'
+        textarea.value = text
+
+        let okButton = document.createElement('button')
+        okButton.textContent = 'OK'
+        let cancelButton = document.createElement('button')
+        cancelButton.textContent = 'Отмена'
+
+        td.innerHTML = ''
+        td.appendChild(textarea)
+        td.appendChild(okButton)
+        td.appendChild(cancelButton)
 
 
-    // })
-    // sessionStorage.setItem('test', '1')
-    // alert( sessionStorage.getItem('test') )
+        okButton.addEventListener('click', () => {
+            td.innerHTML = textarea.value
+        })
+
+        cancelButton.addEventListener('click', () => {
+            td.innerHTML = text
+        })
+    })
 }
 
 {
@@ -1603,27 +1605,26 @@ console.log(firstCircle.getSquare())
     let moneyBeforeRes = document.querySelector('#money-before-res') as HTMLDivElement
     let moneyAfterRes = document.querySelector('#money-after-res') as HTMLTableCellElement
     calculator?.addEventListener('change', () => {
-        let result = Math.round(parseFloat(initial.value) * (1 + parseFloat(interest.value) / 100) ** (parseFloat(months.value) / 12));
+        let result = Math.round(parseFloat(initial.value) * (1 + parseInt(interest.value) / 100) ** (parseFloat(months.value) / 12));
         moneyAfterRes.innerHTML = `${result}`
         moneyBeforeRes.innerHTML = `${initial.value}`
-        moneyAfter.style.height = parseInt(moneyAfter.style.height) + (result - parseFloat(initial.value)) + 'px'
+        moneyAfter.style.height = result / parseInt(initial.value) * 100 + 'px'
     })
 }
 {
-    //     Автосохранение поля формы
+    //!     Автосохранение поля формы
     // Создайте поле textarea, значение которого будет автоматически сохраняться при каждом его изменении.
+    // Когда пользователь закроет страницу и потом откроет её заново он должен увидеть последнее введённое значение.
     let area = document.querySelector('#area') as HTMLTextAreaElement
     let deleteArea = document.querySelector('#deleteArea') as HTMLButtonElement
-    area.addEventListener('change', ()=>{
-        localStorage.setItem('1',area.value) 
+    area.addEventListener('input', () => {
+        localStorage.setItem('autosaveTextarea', area.value)
     })
-    deleteArea.onclick =()=>{
-        localStorage.removeItem('1')
+    deleteArea.onclick = () => {
+        localStorage.removeItem('autosaveTextarea')
         area.value = ''
     }
-    area.value = localStorage.getItem('1') 
-
-    // Когда пользователь закроет страницу и потом откроет её заново он должен увидеть последнее введённое значение.
+    area.value = localStorage.getItem('1')
 }
 // //? получение фотки geo из current местоположения
 // {

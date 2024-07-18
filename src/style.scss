@@ -9,8 +9,8 @@ th {
     color: #f941a3;
     border-right: 2px solid;
     border-left: 2px solid;
-    font-size: 0.9em;
-    font-weight: bold;
+    // font-size: 0.9em;
+    // font-weight: bold;
 }
 
 td {
@@ -22,7 +22,7 @@ td {
     border-left: 2px solid #2e5fa7;
     border-bottom: 2px solid #2e5fa7;
     border-right: 2px solid #2e5fa7;
-    font-weight: bold;
+    // font-weight: bold;
 }
 
 button {
@@ -187,10 +187,12 @@ blockquote:before {
     background: transparent;
     cursor: pointer;
 }
+
 .selected {
     background: #0f0;
 }
-.notify img{
+
+.notify img {
     width: 100px;
     margin: 100px;
 }
@@ -211,7 +213,8 @@ blockquote:before {
     margin: 0;
     padding: 0;
 }
-#thumbs img{
+
+#thumbs img {
     border: solid 1px #ccc;
     width: 100px;
     height: 100px;
@@ -219,86 +222,113 @@ blockquote:before {
     margin: 2px;
     float: left;
 }
+
 #thumbs img:hover {
     border-color: #FF9900;
 }
-#scrollUp{
+
+#scrollUp {
     cursor: pointer;
     position: fixed;
     top: 100px;
     left: 10px;
 }
-#modal{
+
+#modal {
     position: absolute;
     background-color: #a5b0d0;
 }
+
 td select,
 td input {
-  width: 150px;
+    width: 150px;
 }
 
 #diagram td {
-  vertical-align: bottom;
-  text-align: center;
-  padding: 10px;
+    vertical-align: bottom;
+    text-align: center;
+    padding: 10px;
 }
 
 #diagram div {
-  margin: auto;
+    margin: auto;
 }
 
-// th {
-//     text-align: center;
-//     font-weight: bold;
-//   }
-  
-//   td {
-//     height: 150px;
-//     width: 150px;
-//     white-space: nowrap;
-//     text-align: center;
-//     vertical-align: middle;
-//     padding: 10px;
-//   }
-  
-//   .nw {
-//     background-color: #999;
-//   }
-  
-//   .n {
-//     background-color: #03f;
-//     color: #fff;
-//   }
-  
-//   .ne {
-//     background-color: #ff6;
-//   }
-  
-//   .w {
-//     background-color: #ff0;
-//   }
-  
-//   .c {
-//     background-color: #60c;
-//     color: #fff;
-//   }
-  
-//   .e {
-//     background-color: #09f;
-//     color: #fff;
-//   }
-  
-//   .sw {
-//     background-color: #963;
-//     color: #fff;
-//   }
-  
-//   .s {
-//     background-color: #f60;
-//     color: #fff;
-//   }
-  
-//   .se {
-//     background-color: #0c3;
-//     color: #fff;
-//   }
+#bagua-th {
+    text-align: center;
+    font-weight: bold;
+}
+
+#bagua-table td {
+    height: 150px;
+    width: 150px;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+}
+
+#bagua-table textarea {
+
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+
+}
+
+// #bagua-table button {
+//     padding: 5px 10px;
+//     font-size: 14px;
+
+// }
+
+// #bagua-table div {
+//     display: flex;
+//     flex-direction: column;
+//     width: 100%;
+//     height: 100%;
+
+// }
+
+.nw {
+    background-color: #999;
+}
+
+.n {
+    background-color: #03f;
+    color: #fff;
+}
+
+.ne {
+    background-color: #ff6;
+}
+
+.w {
+    background-color: #ff0;
+}
+
+.c {
+    background-color: #60c;
+    color: #fff;
+}
+
+.e {
+    background-color: #09f;
+    color: #fff;
+}
+
+.sw {
+    background-color: #963;
+    color: #fff;
+}
+
+.s {
+    background-color: #f60;
+    color: #fff;
+}
+
+.se {
+    background-color: #0c3;
+    color: #fff;
+}
