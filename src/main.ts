@@ -1626,6 +1626,55 @@ console.log(firstCircle.getSquare())
     }
     area.value = localStorage.getItem('1')
 }
+
+{
+    // let json = '{"name":"John", "age": 30}'
+    // try {
+    //     let user = JSON.parse(json)
+
+    //     if (!user.name) {
+    //         throw new SyntaxError("Данные неполны: нет имени")
+    //     }
+
+    //     blabla(); // неожиданная ошибка
+
+    //     alert(user.name);
+
+    // } catch (e) {
+
+    //     if (e.name == "SyntaxError") {
+    //         alert("JSON Error: " + e.message);
+    //     } else {
+    //         throw e; // проброс (*)
+    //     }
+
+    // }
+}
+
+{
+    //     Встроенная функция setTimeout использует колбэк-функции. Создайте альтернативу, использующую промисы.
+    // Функция delay(ms) должна возвращать промис, который перейдёт
+    //  в состояние «выполнен» через ms миллисекунд, так чтобы мы могли добавить к нему .then:
+
+    function delay(ms: number) {
+        let promise = new Promise(resolve => {
+            setTimeout(resolve, ms)
+        })
+        console.log(promise)
+        return promise
+    }
+
+    // delay(3000).then(() => alert('выполнилось через 3 секунды'))
+
+    //     Перепишите функцию showCircle, написанную в задании Анимация круга с помощью колбэка таким образом, 
+    //чтобы она возвращала промис, вместо того чтобы принимать в аргументы функцию-callback.
+    // Новое использование:
+
+    showCircle(150, 150, 100).then(div => {
+        div.classList.add('message-ball');
+        div.append("Hello, world!");
+    });
+}
 // //? получение фотки geo из current местоположения
 // {
 //     // let latitude
