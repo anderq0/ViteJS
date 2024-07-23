@@ -1624,7 +1624,7 @@ console.log(firstCircle.getSquare())
         localStorage.removeItem('autosaveTextarea')
         area.value = ''
     }
-    area.value = localStorage.getItem('1')
+    area.value = localStorage.getItem('autosaveTextarea')
 }
 
 {
@@ -1670,10 +1670,87 @@ console.log(firstCircle.getSquare())
     //чтобы она возвращала промис, вместо того чтобы принимать в аргументы функцию-callback.
     // Новое использование:
 
-    showCircle(150, 150, 100).then(div => {
-        div.classList.add('message-ball');
-        div.append("Hello, world!");
-    });
+    // showCircle(150, 150, 100).then(div => {
+    //     div.classList.add('message-ball')
+    //     div.append("Hello, world!")
+    // })
+}
+
+{
+    //     Перепишите один из примеров раздела Цепочка промисов, используя async / await вместо.then /catch:
+    async function loadJson(url: string) {
+        let response = await fetch('https://github.com/anderq0')
+        if (response.status == 200) {
+            console.log(response.status)
+            return response.json()
+        } else {
+            let errorNum = response.status as unknown as string
+            console.log(errorNum)
+            throw new Error(errorNum)
+        }
+
+    }
+    loadJson('https://github.com/anderq0').catch(alert)
+}
+{
+    // В функции demoGithubUser замените рекурсию на цикл: используя async/await, сделать это будет просто.
+
+    // class HttpError extends Error {
+    //     response:any
+    //     constructor(response) {
+    //       super(`${response.status} for ${response.url}`);
+    //       this.name = 'HttpError';
+    //       this.response = response;
+    //     }
+    //   }
+
+    //   function loadJson(url:string) {
+    //     return fetch(url)
+    //       .then(response => {
+    //         if (response.status == 200) {
+    //           return response.json();
+    //         } else {
+    //           throw new HttpError(response);
+    //         }
+    //       })
+    //   }
+
+    //   // Запрашивать логин, пока github не вернёт существующего пользователя.
+    //   async function demoGithubUser() {
+    //     let name = prompt("Введите логин?", "iliakan");
+
+    //     return loadJson(`https://api.github.com/users/${name}`)
+    //       .then(user => {
+    //         alert(`Полное имя: ${user.name}.`);
+    //         return user;
+    //       })
+    //       .catch(err => {
+    //         if (err instanceof HttpError && err.response.status == 404) {
+    //           alert("Такого пользователя не существует, пожалуйста, повторите ввод.");
+    //           return demoGithubUser();
+    //         } else {
+    //           throw err;
+    //         }
+    //       });
+    //   }
+
+    //   demoGithubUser();
+
+
+}
+{
+    // Есть «обычная» функция.Как можно внутри неё получить результат выполнения async–функции ?
+
+    async function wait() {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        return 10;
+    }
+
+    function f() {
+        wait().then(res=>console.log(res))
+    }
+    f()
 }
 // //? получение фотки geo из current местоположения
 // {
