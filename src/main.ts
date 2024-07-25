@@ -1,4 +1,5 @@
 import './style.scss'
+import axios from 'axios'
 // ДЗ 2 задание 2
 type checkType = {
     name: string,
@@ -1677,80 +1678,92 @@ console.log(firstCircle.getSquare())
 }
 
 {
-    //     Перепишите один из примеров раздела Цепочка промисов, используя async / await вместо.then /catch:
-    async function loadJson(url: string) {
-        let response = await fetch('https://github.com/anderq0')
-        if (response.status == 200) {
-            console.log(response.status)
-            return response.json()
-        } else {
-            let errorNum = response.status as unknown as string
-            console.log(errorNum)
-            throw new Error(errorNum)
-        }
+    // !    Перепишите один из примеров раздела Цепочка промисов, используя async / await вместо.then /catch:
+    // async function loadJson(url: string) {
+    //     let response = await fetch(url)
+    //     if (response.status == 200) {
+    //         console.log(response.status)
+    //         return response.json()
+    //     } else {
+    //         let errorNum = response.status
+    //         console.log(errorNum)
+    //     }
 
-    }
-    loadJson('https://github.com/anderq0').catch(alert)
-}
-{
+    // }
+    // loadJson('https://github.com/anderq0').catch(alert)
+
     // В функции demoGithubUser замените рекурсию на цикл: используя async/await, сделать это будет просто.
 
     // class HttpError extends Error {
-    //     response:any
-    //     constructor(response) {
-    //       super(`${response.status} for ${response.url}`);
-    //       this.name = 'HttpError';
-    //       this.response = response;
+    //     response: any
+    //     constructor(response: any) {
+    //         super(`${response.status} for ${response.url}`);
+    //         this.name = 'HttpError';
+    //         this.response = response;
     //     }
-    //   }
+    // }
 
-    //   function loadJson(url:string) {
-    //     return fetch(url)
-    //       .then(response => {
-    //         if (response.status == 200) {
-    //           return response.json();
-    //         } else {
-    //           throw new HttpError(response);
-    //         }
-    //       })
-    //   }
+    // async function loadJsonTwo(url: string) {
+    //     let response = await fetch(url)
+    //     if (response.status == 200) {
+    //         return response.json();
+    //     } else {
+    //         throw new HttpError(response);
+    //     }
+    // }
 
-    //   // Запрашивать логин, пока github не вернёт существующего пользователя.
-    //   async function demoGithubUser() {
+    // // Запрашивать логин, пока github не вернёт существующего пользователя.
+    // async function demoGithubUser() {
     //     let name = prompt("Введите логин?", "iliakan");
-
-    //     return loadJson(`https://api.github.com/users/${name}`)
-    //       .then(user => {
-    //         alert(`Полное имя: ${user.name}.`);
-    //         return user;
-    //       })
-    //       .catch(err => {
+    //     let user = await loadJsonTwo(`https://api.github.com/users/${name}`)
+    //     alert(`Полное имя: ${user.name}.`)
+    //     user.catch(err: any => {
     //         if (err instanceof HttpError && err.response.status == 404) {
-    //           alert("Такого пользователя не существует, пожалуйста, повторите ввод.");
-    //           return demoGithubUser();
+    //             alert("Такого пользователя не существует, пожалуйста, повторите ввод.");
+    //             return demoGithubUser();
     //         } else {
-    //           throw err;
+    //             throw err;
     //         }
-    //       });
-    //   }
+    //     });
+    // }
 
-    //   demoGithubUser();
+    // demoGithubUser();
 
+    // !Есть «обычная» функция.Как можно внутри неё получить результат выполнения async–функции ?
+    // async function wait() {
+    //     await new Promise(resolve => setTimeout(resolve, 1000))
 
+    //     return 10
+    // }
+
+    // function f() {
+    //     wait().then(res => console.log(res))
+    // }
+    // f()
 }
+
 {
-    // Есть «обычная» функция.Как можно внутри неё получить результат выполнения async–функции ?
+    // async function getStatus() {
+    //     let url = await axios('http://localhost:5173/ViteJS')
+    //     console.log(url.data)
+    // }
+    // getStatus()
+    // axios('http://localhost:5173/ViteJS').then((resp)=>console.log(resp))
 
-    async function wait() {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+//     Создайте асинхронную функцию getUsers(names), которая получает на вход массив логинов пользователей GitHub, запрашивает у GitHub информацию о них и возвращает массив объектов-пользователей.
 
-        return 10;
-    }
+// Информация о пользователе GitHub с логином USERNAME доступна по ссылке: https://api.github.com/users/USERNAME.
 
-    function f() {
-        wait().then(res=>console.log(res))
-    }
-    f()
+// В песочнице есть тестовый пример.
+
+// Важные детали:
+
+// На каждого пользователя должен приходиться один запрос fetch.
+// Запросы не должны ожидать завершения друг друга. Надо, чтобы данные приходили как можно быстрее.
+// Если какой-то запрос завершается ошибкой или оказалось, что данных о запрашиваемом пользователе нет, то функция должна возвращать null в массиве результатов.
+}{
+    axios('http://www.omdbapi.com/?apikey=a3b56e1a&s=element').then((resp)=> console.log(resp.data))
+
 }
 // //? получение фотки geo из current местоположения
 // {

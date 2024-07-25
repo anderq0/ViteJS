@@ -10,10 +10,13 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/node": "^20.14.12",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   },
   "dependencies": {
+    "path": "^0.12.7",
+    "axios": "^1.7.2",
     "num-words": "^1.2.3",
     "sass": "^1.72.0"
   }

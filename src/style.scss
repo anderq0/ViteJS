@@ -1,7 +1,6 @@
 body {
-    background-color: #373b46;
+    background-color: #212c4a;
 }
-
 
 
 th {
@@ -25,18 +24,18 @@ td {
     // font-weight: bold;
 }
 
-button {
-    background-color: #f941a3;
-    font-size: 20px;
-    margin-top: 15px;
-}
+// button {
+//     background-color: #f941a3;
+//     font-size: 20px;
+//     margin-top: 15px;
+// }
 
-input {
-    padding: 15px 15px;
-    margin-top: 5px;
-    background-color: #a5b0d0;
-    font-size: 15px;
-}
+// input {
+//     padding: 15px 15px;
+//     margin-top: 5px;
+//     background-color: #a5b0d0;
+//     font-size: 15px;
+// }
 
 input#printMachine {
     position: absolute;
@@ -331,4 +330,25 @@ td input {
 .se {
     background-color: #0c3;
     color: #fff;
+}
+.formFind{
+    background-color: rgb(255, 255, 255);
+    margin: 100px;
+    width: 500px;
+    height: 200px;
+    text-align: center;
+    padding: 5px;
+}
+.formFind h3{
+    text-align: center;
+}
+.formFind table,tr,td{
+    background-color: rgb(255, 255, 255);
+    border: none;
+    text-align: center;
+}
+.formFind button{
+    border-color: #8d8d8d;
+    width: 90%;
+    height: 15%;
 }
