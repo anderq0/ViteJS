@@ -7,28 +7,86 @@
   <script type="module" src="src/main2.ts"></script>
   <title>Document</title>
 </head>
+
 <body>
-  <form class="formFind">
-    <h3>Search:</h3>
-    <table>
-      <tr>
-        <td>Title</td>
-        <td>
-          <input id="titleMovie" type="text" >
-        </td>
-      </tr>
-      <tr>
-        <td>Type</td>
-        <td>
-          <select  id="typeSelect">
+  <div class="content">
+    <div class="formWhole">
+      <h3>Search:</h3>
+      <form class="formFind">
+
+        <div class="formGroup">
+          <label for="labelTitle">Title:</label>
+          <input id="inputTitle" type="text" spellcheck="false" placeholder="Enter movie title">
+        </div>
+
+        <div class="formGroup">
+          <label for="labelType">Type:</label>
+          <select id="selectType">
             <option value="Movie">Movie</option>
             <option value="Series">Series</option>
-            <option value="Episode" >Episode</option>
+            <option value="Episode">Episode</option>
           </select>
-        </td>
-      </tr>
-    </table>
-    <button id="searchMovieBtn">Search</button>
-  </form>
+        </div>
+
+        <button id="searchBtn">Search</button>
+      </form>
+    </div>
+  </div>
+
+
+
+  <p id="filmsP">Films:</p>
+
+  <div id="panelResult" hidden>
+    <div id="resultOfSearchContainer">
+  
+      <div class="resultOfSearchDivs">
+  
+        <div class="resultCard">
+          <img class="imgPoster">
+          <div class="info">
+            <p class="typeName"></p>
+            <p class="filmName"></p>
+            <p class="yearName"></p>
+            <button class="detailsBtn">Details</button>
+          </div>
+        </div>
+  
+        <div class="resultCard">
+          <img class="imgPoster">
+          <div class="info">
+            <p class="typeName"></p>
+            <p class="filmName"></p>
+            <p class="yearName"></p>
+            <button class="detailsBtn">Details</button>
+          </div>
+        </div>
+  
+        <div class="resultCard">
+          <img class="imgPoster">
+          <div class="info">
+            <p class="typeName"></p>
+            <p class="filmName"></p>
+            <p class="yearName"></p>
+            <button class="detailsBtn">Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="pagination">
+      <button class="pageBtn" id="prevBtn">&larr;</button>
+      <div class="pageNumbers">
+        
+      </div>
+      <button class="pageBtn" id="nextBtn">&rarr;</button>
+    </div>
+  </div>
+
+
+
+
+  <!-- <div id="errorMovie">Movie not found</div> -->
 </body>
+
 </html>

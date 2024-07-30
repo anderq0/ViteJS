@@ -1742,7 +1742,7 @@ console.log(firstCircle.getSquare())
     // f()
 }
 
-{
+// {
     // async function getStatus() {
     //     let url = await axios('http://localhost:5173/ViteJS')
     //     console.log(url.data)
@@ -1761,10 +1761,10 @@ console.log(firstCircle.getSquare())
 // На каждого пользователя должен приходиться один запрос fetch.
 // Запросы не должны ожидать завершения друг друга. Надо, чтобы данные приходили как можно быстрее.
 // Если какой-то запрос завершается ошибкой или оказалось, что данных о запрашиваемом пользователе нет, то функция должна возвращать null в массиве результатов.
-}{
-    axios('http://www.omdbapi.com/?apikey=a3b56e1a&s=element').then((resp)=> console.log(resp.data))
+// }{
+//     axios('http://www.omdbapi.com/?apikey=a3b56e1a&s=element').then((resp)=> console.log(resp.data))
 
-}
+// }
 // //? получение фотки geo из current местоположения
 // {
 //     // let latitude
@@ -1789,23 +1789,23 @@ console.log(firstCircle.getSquare())
 //     const geoPhoto = document.getElementById('geoPhoto') as HTMLDivElement
 //     let keyword = ''
 
-//     function getlocation() {
-//         fetch("https://ipapi.co/json/")
-//             .then((response) => response.json())
-//             .then((data) => {
-//                 keyword = data.city
-//                 console.log("City: "+ data.city +"\nIP: "+ data.ip)
-//                 const geopositionText = document.createElement('h4')
-//                 geopositionText.textContent = `Are you from ${data.city} ?`
-//                 geopositionText.id = 'geopositionText'
-//                 geoPhoto.appendChild(geopositionText)
-//                 searchImages(keyword)
+    // function getlocation() {
+    //     fetch("https://ipapi.co/json/")
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             keyword = data.city
+    //             console.log("City: "+ data.city +"\nIP: "+ data.ip)
+    //             const geopositionText = document.createElement('h4')
+    //             geopositionText.textContent = `Are you from ${data.city} ?`
+    //             geopositionText.id = 'geopositionText'
+    //             geoPhoto.appendChild(geopositionText)
+    //             searchImages(keyword)
 
-//             })
+    //         })
 
-//     }
+    // }
 
-//     getlocation()
+    // getlocation()
 
 //     async function searchImages(keyword: string) {
 //         const url = `https://api.unsplash.com/search/photos?per_page=1&query=${keyword}&client_id=${accesKey}`
