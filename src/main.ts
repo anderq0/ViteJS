@@ -1352,7 +1352,8 @@ console.log(firstCircle.getSquare())
 
     // Создайте галерею изображений, в которой основное изображение изменяется при клике на уменьшенный вариант.
     let mainPicture = document.querySelector('#largeImg') as HTMLImageElement
-    document.addEventListener('click', (e) => {
+    let gallery = document.querySelector('#gallery') as HTMLDivElement
+    gallery.addEventListener('click', (e) => {
         let target = e.target as HTMLElement
         e.preventDefault()
         let picture = target.closest('img') as HTMLImageElement

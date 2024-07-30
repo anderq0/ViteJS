@@ -33,15 +33,23 @@
     </div>
   </div>
 
-
-
   <p id="filmsP">Films:</p>
 
-  <div id="panelResult" hidden>
+  <div id="panelResult" >
     <div id="resultOfSearchContainer">
-  
+
       <div class="resultOfSearchDivs">
-  
+
+        <div class="resultCard">
+          <img class="imgPoster">
+          <div class="info">
+            <p class="typeName"></p>
+            <p class="filmName">Teenage Mutant Ninja Turtles</p>
+            <p class="yearName"></p>
+            <button class="detailsBtn">Details</button>
+          </div>
+        </div>
+
         <div class="resultCard">
           <img class="imgPoster">
           <div class="info">
@@ -51,17 +59,7 @@
             <button class="detailsBtn">Details</button>
           </div>
         </div>
-  
-        <div class="resultCard">
-          <img class="imgPoster">
-          <div class="info">
-            <p class="typeName"></p>
-            <p class="filmName"></p>
-            <p class="yearName"></p>
-            <button class="detailsBtn">Details</button>
-          </div>
-        </div>
-  
+
         <div class="resultCard">
           <img class="imgPoster">
           <div class="info">
@@ -73,20 +71,32 @@
         </div>
       </div>
     </div>
-  
+
     <div class="pagination">
       <button class="pageBtn" id="prevBtn">&larr;</button>
       <div class="pageNumbers">
-        
+
       </div>
       <button class="pageBtn" id="nextBtn">&rarr;</button>
     </div>
   </div>
 
-
-
-
-  <!-- <div id="errorMovie">Movie not found</div> -->
+  <div class="modalContainer">
+    <div class="modalWindow">
+      <button class="closeBtn">X</button>
+      <img class="mainMovieImg" src="https://m.media-amazon.com/images/M/MV5BNjUzODQ5MDY5NV5BMl5BanBnXkFtZTgwOTc1NzcyMjE@._V1_SX300.jpg">
+      <div class="mainMovieInfo">
+        <p class="Title">Teenage Mutant Ninja Turtles</p>
+        <p class="Released">"08 Aug 2014</p>
+        <p class="Genre">Action, Adventure, Comedy</p>
+        <p class="Country">United States</p>
+        <p class="Director">Jonathan Liebesman</p>
+        <p class="Writer">Josh Appelbaum, André Nemec, Evan Daugherty</p>
+        <p class="Actors">"Megan Fox, Will Arnett, William Fichtner</p>
+        <p class="Awards">1 win & 11 nominations</p>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
