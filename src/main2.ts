@@ -13,9 +13,8 @@ let prevBtn = document.querySelector('#prevBtn') as HTMLButtonElement
 let nextBtn = document.querySelector('#nextBtn') as HTMLDivElement
 let pageNumbers = document.querySelector('.pageNumbers') as HTMLDivElement
 
-
 let imgPoster = document.querySelectorAll('.imgPoster') as NodeListOf<HTMLImageElement>
-let typeName = document.querySelectorAll('.filmName') as NodeListOf<HTMLParagraphElement>
+let typeName = document.querySelectorAll('.typeName') as NodeListOf<HTMLParagraphElement>
 let filmName = document.querySelectorAll('.filmName') as NodeListOf<HTMLParagraphElement>
 let yearName = document.querySelectorAll('.yearName') as NodeListOf<HTMLParagraphElement>
 const movieElements = document.querySelectorAll('.resultCard') as NodeListOf<HTMLDivElement>
@@ -23,7 +22,7 @@ const movieElements = document.querySelectorAll('.resultCard') as NodeListOf<HTM
 let activePage = 1
 let totalPages = 1
 const moviesPerPage = 3
-const maxPageButtons = 5
+const maxPageButtons = 100
 
 let filmList: any[] = []
 
@@ -41,11 +40,9 @@ searchBtn.addEventListener('click', (e) => {
                 document.body.appendChild(errorMovie)
             } else if (resp.data.Response == 'True') {
                 panelResult.hidden = false
-                filmList = resp.data.Search    
-                // filmList.push(resp.data.Search)
-                totalPages = Math.ceil(filmList.length / moviesPerPage)
+                filmList = resp.data.Search
 
-                addToList(filmList)
+                totalPages = Math.ceil(filmList.length / moviesPerPage)
                 createPaginationButtons(totalPages)
 
                 displayMovies()
@@ -81,13 +78,7 @@ function createPaginationButtons(totalPages: number) {
     }
 }
 
-function addToList(movie:any){
-    for(let i = 0;i < filmList.length;i++){
-        console.log(filmList[i])
-    }
-}
 function updatePaginationButtons() {
-    // Math.floor(maxPageButtons / 2 всегда 2
     const startPage = 1
     const endPage = Math.min(totalPages, startPage + maxPageButtons - 1)
 
@@ -125,7 +116,6 @@ function displayMovies() {
     updatePaginationButtons()
 }
 
-
 let modalContainer = document.querySelector('.modalContainer') as HTMLDivElement
 let closeBtn = document.querySelector('.closeBtn') as HTMLButtonElement
 let title = document.querySelector('.Title') as HTMLParagraphElement
@@ -142,26 +132,29 @@ document.addEventListener('click', (e) => {
     let target = e.target as HTMLElement
     let btn = target.closest('.detailsBtn') as HTMLButtonElement
     if (!btn) return false
+
     let movie = btn.closest('.detailsBtn')?.parentElement?.querySelector('.filmName')?.textContent
-    console.log(movie)
     let realList: any[] = []
     for (let el = 0; el < filmList.length; el++) {
         if (movie == filmList[el].Title) {
+            realList.push(filmList[el].imdbID)
             console.log(filmList[el])
-            realList.push(filmList[el])
         }
     }
-    displayMainFilmInfo(realList[0])
+    console.log(realList[0])
+    axios(`http://www.omdbapi.com/?apikey=c07de1fa&i=${realList[0]}`)
+        .then((resp) => {
+            displayMainFilmInfo(resp.data)
+        })
     modalContainer.style.opacity = '1'
     modalContainer.style.pointerEvents = 'all'
 })
-closeBtn.addEventListener('click', () => {
+modalContainer.addEventListener('click', () => {
     modalContainer.style.opacity = '0'
     modalContainer.style.pointerEvents = 'none'
 })
 
 function displayMainFilmInfo(movie: any) {
-    console.log(movie.Title, movie.Released, movie.Genre, movie.Country, movie.Director, movie.Writer, movie.Actors, movie.Awards)
     mainMovieImg.src = movie.Poster
     title.textContent = movie.Title
     released.textContent = movie.Released
