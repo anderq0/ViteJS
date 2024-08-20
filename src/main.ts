@@ -1767,46 +1767,46 @@ console.log(firstCircle.getSquare())
 
 // }
 // //? получение фотки geo из current местоположения
-// {
-//     // let latitude
-//     // let longitude
-//     // function getlocation() {
-//     //     if (navigator.geolocation) {
-//     //         navigator.geolocation.getCurrentPosition(savePosition)
-//     //     } else {
-//     //         console.log("Geolocation is not supported by this browser.")
-//     //   }
+// {--
+    // let latitude
+    // let longitude
+    // function getlocation() {
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(savePosition)
+    //     } else {
+    //         console.log("Geolocation is not supported by this browser.")
+    //   }
 
-//     // }
-//     // // @ts-ignore
-//     // function savePosition(position) {
-//     //     latitude = position.coords.latitude
-//     //     longitude = position.coords.longitude
-//     //     console.log("Latitude: " + latitude + ", Longitude: " + longitude)
-//     // }
-//     // getlocation()
+    // }
+    // // @ts-ignore
+    // function savePosition(position) {
+    //     latitude = position.coords.latitude
+    //     longitude = position.coords.longitude
+    //     console.log("Latitude: " + latitude + ", Longitude: " + longitude)
+    // }
+    // getlocation()
 
 //     const accesKey = "mHQcEWgeYpwQPfvGvbofjGAVs3eqF_WcG7Cpb7jkeHw"
 //     const geoPhoto = document.getElementById('geoPhoto') as HTMLDivElement
 //     let keyword = ''
 
-    // function getlocation() {
-    //     fetch("https://ipapi.co/json/")
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             keyword = data.city
-    //             console.log("City: "+ data.city +"\nIP: "+ data.ip)
-    //             const geopositionText = document.createElement('h4')
-    //             geopositionText.textContent = `Are you from ${data.city} ?`
-    //             geopositionText.id = 'geopositionText'
-    //             geoPhoto.appendChild(geopositionText)
-    //             searchImages(keyword)
+//     function getlocation() {
+//         fetch("https://ipapi.co/json/")
+//             .then((response) => response.json())
+//             .then((data) => {
+//                 keyword = data.city
+//                 console.log("City: "+ data.city +"\nIP: "+ data.ip)
+//                 const geopositionText = document.createElement('h4')
+//                 geopositionText.textContent = `Are you from ${data.city} ?`
+//                 geopositionText.id = 'geopositionText'
+//                 geoPhoto.appendChild(geopositionText)
+//                 searchImages(keyword)
 
-    //         })
+//             })
 
-    // }
+//     }
 
-    // getlocation()
+//     getlocation()
 
 //     async function searchImages(keyword: string) {
 //         const url = `https://api.unsplash.com/search/photos?per_page=1&query=${keyword}&client_id=${accesKey}`

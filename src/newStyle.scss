@@ -3,25 +3,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.formWhole {
-  margin-top: 100px;
-  height: 250px;
-}
-
-.formWhole h3 {
-  margin-bottom: 10px;
-  text-align: center;
-  color: #fdd000;
-}
-
 .formGroup {
-  display: flex;
   justify-content: space-between;
   align-items: start;
   margin-bottom: 15px;
@@ -29,16 +11,6 @@ body {
 .formGroup label {
   color: #fdd000;
   font-size: 20px;
-}
-.formGroupTwo p {
-  color: #000000;
-  width: 70%;
-}
-.formGroupTwo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
 }
 
 .formGroup input,
@@ -75,31 +47,28 @@ body {
   width: 400px;
 }
 
-
-
 //  рэзультат
-#errorMovie,
-#filmsP {
+.filmsP,
+#errorMovie {
   margin: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: #fdd000;
   font-size: 20px;
-}
-
-
-#resultOfSearchContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .resultCard:hover {
   transform: scale(1.05);
   transition: transform 0.2s;
 }
-
+.resultCard {
+  border: 1px solid #f8f8f8;
+  border-radius: 10px;
+  background-color: #f8f8f8;
+  width: 400px;
+  height: 230px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
 
 .imgPoster {
   width: 150px;
@@ -118,12 +87,12 @@ body {
 }
 
 .filmName {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
 }
 
 .yearName {
-  font-size: 1em;
+  font-size: 15px;
   color: #555;
 }
 
@@ -140,21 +109,8 @@ body {
   background-color: #ccc;
 }
 
-.btnContainer {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-}
-
-.resultOfSearchDivs {
-  display: flex;
-  gap: 20px;
-}
 
 .resultCard {
-  display: flex;
   border: 1px solid #f8f8f8;
   border-radius: 10px;
   background-color: #f8f8f8;
@@ -165,11 +121,7 @@ body {
   transition: transform 0.2s;
 }
 
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#pagination {
   margin-top: 20px;
 }
 
@@ -196,43 +148,35 @@ body {
   cursor: pointer;
   font-size: 15px;
 }
-.modalContainer{
-  position: fixed;
-  left: 0;
-  top: 0;
-  pointer-events: none;
-  opacity: 0;
+
+.flex {
   display: flex;
-  width: 100%;
-  height: 100%;
+  gap: 10px;
+}
+.fdc {
+  flex-direction: column;
+}
+.jcc {
   justify-content: center;
+}
+.aic {
   align-items: center;
-  background-color: #000000ab;
 }
-.modalWindow{
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: 700px;
-  max-height: 700px;
-  background-color: #ccc;
-  border-radius: 10px;
-}
-.modalMainWindow{
-  display: flex;
-}
-.closeBtn{
+
+
+.overlay {
   position: absolute;
-  width: 20px;
-  height: 20px;
-}
-.mainMovieImg{
-  margin: 20px;
-  width: 30%;
-  height: 70%;
-}
-#h3ID{
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #00000050;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+}
+.modal {
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
 }
