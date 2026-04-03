@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 export default {
-    base: '/ViteJS/', 
+    base: '/ViteJS/',
     build: {
         rollupOptions: {
             input: {
